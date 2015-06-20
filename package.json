@@ -1,0 +1,21 @@
+{
+  "name": "linkHunter",
+  "version": "1.0.0",
+  "description": "",
+  "author": "Gabin Aureche",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-core": "^5.1.11",
+    "babel-loader": "^5.0.0",
+    "gulp": "^3.8.11",
+    "gulp-load-plugins": "^0.10.0",
+    "gulp-webpack": "^1.4.0",
+    "jasmine-core": "^2.3.4",
+    "karma": "^0.12.36",
+    "karma-jasmine": "^0.3.5",
+    "karma-phantomjs-launcher": "^0.2.0",
+    "karma-webpack": "^1.5.0",
+    "phantomjs": "^1.9.17",
+    "webpack": "^1.8.9"
+  }
+}
