@@ -5,13 +5,13 @@ var karma         = require('karma').server;
 
 gulp.task('scripts', function () {
     return gulp
-        .src('src/linkHunter.js')
+        .src('src/entry.js')
         .pipe($.webpack(webpackConfig))
         .pipe(gulp.dest('dist'));
 });
 
 gulp.task('watch', ['default'], function () {
-    gulp.watch('src/linkHunter.js', ['scripts']);
+    gulp.watch('src/*.js', ['scripts']);
 });
 
 gulp.task('test', function (done) {
