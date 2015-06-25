@@ -1,5 +1,5 @@
 import LinkHunterClass from './LinkHunterClass';
 
 (w => {
-    w.linkHunter = LinkHunterClass;
+    w.LinkHunter = LinkHunterClass;
 })(window);

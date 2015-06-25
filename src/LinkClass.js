@@ -37,4 +37,12 @@ export default class linkClass {
 
         return shortenedUrl;
     }
+
+    beautify () {
+        let link = this.original.replace(/^https?:\/\//, '');
+        let fragments = link.split('/');
+
+        if (fragments.length > 2) return fragments.shift() + '/.../' + fragments.pop();
+        else return fragments.shift() + '/' + fragments.pop();
+    }
 }

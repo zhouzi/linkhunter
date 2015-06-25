@@ -15,6 +15,8 @@
 
 ### 1.1.0 - Unreleased
 
+* [x] Add `beautify`
+* [ ] Improve email detection
 * [ ] Add documentation
 * [ ] Add demo page
 * [ ] Add a significant amount of test subjects

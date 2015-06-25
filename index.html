@@ -2,6 +2,25 @@
 <html>
     <head></head>
     <body>
+        <textarea id="textarea" cols="30" rows="10"></textarea>
+        <pre id="log"></pre>
         <script src="dist/linkHunter.min.js"></script>
+        <script>
+            var linkHunter = new LinkHunter();
+            var textarea   = document.getElementById('textarea');
+            var log        = document.getElementById('log');
+
+            textarea.addEventListener('input', function () {
+                var links = linkHunter.getLinks(textarea.value, false);
+
+                links.map(function (link) {
+                    link.formatted  = link.toFormatted('http://');
+                    link.shortened  = link.shorten(20);
+                    link.beautified = link.beautify();
+                });
+
+                log.innerHTML = JSON.stringify(links).replace('[', '[\n  ').replace(']', '\n]').replace(/,/g, ',\n  ').replace(/},/g, '},\n\n').replace(/}/g, '\n  }').replace(/{/g, '{\n  ');
+            });
+        </script>
     </body>
 </html>
