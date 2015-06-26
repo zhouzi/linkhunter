@@ -205,6 +205,10 @@ textarea {
     border-width: 10px 10px 0 10px;
     border-color: $color-tertiary transparent transparent transparent;
   }
+
+  li {
+    white-space: nowrap;
+  }
 }
 
 .demo-link__details__title {

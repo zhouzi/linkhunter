@@ -1,4 +1,4 @@
-export default class linkClass {
+export default class LinkClass {
     constructor (link) {
         this.original = link;
         this.type     = link.indexOf('@') >= 0 ? 'email' : 'url';
@@ -9,13 +9,24 @@ export default class linkClass {
         else return /^https?:\/\//.test(this.original) ? this.original : protocol + this.original;
     }
 
+    static cleanUp (link, removeQueryParams = false) {
+        if (removeQueryParams) {
+            var indexOfQueryParams = link.lastIndexOf('?');
+            if (indexOfQueryParams >= 0) link = link.substr(0, indexOfQueryParams);
+        }
+
+        link = link.replace(/^https?:\/\//, '').replace(/\/#?$/, '');
+
+        return link;
+    }
+
     shorten (maxLength, strict = true) {
         if (this.type == 'email') return this.original.substr(0, maxLength);
 
         let link = this.original;
         if (link.length < maxLength) return link;
 
-        link = link.replace(/^https?:\/\//, '');
+        link = LinkClass.cleanUp(link);
 
         let fragments = link.split('/');
         let start     = fragments.shift() + '/';
@@ -38,9 +49,12 @@ export default class linkClass {
         return shortenedUrl;
     }
 
-    beautify () {
-        let link = this.original.replace(/^https?:\/\//, '');
+    beautify (removeQueryParams = false) {
+        let link = LinkClass.cleanUp(this.original, removeQueryParams);
         let fragments = link.split('/');
+
+        // if there is no sub path e.g. site.com
+        if (fragments.length === 1) return link;
 
         if (fragments.length > 2) return fragments.shift() + '/.../' + fragments.pop();
         else return fragments.shift() + '/' + fragments.pop();
