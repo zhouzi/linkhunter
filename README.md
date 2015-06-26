@@ -10,6 +10,12 @@
 * Urls that start or end by a dot won't be matched. So in `Have a look at site.com.` the url `"site.com"` will be lost because of the dot.
 
 
+## Rules
+
+* An url has at least two parts: a sub domain and a tld which can't contain `/:?,`
+* An url can't contain more than one `?` (wrong, maybe it could actually be contained in an article's title for example)
+* An url can't contain successive slashes like `site.com//page` (apart from protocol)
+
 
 ## Change log
 

@@ -1,0 +1,219 @@
+$heading-font-family: 'Fredoka One', sans-serif;
+$font-family: 'Sniglet', sans-serif;
+
+$font-size-root: 18px;
+$font-size-base: 1rem;
+$text-color: #3d3d3d;
+$gray-light: darken(#fff, 8%);
+$gray: darken(#fff, 30%);
+$gutter: 20px;
+
+$blue: #34D7F4;
+$color-secondary: #f03dad;
+$color-tertiary: #fee23d;
+
+@import url("http://fonts.googleapis.com/css?family=Sniglet");
+
+html {
+  font-family: $font-family;
+  font-size: $font-size-root;
+  line-height: 1.4;
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  font-size: $font-size-base;
+  color: $text-color;
+  background-color: $gray-light;
+  padding: $gutter;
+  padding-bottom: $gutter * 4;
+}
+
+h1,
+h2 {
+  margin: 0;
+}
+
+.wrapper {
+  max-width: 500px;
+  margin: auto;
+}
+
+.hero {
+  padding: ($gutter * 4) ($gutter * 2);
+  text-align: center;
+  background-color: $blue;
+  border-radius: 8px 8px 0 0;
+  border-bottom: 4px solid $color-tertiary;
+}
+
+.demo {
+  padding: ($gutter * 2);
+  background-color: #fff;
+  border-radius: 0 0 8px 8px;
+}
+
+h1 {
+  display: inline-block;
+  font-size: 3rem;
+  color: $color-secondary;
+  font-family: $heading-font-family;
+  margin-bottom: $gutter / 2;
+  position: relative;
+
+  &:before {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 4px;
+    background-color: $color-tertiary;
+    border-radius: 20px;
+  }
+}
+
+h2 {
+  font-size: 1.2rem;
+  color: #fff;
+  font-weight: normal;
+  margin-bottom: $gutter;
+}
+
+h3 {
+  font-size: .8rem;
+  text-transform: uppercase;
+  color: $gray;
+  margin: 0 0 ($gutter / 2) 0;
+  border-bottom: 2px solid $gray-light;
+}
+
+a {
+  position: relative;
+  transform: translateZ(0);
+  display: inline-block;
+  color: $color-secondary;
+  background-color: $color-tertiary;
+  border: 2px solid darken($color-tertiary, 14%);
+  border-radius: 6px;
+  padding: $gutter / 2;
+  text-decoration: none;
+  margin-right: .6rem;
+  overflow: hidden;
+
+  &,
+  &:before {
+    transition: all 200ms ease-out;
+  }
+
+  &:last-child {
+    margin-right: 0;
+  }
+
+  &:before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    transform: scaleY(0);
+    transform-origin: 50% 100%;
+    background-color: $color-secondary;
+  }
+
+  &:focus,
+  &:hover {
+    color: #fff;
+    border-color: #fff;
+
+    &:before {
+      transform: scaleX(1);
+    }
+  }
+}
+
+textarea {
+  display: block;
+  width: 100%;
+  border: 2px solid $gray-light;
+  padding: .4rem;
+  margin-bottom: $gutter;
+  transition: border-color 150ms ease-out;
+
+  &:focus {
+    border-color: $color-secondary;
+    outline: none;
+  }
+}
+
+.demo-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 0;
+}
+
+.demo-link {
+  font-size: $font-size-base;
+  display: inline-block;
+  margin-right: $gutter / 2;
+  position: relative;
+  padding: .4rem;
+  background-color: $gray-light;
+
+  &:focus,
+  &:hover {
+    cursor: help;
+
+    .demo-link__details {
+      display: block;
+    }
+  }
+}
+
+.demo-link__details {
+  display: none;
+  list-style: none;
+  margin: 0 0 5px 0;
+  position: absolute;
+  line-height: 1;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: $color-tertiary;
+  padding: $gutter / 2;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .1);
+
+  &:before {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 10px 10px 0 10px;
+    border-color: $color-tertiary transparent transparent transparent;
+  }
+}
+
+.demo-link__details__title {
+  font-size: .6rem;
+  text-transform: uppercase;
+  opacity: .8;
+  margin-bottom: .2rem;
+
+  &:not(:first-child) {
+    margin-top: $gutter;
+  }
+}

@@ -1,26 +1,63 @@
 <!doctype html>
 <html>
-    <head></head>
+    <head>
+        <title>LinkHunter - Detect links that real users actually type.</title>
+        <link href='http://fonts.googleapis.com/css?family=Fredoka+One' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css">
+        <link rel="stylesheet" href="styles.css">
+    </head>
+
     <body>
-        <textarea id="textarea" cols="30" rows="10"></textarea>
-        <pre id="log"></pre>
+        <div class="wrapper">
+            <main>
+                <section class="hero">
+                    <h1>LinkHunter</h1>
+                    <h2>Detect links that real users actually type.</h2>
+
+                    <a href="#">View on Github</a>
+                    <a href="#">Tweet</a>
+                </section>
+
+                <section class="demo">
+                    <textarea id="demo-textarea" rows="5">Ask someone to type in the url of twitter, no copy/paste. I bet they are going to write it as twitter.com, maybe www.twitter.com but most of the time they are going to miss the http://.</textarea>
+
+                    <h3 id="demo-title"></h3>
+                    <ul class="demo-links"></ul>
+                </section>
+            </main>
+        </div>
+
         <script src="dist/linkHunter.min.js"></script>
         <script>
             var linkHunter = new LinkHunter();
-            var textarea   = document.getElementById('textarea');
-            var log        = document.getElementById('log');
+            var textarea   = document.getElementById('demo-textarea');
+            var demoLinks  = document.getElementsByClassName('demo-links')[0];
+            var demoTitle  = document.getElementById('demo-title');
 
-            textarea.addEventListener('input', function () {
+            textarea.addEventListener('input', detect);
+
+            function detect () {
                 var links = linkHunter.getLinks(textarea.value, false);
+                var html  = '';
 
-                links.map(function (link) {
-                    link.formatted  = link.toFormatted('http://');
-                    link.shortened  = link.shorten(20);
-                    link.beautified = link.beautify();
-                });
+                for (var i = 0, link; link = links[i]; i++) {
+                    html +=
+                        '<li class="demo-link">' +
+                            link.original +
+                            '<ul class="demo-link__details">' +
+                                '<li class="demo-link__details__title">With protocol</li>' +
+                                '<li>' + link.toFormatted() + '</li>' +
+                                '<li class="demo-link__details__title">Beautified</li>' +
+                                '<li>' + link.beautify() + '</li>' +
+                            '</ul>' +
+                        '</li>';
+                }
 
-                log.innerHTML = JSON.stringify(links).replace('[', '[\n  ').replace(']', '\n]').replace(/,/g, ',\n  ').replace(/},/g, '},\n\n').replace(/}/g, '\n  }').replace(/{/g, '{\n  ');
-            });
+                demoTitle.innerHTML = 'Found <strong>' + links.length + '</strong> link' + (links.length !== 1 ? 's' : '') + ' from the text above';
+                demoLinks.innerHTML = html;
+            }
+
+            detect();
         </script>
     </body>
 </html>
