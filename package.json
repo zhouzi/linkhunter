@@ -1,15 +1,24 @@
 {
-  "name": "linkHunter",
+  "name": "LinkHunter",
   "version": "1.0.0",
-  "description": "",
+  "description": "Detect links that real users actually type.",
   "author": "Gabin Aureche",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Zhouzi/LinkHunter/issues"
+  },
+  "homepage": "https://github.com/Zhouzi/LinkHunter",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Zhouzi/LinkHunter.git"
+  },
   "devDependencies": {
     "babel-core": "^5.1.11",
     "babel-loader": "^5.0.0",
     "browser-sync": "^2.7.12",
     "gulp": "^3.8.11",
     "gulp-autoprefixer": "^2.3.1",
+    "gulp-header": "^1.2.2",
     "gulp-load-plugins": "^0.10.0",
     "gulp-sass": "^2.0.2",
     "gulp-webpack": "^1.4.0",

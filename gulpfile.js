@@ -4,11 +4,26 @@ var webpackConfig = require('./webpack.config.js');
 var karma         = require('karma').server;
 var browserSync   = require('browser-sync');
 var reload        = browserSync.reload;
+var pkg           = require('./package.json');
+
+var header = [
+    '/*!',
+    ' * <%= pkg.name %> - v<%= pkg.version %>',
+    ' * <%= pkg.description %>',
+    ' * <%= pkg.homepage %>',
+    ' *',
+    ' * @author <%= pkg.author %>',
+    ' * @license <%= pkg.license %>',
+    ' */',
+    '',
+    ''
+].join('\n');
 
 gulp.task('scripts', function () {
     return gulp
         .src('src/entry.js')
         .pipe($.webpack(webpackConfig))
+        .pipe($.header(header, { pkg: pkg }))
         .pipe(gulp.dest('dist'));
 });
 
