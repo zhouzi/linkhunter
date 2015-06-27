@@ -24,6 +24,8 @@
 * [ ] Review code
 * [ ] Review tests
 * [ ] Improve email detection
-* [ ] Add documentation
+* [ ] Add & update documentation
 * [x] Add demo page
 * [ ] Add a significant amount of test subjects
+* [ ] Review demo page markup
+* [ ] Add GA tracker
