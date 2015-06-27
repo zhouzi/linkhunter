@@ -50,6 +50,8 @@ export default class LinkClass {
     }
 
     beautify (removeQueryParams = false) {
+        if (this.type == 'email') return this.original;
+
         let link = LinkClass.cleanUp(this.original, removeQueryParams);
         let fragments = link.split('/');
 
