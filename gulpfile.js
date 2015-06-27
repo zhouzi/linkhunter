@@ -53,4 +53,4 @@ gulp.task('serve', ['default'], function () {
     gulp.run('watch');
 });
 
-gulp.task('default', ['scripts']);
+gulp.task('default', ['styles', 'scripts']);
