@@ -256,6 +256,7 @@ Link('http://site.com/path/to/article-title?utf8&tracker=data').beautify(false)
 * [ ] Improve the regular url regexp to avoid matching `http://.` (add the domain pattern from user typed regexp).
 * [ ] Add a `.replaceLinks(callback)` method.
 * [ ] Add more options to `.linky()`: beautify, shorten.
+* [ ] Add support for non-browser environment (this article might help: "[Backend Apps with Webpack (Part I)](http://jlongster.com/Backend-Apps-with-Webpack--Part-I)").
 
 ### 1.0.0 - 2015-06-28
 
