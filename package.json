@@ -2,33 +2,33 @@
   "name": "LinkHunter",
   "version": "1.0.0",
   "description": "Detect links that real users actually type.",
-  "author": "Gabin Aureche",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/Zhouzi/LinkHunter/issues"
-  },
-  "homepage": "https://github.com/Zhouzi/LinkHunter",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Zhouzi/LinkHunter.git"
-  },
   "devDependencies": {
-    "babel-core": "^5.1.11",
-    "babel-loader": "^5.0.0",
-    "browser-sync": "^2.7.12",
-    "gulp": "^3.8.11",
+    "babel-core": "^5.5.8",
+    "babel-loader": "^5.1.4",
+    "gulp": "^3.9.0",
     "gulp-autoprefixer": "^2.3.1",
     "gulp-header": "^1.2.2",
+    "browser-sync": "^2.7.12",
     "gulp-load-plugins": "^0.10.0",
     "gulp-sass": "^2.0.2",
-    "gulp-webpack": "^1.4.0",
+    "gulp-webpack": "^1.5.0",
     "jasmine-core": "^2.3.4",
     "json-loader": "^0.5.2",
     "karma": "^0.12.36",
     "karma-jasmine": "^0.3.5",
     "karma-phantomjs-launcher": "^0.2.0",
-    "karma-webpack": "^1.5.0",
+    "karma-webpack": "^1.5.1",
     "phantomjs": "^1.9.17",
-    "webpack": "^1.8.9"
-  }
+    "webpack": "^1.9.11"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Zhouzi/LinkHunter.git"
+  },
+  "author": "Gabin Aureche",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Zhouzi/LinkHunter/issues"
+  },
+  "homepage": "https://github.com/Zhouzi/LinkHunter"
 }

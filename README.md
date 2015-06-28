@@ -17,12 +17,12 @@ When searching for "user typed" links, it will make sure to break on punctuation
 It could be an issue if an user tries to type `twitter.com?some=params` but we assume that an user that is aware of the query parameter thing is also aware of the need of a protocol.
 Adding a protocol solve the issue and match the url properly (`http://twitter.com?some=params`).
 
-* [Features]()
-* [Usage]()
-* [Documentation]()
-* [Known Limitations]()
-* [Contributing]()
-* [Change Log]()
+* [Features](https://github.com/Zhouzi/LinkHunter#features)
+* [Usage](https://github.com/Zhouzi/LinkHunter#usage)
+* [Documentation](https://github.com/Zhouzi/LinkHunter#documentation)
+* [Known "Limitations"](https://github.com/Zhouzi/LinkHunter#known-limitations)
+* [Contributing](https://github.com/Zhouzi/LinkHunter#contributing)
+* [Change Log](https://github.com/Zhouzi/LinkHunter#change-log)
 
 
 
@@ -40,20 +40,22 @@ With that, it's able to:
 * Beautify `http://site.com/some/sub/path/to/article-title?some=tracker` to `site.com/.../article-title`
 * Transform `Have a look at site.com and say hello@domain.com` to `Have a look at <a href="http://site.com" target="_blank">site.com</a> and say <a href="mailto:hello@domain.com">hello@domain.com</a>`
 
-These are just a few of LinkHunter's capabilities, have at look at the [documentation]() for more details.
+These are just a few of LinkHunter's capabilities, have at look at the [documentation](https://github.com/Zhouzi/LinkHunter#documentation) for more details.
 
 
 ## Usage
 
-1. Download [LinkHunter.min.js]()
+1. Download [LinkHunter.min.js](https://raw.githubusercontent.com/Zhouzi/LinkHunter/master/dist/LinkHunter.min.js)
 2. Link it in your markup: `<script src="path/to/LinkHunter.min.js"></script>`
 3. You are now able to build a LinkHunter's instance: `var linkHunter = new LinkHunter();`
 
 
 
-## LinkHunter
+## Documentation
 
-### Instantiation
+### LinkHunter
+
+#### Instantiation
 
 The first thing to do is to create a new instance of LinkHunter.
 
@@ -62,7 +64,7 @@ The first thing to do is to create a new instance of LinkHunter.
 var linkHunter = new LinkHunter();
 ```
 
-### `.looksLikeALink(string, ignoreEmail)`
+#### `.looksLikeALink(string, ignoreEmail)`
 
 Return whether or not a string looks like a link.
 
@@ -79,7 +81,7 @@ linkHunter.looksLikeALink('email@domain.com', true); // -> false
 linkHunter.looksLikeALink('Whatever!');              // -> false
 ```
 
-### `.looksLikeAnEmail(string)`
+#### `.looksLikeAnEmail(string)`
 
 Return whether or not a string looks like an email.
 
@@ -92,14 +94,14 @@ linkHunter.looksLikeAnEmail('email@domain.com'); // -> true
 linkHunter.looksLikeAnEmail('http://site.com');  // -> false
 ```
 
-### `.getLinks(string, ignoreEmail)`
+#### `.getLinks(string, ignoreEmail)`
 
 Extract links from a string.
 
 1. **string** (type: `string`) - Where to search for links.
 2. **ignoreEmail** (type: `boolean`, default: `false`) - Whether it should ignore email or not (`true` means yes).
 
-@return an array of [link objects]()
+@return an array of [link objects](https://github.com/Zhouzi/LinkHunter#link)
 
 ```javascript
 linkHunter.getLinks('Say hello at email@domain.com!');
@@ -109,7 +111,7 @@ linkHunter.getLinks('Have a look at site.com!');
 // -> [Link({ original: 'site.com', type: 'url' })]
 ```
 
-### `.linky(string, options)`
+#### `.linky(string, options)`
 
 Match and transform links in a string into html anchor tags.
 
@@ -131,11 +133,11 @@ linkHunter.getLinks('Have a look at twitter.com and say hello at email@domain.co
 // -> "Have a look at <a href="http://twitter.com">twitter.com</a> and say hello at <a href="mailto:email@domain.com">email@domain.com</a>!"
 ```
 
-## Link
+### Link
 
 Some of LinkHunter's methods return link objects which are documented below.
 
-### `.original`
+#### `.original`
 
 Store the original link.
 
@@ -143,7 +145,7 @@ Store the original link.
 Link('site.com').original // -> 'site.com'
 ```
 
-### `.type`
+#### `.type`
 
 Store the type of the link (`url` or `email`).
 
@@ -152,7 +154,7 @@ Link('site.com').type         // -> 'url'
 Link('email@domain.com').type // -> 'email'
 ```
 
-### `.originalHasProtocol()`
+#### `.originalHasProtocol()`
 
 Return whether the original link has a protocol or not.
 
@@ -164,7 +166,7 @@ Link('http://site.com').originalHasProtocol()  // -> true
 Link('https://site.com').originalHasProtocol() // -> true
 ```
 
-### `.withProtocol(protocol)`
+#### `.withProtocol(protocol)`
 
 Add the given protocol **if needed**.
 
@@ -179,7 +181,7 @@ Link('http://site.com').withProtocol('http://')  // -> 'http://site.com'
 Link('http://site.com').withProtocol('https://') // -> 'http://site.com'
 ```
 
-### `.cleanUp(removeQueryParams)`
+#### `.cleanUp(removeQueryParams)`
 
 Remove the protocol, trailing `/` or `/#` (not `/#hash`).
 
@@ -193,7 +195,7 @@ Link('http://site.com?some=params').cleanUp()     // -> site.com?some=params
 Link('http://site.com?some=params').cleanUp(true) // -> site.com
 ```
 
-### `.shorten(maxLength)`
+#### `.shorten(maxLength)`
 
 If link's length is lesser than `maxLength`, first clean up and then if it's still too long does a substr.
 
@@ -206,7 +208,7 @@ Link('http://site.com/some/sub/path').shorten(20) // -> 'site.com/some/sub...'
 Link('http://site.com/some/sub/path').shorten(99) // -> 'http://site.com/some/sub/path'
 ```
 
-### `.beautify(removeQueryParams)`
+#### `.beautify(removeQueryParams)`
 
 Clean up a link and keep the last part of the url which often contains a clear reference to the page's content.
 
@@ -248,14 +250,10 @@ Link('http://site.com/path/to/article-title?utf8&tracker=data').beautify(false)
 
 ## Change log
 
-### 1.0.0 - Unreleased
+### 1.0.1 - Unreleased
 
-* [x] Add `beautify`
-* [x] Review code
-* [x] Review tests
-* [x] Improve email detection
-* [x] Add & update documentation
-* [x] Add demo page
-* [x] Add a significant amount of test subjects
-* [ ] Review demo page markup
-* [ ] Add GA tracker
+* [ ] Improve the regular url regexp to avoid matching `http://.` (add the domain pattern from user typed regexp).
+
+### 1.0.0 - 2015-06-28
+
+First release.
