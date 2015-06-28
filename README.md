@@ -251,9 +251,11 @@ Link('http://site.com/path/to/article-title?utf8&tracker=data').beautify(false)
 
 ## Change log
 
-### 1.0.1 - Unreleased
+### 1.1.0 - Unreleased
 
 * [ ] Improve the regular url regexp to avoid matching `http://.` (add the domain pattern from user typed regexp).
+* [ ] Add a `.replaceLinks(callback)` method.
+* [ ] Add more options to `.linky()`: beautify, shorten.
 
 ### 1.0.0 - 2015-06-28
 
