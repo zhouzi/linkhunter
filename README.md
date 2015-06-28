@@ -2,21 +2,45 @@
 
 Detect links that real users actually type.
 
-In theory, an url is supposed to be prefixed by a protocol (e.g http://) so `http://site.com/` is correct while `site.com` is not.
-The thing is, users rarely refer to a site by mentioning its protocol.
-The purpose of LinkHunter is to match everything that actually looks like a link so both `http://site.com/` and `site.com` are correct.
+LinkHunter's purpose is to match links that users type as well as the ones they copy/paste.
+The difference between the two is that users rarely type urls in the form of `http://twitter.com/` but rather `twitter.com`.
+It means that LinkHunter is able to match:
 
-It also means that LinkHunter is really permissive because an url could be almost anything.
-Make sure you are aware of the [known limitations]().
+* `http://twitter.com/` in `Have a look at http://twitter.com/`
+* `twitter.com` in `Have a look at twitter.com`
+* `me@domain.com` in `Contact me@domain.com`
+
+Note that LinkHunter is meant to extract links from user's input but not to strictly validate urls or emails.
+For example, while `user@domain` is a correct email address, it won't match it but would work with `user@domain.com`.
+
+When searching for "user typed" links, it will make sure to break on punctuation mark so `twitter.com` is properly matched in `Have a look at twitter.com!` and not `twitter.com!`.
+It could be an issue if an user tries to type `twitter.com?some=params` but we assume that an user that is aware of the query parameter thing is also aware of the need of a protocol.
+Adding a protocol solve the issue and match the url properly (`http://twitter.com?some=params`).
+
+* [Features]()
+* [Usage]()
+* [Documentation]()
+* [Known Limitations]()
+* [Contributing]()
+* [Change Log]()
 
 
 
 ## Features
 
-* Detect anything that looks like an url to humans.
-* Detect emails as well (with a specific type).
-* Return link objects with some special features like proper shortening, a "beautifier", and [more]().
+LinkHunter considers three types of links:
 
+* copy/paste: `http://site.com/some/sub/path/to/article-title?some=tracker`
+* user typed: `site.com/articles`
+* email: `email@domain.com`
+
+With that, it's able to:
+
+* Shorten `http://site.com/some/sub/path/to/article-title?some=tracker` to `site.com/some...`
+* Beautify `http://site.com/some/sub/path/to/article-title?some=tracker` to `site.com/.../article-title`
+* Transform `Have a look at site.com and say hello@domain.com` to `Have a look at <a href="http://site.com" target="_blank">site.com</a> and say <a href="mailto:hello@domain.com">hello@domain.com</a>`
+
+These are just a few of LinkHunter's capabilities, have at look at the [documentation]() for more details.
 
 
 ## Usage
@@ -25,132 +49,183 @@ Make sure you are aware of the [known limitations]().
 2. Link it in your markup: `<script src="path/to/LinkHunter.min.js"></script>`
 3. You are now able to build a LinkHunter's instance: `var linkHunter = new LinkHunter();`
 
-For more details on features, please refer to the [documentation]().
 
 
-## Documentation
+## LinkHunter
 
 ### Instantiation
 
-There is a couple of things you can configure with LinkHunter and this is why you need to build a new instance to get started.
-It's as simple as:
+The first thing to do is to create a new instance of LinkHunter.
 
 ```javascript
 // Using defaults
 var linkHunter = new LinkHunter();
-
-// Custom options
-var linkHunter = new LinkHunter({});
 ```
 
-The available options are:
+### `.looksLikeALink(string, ignoreEmail)`
 
-name|default|description
-----|-------|-----------
-/|/|/
+Return whether or not a string looks like a link.
 
-### `linkHunter.isLink(string)`
+1. **string** (type: `string`) - The string to test.
+2. **ignoreEmail** (type: `boolean`, default: `false`) - Whether it should ignore email or not (`true` means yes).
 
-Returns whether a string is a link or not.
+@return boolean
 
 ```javascript
-linkHunter.isLink('site.com'); // -> true
-linkHunter.isLink('site...com'); // -> false
+linkHunter.looksLikeALink('site.com');               // -> true
+linkHunter.looksLikeALink('http://site.com');        // -> true
+linkHunter.looksLikeALink('email@domain.com');       // -> true
+linkHunter.looksLikeALink('email@domain.com', true); // -> false
+linkHunter.looksLikeALink('Whatever!');              // -> false
 ```
 
-**Arguments**
+### `.looksLikeAnEmail(string)`
 
-1. string: the subject to test
+Return whether or not a string looks like an email.
 
-### `linkHunter.getLinks(string)`
+1. **string** (type: `string`) - The string to test.
 
-Returns a list of [link objects]() from a text/string.
+@return boolean
 
 ```javascript
-linkHunter.getLinks('Hey guys have a look at site.com');
+linkHunter.looksLikeAnEmail('email@domain.com'); // -> true
+linkHunter.looksLikeAnEmail('http://site.com');  // -> false
 ```
 
-**Arguments**
+### `.getLinks(string, ignoreEmail)`
 
-1. string: a text where to search for urls
-2. ignoreEmail (boolean): if true, ignore emails otherwise capture these too. Default is true.
+Extract links from a string.
 
-### `linkHunter.linkify(string)`
+1. **string** (type: `string`) - Where to search for links.
+2. **ignoreEmail** (type: `boolean`, default: `false`) - Whether it should ignore email or not (`true` means yes).
 
-Match all links from a text and replace them by an anchor.
+@return an array of [link objects]()
 
 ```javascript
-linkHunter.linkify('Hey guys have a look at site.com'); // -> 'Hey guys have a look at <a href="http://site.com">site.com</a>'
+linkHunter.getLinks('Say hello at email@domain.com!');
+// -> [Link({ original: 'email@domain.com', type: 'email' })]
+
+linkHunter.getLinks('Have a look at site.com!');
+// -> [Link({ original: 'site.com', type: 'url' })]
 ```
 
-**Arguments**
+### `.linky(string, options)`
 
-1. string: a text where to search and replace urls
-2. options (object):
-    * `ignoreEmail`: whether it should ignore emails or not, default is false (so it replace emails by `mailto:`).
-    * `targetBlank`: whether it should add the `target="_blank"` attribute or not, default is false.
+Match and transform links in a string into html anchor tags.
 
+1. **string** (type: `string`) - Where to search and replace links.
+2. **options** (type: `object`, default: `{}`) - See below.
 
+**options**
 
-### Link Objects
+|name|default|description|
+|----|-------|-----------|
+|ignoreEmail (boolean)|`false`|Whether it shouldn't replace email by `mailto:` or not|
+|targetBlank (boolean)|`false`|Whether it should add the `target="_blank"` attribute or not|
+|protocol (string)|`"http://"`|The protocol to prepend when needed|
 
-Some methods such as `linkHunter.getLinks` return a list of "link objects" with some special properties and methods.
-
-#### Properties
-
-* `link.original`: contains the original link.
-* `link.type`: can be `url` or `email`.
-
-#### Methods
-
-##### `link.toFormatted()`
-
-Return the link adding a protocol if needed. The default protocol is `http://` but can be changed by doing so:
+@return string
 
 ```javascript
-link.toFormatted('https://'); // -> return https://site.com
+linkHunter.getLinks('Have a look at twitter.com and say hello at email@domain.com!', { ignoreEmail: false, targetBlank: false, protocol: 'http://' });
+// -> "Have a look at <a href="http://twitter.com">twitter.com</a> and say hello at <a href="mailto:email@domain.com">email@domain.com</a>!"
 ```
 
-**Note:** the protocol is added only if missing so if the original link was `http://site.com`, `link.toFormatted()` would return the same value.
+## Link
 
-##### `link.shorten(40)`
+Some of LinkHunter's methods return link objects which are documented below.
 
-Shorten a link by first removing the protocol and then doing its best to keep the last part of the url.
-So for example, in `http://site.com/some/blog/article-title` the goal would be to keep `site.com` and `article-title` ending in: `site.com/.../article-title`.
-The fact is, the last part of urls are often what describes the page's content.
+### `.original`
+
+Store the original link.
 
 ```javascript
-// link.original -> 'http://site.com/some/blog/article-title'
-link.shorten(20); // -> 'site.com/.../arti...'
-link.shorten(20, false); // -> 'site.com/.../article-title'
+Link('site.com').original // -> 'site.com'
 ```
 
-**Arguments**
+### `.type`
 
-1. int: max length of the shortened link
-2. strict (boolean): ...
-
-##### `link.beautify()`
-
-Keep what's supposed to be the more relevant part of the url: domain name and last part of the url.
+Store the type of the link (`url` or `email`).
 
 ```javascript
-// link.original -> 'http://site.com/some/blog/article-title?with=params#hash'
-link.beautify(); // 'site.com/.../?with=params#hash'
-link.beautify(true); // 'site.com/.../article-title'
+Link('site.com').type         // -> 'url'
+Link('email@domain.com').type // -> 'email'
 ```
 
-**Arguments**
+### `.originalHasProtocol()`
 
-1. removeQueryParams (boolean): remove query params (everything that is behind the last `?`), default is false.
+Return whether the original link has a protocol or not.
+
+@return boolean
+
+```javascript
+Link('site.com').originalHasProtocol()         // -> false
+Link('http://site.com').originalHasProtocol()  // -> true
+Link('https://site.com').originalHasProtocol() // -> true
+```
+
+### `.withProtocol(protocol)`
+
+Add the given protocol **if needed**.
+
+1. **protocol** (type: string, default: `'http://'`) - The protocol to prepend when needed.
+
+@return string
+
+```javascript
+Link('site.com').withProtocol()                  // -> 'http://site.com'
+Link('site.com').withProtocol('https://')        // -> 'https://site.com'
+Link('http://site.com').withProtocol('http://')  // -> 'http://site.com'
+Link('http://site.com').withProtocol('https://') // -> 'http://site.com'
+```
+
+### `.cleanUp(removeQueryParams)`
+
+Remove the protocol, trailing `/` or `/#` (not `/#hash`).
+
+1. **removeQueryParams** (type: boolean, default: `false`) - Whether it should remove query parameters or not.
+
+@return string
+
+```javascript
+Link('http://site.com/#').cleanUp()               // -> site.com
+Link('http://site.com?some=params').cleanUp()     // -> site.com?some=params
+Link('http://site.com?some=params').cleanUp(true) // -> site.com
+```
+
+### `.shorten(maxLength)`
+
+If link's length is lesser than `maxLength`, first clean up and then if it's still too long does a substr.
+
+1. **maxLength** (type: integer): the maximum length of the string to return.
+
+@return string
+
+```javascript
+Link('http://site.com/some/sub/path').shorten(20) // -> 'site.com/some/sub...'
+Link('http://site.com/some/sub/path').shorten(99) // -> 'http://site.com/some/sub/path'
+```
+
+### `.beautify(removeQueryParams)`
+
+Clean up a link and keep the last part of the url which often contains a clear reference to the page's content.
+
+1. **removeQueryParams** (type: boolean, default: `true`) - Whether it should remove query parameters or not.
+
+```javascript
+Link('http://site.com/path/to/article-title?utf8&tracker=data').beautify()
+// -> site.com/.../article-title
+
+Link('http://site.com/path/to/article-title?utf8&tracker=data').beautify(false)
+// -> site.com/.../article-title?utf8&tracker=data
+```
 
 
 
-## Known Limitations
+## Known "Limitations"
 
-* A domain is valid starting from 1 character while the minimum for a tld is 2. It means that Twitter's `t.co` would be matched as well as `a.bc`, `a.qw`, and so on.
-* For now, urls ending by a dot are not matched. Meaning `site.com` won't be detected in `"Have a look at site.com."` because of the trailing dot.
-* Unable to match users links that contains a dot in the path e.g.: `github.com/angular.js` otherwise it would match `site.com.` too.
+* Domain such as Twitter's `t.co` are matched so `a.bc` and `q.we` too
+* User typed links sub path (everything after the first slash) can't contain a punctuation mark so `github.com/angular.js` would not be matched properly. It's useful to match `site.com` in `Have a look at site.com!` or `Have a look at site.com.` (avoiding the punctuation).
 
 
 
@@ -179,7 +254,7 @@ link.beautify(true); // 'site.com/.../article-title'
 * [x] Review code
 * [x] Review tests
 * [x] Improve email detection
-* [ ] Add & update documentation
+* [x] Add & update documentation
 * [x] Add demo page
 * [x] Add a significant amount of test subjects
 * [ ] Review demo page markup
