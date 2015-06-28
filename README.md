@@ -111,12 +111,31 @@ linkHunter.getLinks('Have a look at site.com!');
 // -> [Link({ original: 'site.com', type: 'url' })]
 ```
 
+#### `.replaceLinks(string, callback, context)`
+
+Trigger a callback for each links found. The callback receive 1 argument: a link object.
+The links will be replaced by callback's return value so make sure to return a string.
+
+1. **string** (type: `string`) - Where to search and replaces links using callback.
+2. **callback** (type: `function`) - Called for each links, receive a link object and must return the replacement value.
+3. **context** (type: `/`, default: `linkHunter instance`) - Set callback's context.
+
+@return string
+
+```javascript
+linkHunter.replaceLinks('Have a look at http://site.com/sub/path/to/article-title!', function (link) {
+    return link.beautify();
+});
+// -> 'Have a look at site.com/.../article-title!'
+```
+
 #### `.linky(string, options)`
 
 Match and transform links in a string into html anchor tags.
+Note: this method is made for convenience and simply calls `.replaceLinks` internally.
 
 1. **string** (type: `string`) - Where to search and replace links.
-2. **options** (type: `object`, default: `{}`) - See below.
+2. **options** (type: `object`, default: `object`) - See below.
 
 **options**
 
@@ -125,12 +144,20 @@ Match and transform links in a string into html anchor tags.
 |ignoreEmail (boolean)|`false`|Whether it shouldn't replace email by `mailto:` or not|
 |targetBlank (boolean)|`false`|Whether it should add the `target="_blank"` attribute or not|
 |protocol (string)|`"http://"`|The protocol to prepend when needed|
+|operation|{}|The operation to execute on each links|
 
 @return string
 
 ```javascript
-linkHunter.getLinks('Have a look at twitter.com and say hello at email@domain.com!', { ignoreEmail: false, targetBlank: false, protocol: 'http://' });
+linkHunter.linky('Have a look at twitter.com and say hello at email@domain.com!', { ignoreEmail: false, targetBlank: false, protocol: 'http://' });
 // -> "Have a look at <a href="http://twitter.com">twitter.com</a> and say hello at <a href="mailto:email@domain.com">email@domain.com</a>!"
+```
+
+An operation looks like `{ name: 'beautify', args: [] }` and what it does is that it calls the link's method `operation.name` and pass the arguments to modify the link's display value.
+
+```javascript
+linkHunter.linky('Have a look at http://site.com/sub/path/to/article-title!', { operation: { name: 'beautify', args: [] } });
+// -> 'Have a look at <a href="http://site.com/sub/path/to/article-title">site.com/.../article-title</a>!'
 ```
 
 ### Link
