@@ -1,15 +1,25 @@
 export default class LinkClass {
-    constructor (link) {
+    constructor (link, isEmail) {
         this.original = link;
-        this.type     = link.indexOf('@') >= 0 ? 'email' : 'url';
+        this.type     = isEmail ? 'email' : 'url';
     }
 
-    toFormatted (protocol = 'http://') {
+    static addEllipsis (str, maxLength = str.length, ellipsis = '...') {
+        return str.substr(0, maxLength - ellipsis.length) + ellipsis;
+    }
+
+    originalHasProtocol () {
+        return /^https?:\/\//.test(this.original);
+    }
+
+    withProtocol (protocol = 'http://') {
         if (this.type == 'email') return this.original;
-        else return /^https?:\/\//.test(this.original) ? this.original : protocol + this.original;
+        return this.originalHasProtocol() ? this.original : protocol + this.original;
     }
 
-    static cleanUp (link, removeQueryParams = false) {
+    cleanUp (removeQueryParams = false) {
+        let link = this.original;
+
         if (removeQueryParams) {
             var indexOfQueryParams = link.lastIndexOf('?');
             if (indexOfQueryParams >= 0) link = link.substr(0, indexOfQueryParams);
@@ -20,43 +30,24 @@ export default class LinkClass {
         return link;
     }
 
-    shorten (maxLength, strict = true) {
+    shorten (maxLength) {
         if (this.type == 'email') return this.original.substr(0, maxLength);
 
         let link = this.original;
-        if (link.length < maxLength) return link;
+        if (link.length <= maxLength || (link = this.cleanUp()).length <= maxLength) return link;
 
-        link = LinkClass.cleanUp(link);
-
-        let fragments = link.split('/');
-        let start     = fragments.shift() + '/';
-        let end       = fragments.pop();
-
-        for (let i = 0, fragment; i < fragments.length; i++) {
-            fragment = fragments[i];
-
-            if ((start + fragment + '/' + end).length <= maxLength) {
-                start += fragment + '/';
-            } else {
-                start += '.../';
-                break;
-            }
-        }
-
-        let shortenedUrl = start + end;
-        if (strict && shortenedUrl.length > maxLength) shortenedUrl = shortenedUrl.substr(0, maxLength - 3) + '...';
-
-        return shortenedUrl;
+        return LinkClass.addEllipsis(link, maxLength);
     }
 
-    beautify (removeQueryParams = false) {
+    beautify (removeQueryParams = true) {
         if (this.type == 'email') return this.original;
 
-        let link = LinkClass.cleanUp(this.original, removeQueryParams);
-        let fragments = link.split('/');
+        let link = this.cleanUp(removeQueryParams);
 
         // if there is no sub path e.g. site.com
-        if (fragments.length === 1) return link;
+        if (link.indexOf('/') < 0) return link;
+
+        let fragments = link.split('/');
 
         if (fragments.length > 2) return fragments.shift() + '/.../' + fragments.pop();
         else return fragments.shift() + '/' + fragments.pop();

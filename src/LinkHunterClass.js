@@ -1,58 +1,59 @@
 import LinkClass from './LinkClass';
+import utils from './utils';
+
+const EMAIL_REGEXP      = '[^\\s]+@[^\\s.]+\\.[-a-z]{2,10}';
+const REGULARURL_REGEXP = 'https?:\/\/[^\\s]+';
+const USERURL_REGEXP    = '(?:[a-z0-9]{1,255}\\.)+[a-z]{2,10}[^.\\s"\'!?:,;]*';
+const LINK_REGEXP       = `((?:${EMAIL_REGEXP})|(?:${REGULARURL_REGEXP})|(?:${USERURL_REGEXP}))`;
 
 export default class LinkHunterClass {
     constructor () {
-        let baseLinkRegexp = '((?:https?:\/\/)?[-a-zA-Z0-9:%_\\+~=?][-a-zA-Z0-9@:%._\\+~#=?]{0,255}\\.[a-z]{2,6}[-a-zA-Z0-9@:%._\\+~#=\/&\\[\\]?]*)';
-
         this.regexps =  {
-            linkStrict: new RegExp(`^${baseLinkRegexp}$`),
-            linkGlobal: new RegExp(baseLinkRegexp, 'g')
+            email:      new RegExp(`^${EMAIL_REGEXP}$`, 'i'),
+            regularUrl: new RegExp(`^${REGULARURL_REGEXP}$`, 'i'),
+            userUrl:    new RegExp(`^${USERURL_REGEXP}$`, 'i'),
+            link:       new RegExp(`^${LINK_REGEXP}$`, 'i'),
+            links:      new RegExp(LINK_REGEXP, 'gi')
         };
     }
 
-    isLink (str, ignoreEmail = true) {
-        // if there's an @ then consider it's an email
-        if (ignoreEmail && str.indexOf('@') >= 0) return false;
-
-        // remove links that start or end by a dot
-        // it means that in "Have a look at site.com." site.com won't be matched
-        if (str.charAt(0) == '.' || str.charAt(str.length - 1) == '.') return false;
-
-        // does it actually looks like a link?
-        if (!this.regexps.linkStrict.test(str)) return false;
-
-        // remove links such as site...com
-        if (/\.{2,}/g.test(str)) return false;
-
-        return true;
+    looksLikeAnEmail (str) {
+        return this.regexps.email.test(str);
     }
 
-    getLinks (str, ignoreEmail = true) {
-        let links = str.match(this.regexps.linkGlobal) || [];
-
-        let self = this;
-        return links
-            .filter(link => { return self.isLink(link, ignoreEmail); })
-            .map(link => { return new LinkClass(link); });
+    looksLikeALink (str, ignoreEmail = false) {
+        if (ignoreEmail && this.looksLikeAnEmail(str)) return false;
+        return this.regexps.link.test(str);
     }
 
-    linkify (str, options = { ignoreEmail: false, targetBlank: false }) {
-        let linkTemplate = options.targetBlank ?
+    getLinks (str, ignoreEmail = false) {
+        let links = str.match(this.regexps.links) || [];
+
+        if (ignoreEmail) {
+            let self = this;
+            links = links.filter(link => { return !self.looksLikeAnEmail(link); });
+        }
+
+        return links.map(link => { return new LinkClass(link); });
+    }
+
+    linky (str, options = {}) {
+        let defaults = { ignoreEmail: false, targetBlank: false, protocol: 'http://' };
+        options = utils.merge(defaults, options);
+
+        let linkTemplate =
+            options.targetBlank ?
             '<a href="{{formatted}}" target="_blank">{{original}}</a>' :
             '<a href="{{formatted}}">{{original}}</a>';
 
         let self = this;
-        let link;
+        return str.replace(self.regexps.links, function (link) {
+            if (options.ignoreEmail && self.looksLikeAnEmail(link)) return link;
 
-        return str.replace(self.regexps.linkGlobal, function ($0) {
-            if (self.isLink($0, options.ignoreEmail)) {
-                link = new LinkClass($0);
+            link = new LinkClass(link, self.looksLikeAnEmail(link));
 
-                if (link.type == 'email') return `<a href="mailto:${link.original}">${link.original}</a>`;
-                else return linkTemplate.replace('{{formatted}}', link.toFormatted()).replace('{{original}}', link.original);
-            }
-
-            return $0;
+            if (link.type == 'email') return `<a href="mailto:${link.original}">${link.original}</a>`;
+            else return linkTemplate.replace('{{formatted}}', link.withProtocol(options.protocol)).replace('{{original}}', link.original);
         });
     }
 }

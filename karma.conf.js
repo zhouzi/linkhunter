@@ -25,6 +25,11 @@ module.exports = function (config) {
                     {
                         test: /\.js$/,
                         loaders: ['babel-loader']
+                    },
+
+                    {
+                        test: /\.json$/,
+                        loaders: ['json-loader']
                     }
                 ]
             }

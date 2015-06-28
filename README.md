@@ -150,6 +150,7 @@ link.beautify(true); // 'site.com/.../article-title'
 
 * A domain is valid starting from 1 character while the minimum for a tld is 2. It means that Twitter's `t.co` would be matched as well as `a.bc`, `a.qw`, and so on.
 * For now, urls ending by a dot are not matched. Meaning `site.com` won't be detected in `"Have a look at site.com."` because of the trailing dot.
+* Unable to match users links that contains a dot in the path e.g.: `github.com/angular.js` otherwise it would match `site.com.` too.
 
 
 
@@ -175,11 +176,11 @@ link.beautify(true); // 'site.com/.../article-title'
 ### 1.0.0 - Unreleased
 
 * [x] Add `beautify`
-* [ ] Review code
-* [ ] Review tests
-* [ ] Improve email detection
+* [x] Review code
+* [x] Review tests
+* [x] Improve email detection
 * [ ] Add & update documentation
 * [x] Add demo page
-* [ ] Add a significant amount of test subjects
+* [x] Add a significant amount of test subjects
 * [ ] Review demo page markup
 * [ ] Add GA tracker
