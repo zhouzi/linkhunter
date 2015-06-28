@@ -37,6 +37,13 @@ export default class LinkHunterClass {
         return links.map(link => { return new LinkClass(link); });
     }
 
+    replaceLinks (str, callback, context = this) {
+        let self = this;
+        return str.replace(this.regexps.links, link => {
+            return callback.call(context, new LinkClass(link, self.looksLikeAnEmail(link)));
+        });
+    }
+
     linky (str, options = {}) {
         let defaults = { ignoreEmail: false, targetBlank: false, protocol: 'http://' };
         options = utils.merge(defaults, options);
@@ -46,11 +53,8 @@ export default class LinkHunterClass {
             '<a href="{{formatted}}" target="_blank">{{original}}</a>' :
             '<a href="{{formatted}}">{{original}}</a>';
 
-        let self = this;
-        return str.replace(self.regexps.links, function (link) {
-            if (options.ignoreEmail && self.looksLikeAnEmail(link)) return link;
-
-            link = new LinkClass(link, self.looksLikeAnEmail(link));
+        return this.replaceLinks(str, (link) => {
+            if (options.ignoreEmail && link.type == 'email') return link.original;
 
             if (link.type == 'email') return `<a href="mailto:${link.original}">${link.original}</a>`;
             else return linkTemplate.replace('{{formatted}}', link.withProtocol(options.protocol)).replace('{{original}}', link.original);

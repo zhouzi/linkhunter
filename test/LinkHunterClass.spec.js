@@ -1,4 +1,5 @@
 import LinkHunterClass from '../src/LinkHunterClass';
+import LinkClass from '../src/LinkClass';
 import subjects from './subjects.json';
 
 let linkHunter;
@@ -43,5 +44,14 @@ describe('LinkHunterClass', () => {
         it('should replace links by an html anchor tag and respect options', () => {
             expect(linkHunter.linky(text, { ignoreEmail: true, targetBlank: true, protocol: 'https://' })).toBe('Have a look at <a href="https://site.com/whatever" target="_blank">site.com/whatever</a> and <a href="http://www.domain.com/some/sub/path?with=params#hash" target="_blank">http://www.domain.com/some/sub/path?with=params#hash</a> guys! And say hello@someone.com!');
         });
+    });
+
+    it('should call a callback for each links found in a string', () => {
+        let str = linkHunter.replaceLinks('Have a look at site.com and http://whatever.com/ guys! hello@someone.com', link => {
+            expect(link instanceof LinkClass).toBe(true);
+            return 'REPLACEMENT';
+        });
+
+        expect(str).toBe('Have a look at REPLACEMENT and REPLACEMENT guys! REPLACEMENT');
     });
 });
