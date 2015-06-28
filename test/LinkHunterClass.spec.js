@@ -44,6 +44,11 @@ describe('LinkHunterClass', () => {
         it('should replace links by an html anchor tag and respect options', () => {
             expect(linkHunter.linky(text, { ignoreEmail: true, targetBlank: true, protocol: 'https://' })).toBe('Have a look at <a href="https://site.com/whatever" target="_blank">site.com/whatever</a> and <a href="http://www.domain.com/some/sub/path?with=params#hash" target="_blank">http://www.domain.com/some/sub/path?with=params#hash</a> guys! And say hello@someone.com!');
         });
+
+        it('should perform an operation on links\' display value', () => {
+            expect(linkHunter.linky(text, { operation: { name: 'cleanUp', args: [true] } })).toBe('Have a look at <a href="http://site.com/whatever">site.com/whatever</a> and <a href="http://www.domain.com/some/sub/path?with=params#hash">www.domain.com/some/sub/path</a> guys! And say <a href="mailto:hello@someone.com">hello@someone.com</a>!');
+            expect(linkHunter.linky(text, { operation: { name: 'beautify', args: [true] } })).toBe('Have a look at <a href="http://site.com/whatever">site.com/whatever</a> and <a href="http://www.domain.com/some/sub/path?with=params#hash">www.domain.com/.../path</a> guys! And say <a href="mailto:hello@someone.com">hello@someone.com</a>!');
+        });
     });
 
     it('should call a callback for each links found in a string', () => {

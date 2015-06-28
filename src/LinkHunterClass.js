@@ -45,19 +45,27 @@ export default class LinkHunterClass {
     }
 
     linky (str, options = {}) {
-        let defaults = { ignoreEmail: false, targetBlank: false, protocol: 'http://' };
+        let defaults = { ignoreEmail: false, targetBlank: false, protocol: 'http://', operation: {} };
         options = utils.merge(defaults, options);
 
         let linkTemplate =
             options.targetBlank ?
-            '<a href="{{formatted}}" target="_blank">{{original}}</a>' :
-            '<a href="{{formatted}}">{{original}}</a>';
+            '<a href="{{formatted}}" target="_blank">{{displayValue}}</a>' :
+            '<a href="{{formatted}}">{{displayValue}}</a>';
+
+        let displayValue;
 
         return this.replaceLinks(str, (link) => {
-            if (options.ignoreEmail && link.type == 'email') return link.original;
+            displayValue = link.original;
 
-            if (link.type == 'email') return `<a href="mailto:${link.original}">${link.original}</a>`;
-            else return linkTemplate.replace('{{formatted}}', link.withProtocol(options.protocol)).replace('{{original}}', link.original);
-        });
+            if (options.ignoreEmail && link.type == 'email') return displayValue;
+
+            if (typeof link[options.operation.name] == 'function') {
+                displayValue = link[options.operation.name].apply(link, options.operation.args);
+            }
+
+            if (link.type == 'email') return `<a href="mailto:${link.original}">${displayValue}</a>`;
+            else return linkTemplate.replace('{{formatted}}', link.withProtocol(options.protocol)).replace('{{displayValue}}', displayValue);
+        }, this);
     }
 }
