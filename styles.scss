@@ -40,22 +40,25 @@ h2 {
   margin: 0;
 }
 
-.wrapper {
+.drop-shadow {
   position: relative;
-  max-width: 500px;
-  margin: auto;
 
   &:after {
     content: "";
     position: absolute;
     z-index: -1;
     bottom: 0;
-    left: 5%;
-    height: 14px;
-    width: 90%;
+    left: 2%;
+    height: 16px;
+    width: 96%;
     border-radius: 100%;
-    box-shadow: 0 40px 8px rgba(#000, .2);
+    box-shadow: 0 50px 6px rgba(#000, .2);
   }
+}
+
+.wrapper {
+  max-width: 500px;
+  margin: auto;
 }
 
 .hero {
@@ -206,5 +209,17 @@ textarea {
 
   &:not(:first-child) {
     margin-top: $gutter;
+  }
+}
+
+.nav {
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  li {
+    display: inline-block;
   }
 }

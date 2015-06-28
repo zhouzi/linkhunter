@@ -1,6 +1,8 @@
 <!doctype html>
-<html>
+<html lang="en">
     <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>LinkHunter - Detect links that real users actually type.</title>
         <link href='http://fonts.googleapis.com/css?family=Fredoka+One' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css">
@@ -8,24 +10,26 @@
     </head>
 
     <body>
-        <div class="wrapper">
-            <main>
-                <section class="hero">
-                    <h1>LinkHunter</h1>
-                    <h2>Detect links that real users actually type.</h2>
+        <main class="wrapper drop-shadow">
+            <section class="hero">
+                <h1>LinkHunter</h1>
+                <h2>Detect links that real users actually type.</h2>
 
-                    <a href="#">View on Github</a>
-                    <a href="#">Tweet</a>
-                </section>
+                <nav class="nav">
+                    <ul>
+                        <li><a href="#">View on Github</a></li>
+                        <li><a href="#">Tweet</a></li>
+                    </ul>
+                </nav>
+            </section>
 
-                <section class="demo">
-                    <textarea id="demo-textarea" rows="5">Ask someone to type in the url of twitter, no copy/paste. I bet they are going to write it as twitter.com, maybe www.twitter.com but most of the time they are going to miss the http://.</textarea>
+            <section class="demo">
+                <textarea id="demo-textarea" rows="5">Ask someone to type in the url of twitter, no copy/paste. I bet they are going to write it as twitter.com, maybe www.twitter.com but most of the time they are going to miss the http://.</textarea>
 
-                    <h3 id="demo-title"></h3>
-                    <ul class="demo-links"></ul>
-                </section>
-            </main>
-        </div>
+                <h3 id="demo-title"></h3>
+                <ul class="demo-links"></ul>
+            </section>
+        </main>
 
         <script src="dist/LinkHunter.min.js"></script>
         <script>
