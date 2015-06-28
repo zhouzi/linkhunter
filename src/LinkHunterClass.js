@@ -2,7 +2,7 @@ import LinkClass from './LinkClass';
 import utils from './utils';
 
 const EMAIL_REGEXP      = '[^\\s]+@[^\\s.]+\\.[-a-z]{2,10}';
-const REGULARURL_REGEXP = 'https?:\/\/[^\\s]+';
+const REGULARURL_REGEXP = 'https?:\/\/(?:[a-z0-9]{1,255}\\.)+[a-z]{2,10}[^\\s]*';
 const USERURL_REGEXP    = '(?:[a-z0-9]{1,255}\\.)+[a-z]{2,10}[^.\\s"\'!?:,;]*';
 const LINK_REGEXP       = `((?:${EMAIL_REGEXP})|(?:${REGULARURL_REGEXP})|(?:${USERURL_REGEXP}))`;
 

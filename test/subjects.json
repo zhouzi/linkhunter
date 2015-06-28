@@ -7,7 +7,8 @@
     "http://site.com",
     "https://site.com",
     "https://site.com/some-sub/path/with?params=foo#hash",
-    "user@email.com"
+    "user@email.com",
+    "http://t.co"
   ],
 
   "incorrect": [
@@ -21,6 +22,10 @@
     "github.com/angular.js",
     "user@email",
     "user@email..com",
-    "user@email.c"
+    "user@email.c",
+    "http://",
+    "http://.",
+    "http://t.c",
+    "http://t.c9"
   ]
 }
