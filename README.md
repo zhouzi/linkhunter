@@ -227,7 +227,7 @@ Link('http://site.com/path/to/article-title?utf8&tracker=data').beautify(false)
 ## Known "Limitations"
 
 * Domain such as Twitter's `t.co` are matched so `a.bc` and `q.we` too
-* User typed links sub path (everything after the first slash) can't contain a punctuation mark so `github.com/angular.js` would not be matched properly. It's useful to match `site.com` in `Have a look at site.com!` or `Have a look at site.com.` (avoiding the punctuation).
+* User typed links' sub path (everything after the first slash) can't contain a punctuation mark so `github.com/angular.js` wouldn't be matched properly. However this behavior is particularly useful to match `site.com` in `Have a look at site.com!` or `Have a look at site.com.` (instead of matching `site.com!` and `site.com.`).
 
 
 
