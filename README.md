@@ -254,8 +254,7 @@ Link('http://site.com/path/to/article-title?utf8&tracker=data').beautify(false)
 ## Known "Limitations"
 
 * Domain such as Twitter's `t.co` are matched so `a.bc` and `q.we` too
-* User typed links' sub path (everything after the first slash) can't contain a punctuation mark so `github.com/angular.js` wouldn't be matched properly. However this behavior is particularly useful to match `site.com` in `Have a look at site.com!` or `Have a look at site.com.` (instead of matching `site.com!` and `site.com.`).
-    * Given the previous example, `github.com/angular` would be matched in `github.com/angular.js`
+* User typed links (meaning urls without a protocol) can't contain a punctuation mark after the first slash. It means that `github.com` is properly matched in `Go to github.com!And let me know` and not `github.com!And`. It also means that `github.com/angular.js` is not considered as a valid "user typed" url because we can't be sure whether what's behind the punctuation mark (the dot in this case) is part of the url or not. Adding the protocol fix it so `http://github.com/angular.js` is perfectly valid.
 
 
 
@@ -283,7 +282,9 @@ Link('http://site.com/path/to/article-title?utf8&tracker=data').beautify(false)
 * [x] Improve the regular url regexp to avoid matching `http://.` (add the domain pattern from user typed regexp).
 * [x] Add a `.replaceLinks(callback)` method.
 * [x] Add more options to `.linky()`: beautify, shorten, cleanUp.
-* [ ] Add support for non-browser environment (this article might help: "[Backend Apps with Webpack (Part I)](http://jlongster.com/Backend-Apps-with-Webpack--Part-I)").
+* [ ] Set `.originalHasProtocol()` as a property.
+* [x] Improve regexp to avoid matching partical urls like `github.com/angular` in `github.com/angular.js`.
+* [ ] Add support for non-browser environment.
 
 ### 1.0.0 - 2015-06-28
 

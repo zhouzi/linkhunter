@@ -37,6 +37,10 @@ describe('LinkHunterClass', () => {
             ]));
         });
 
+        it('should not extract partial urls', () => {
+            expect(JSON.stringify(linkHunter.getLinks('Have a look at github.com/angular.js guys!'))).toEqual(JSON.stringify([]));
+        });
+
         it('should replace links by an html anchor tag', () => {
             expect(linkHunter.linky(text)).toBe('Have a look at <a href="http://site.com/whatever">site.com/whatever</a> and <a href="http://www.domain.com/some/sub/path?with=params#hash">http://www.domain.com/some/sub/path?with=params#hash</a> guys! And say <a href="mailto:hello@someone.com">hello@someone.com</a>!');
         });
