@@ -181,16 +181,14 @@ Link('site.com').type         // -> 'url'
 Link('email@domain.com').type // -> 'email'
 ```
 
-#### `.originalHasProtocol()`
+#### `.originalHasProtocol`
 
-Return whether the original link has a protocol or not.
-
-@return boolean
+If `true`, means the original url has a protocol.
 
 ```javascript
-Link('site.com').originalHasProtocol()         // -> false
-Link('http://site.com').originalHasProtocol()  // -> true
-Link('https://site.com').originalHasProtocol() // -> true
+Link('site.com').originalHasProtocol         // -> false
+Link('http://site.com').originalHasProtocol  // -> true
+Link('https://site.com').originalHasProtocol // -> true
 ```
 
 #### `.withProtocol(protocol)`
@@ -283,7 +281,7 @@ Link('http://site.com/path/to/article-title?utf8&tracker=data').beautify(false)
 * [x] Improve the regular url regexp to avoid matching `http://.` (add the domain pattern from user typed regexp).
 * [x] Add a `.replaceLinks(callback)` method.
 * [x] Add more options to `.linky()`: beautify, shorten, cleanUp.
-* [ ] Set `.originalHasProtocol()` as a property.
+* [x] Set `.originalHasProtocol()` as a property.
 * [x] Improve regexp to avoid matching partical urls like `github.com/angular` in `github.com/angular.js`.
 * [x] Fix issue with `.getLinks()` to properly set `.type` to `"email"` for emails.
 * [ ] Add support for non-browser environment.

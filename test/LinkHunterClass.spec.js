@@ -36,8 +36,8 @@ describe('LinkHunterClass', () => {
 
         it('should extract links from a text', () => {
             expect(JSON.stringify(linkHunter.getLinks(text))).toEqual(JSON.stringify([
-                { original: 'site.com/whatever', type: 'url' },
-                { original: 'http://www.domain.com/some/sub/path?with=params#hash', type: 'url' },
+                { original: 'site.com/whatever', type: 'url', originalHasProtocol: false },
+                { original: 'http://www.domain.com/some/sub/path?with=params#hash', type: 'url', originalHasProtocol: true },
                 { original: 'hello@someone.com', type: 'email' }
             ]));
         });
@@ -47,7 +47,7 @@ describe('LinkHunterClass', () => {
         });
 
         it('should extract urls that are followed by a punctuation mark', () => {
-            expect(JSON.stringify(linkHunter.getLinks('Have a look at github.com! site.com.'))).toEqual(JSON.stringify([{ original: 'github.com', type: 'url' }, { original: 'site.com', type: 'url' }]));
+            expect(JSON.stringify(linkHunter.getLinks('Have a look at github.com! site.com.'))).toEqual(JSON.stringify([{ original: 'github.com', type: 'url', originalHasProtocol: false }, { original: 'site.com', type: 'url', originalHasProtocol: false }]));
         });
 
         it('should replace links by an html anchor tag', () => {

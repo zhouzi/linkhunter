@@ -1,20 +1,18 @@
 export default class LinkClass {
     constructor (link, isEmail) {
-        this.original = link;
-        this.type     = isEmail ? 'email' : 'url';
+        this.original            = link;
+        this.type                = isEmail ? 'email' : 'url';
+
+        if (this.type != 'email') this.originalHasProtocol = /^https?:\/\//.test(this.original);
     }
 
     static addEllipsis (str, maxLength = str.length, ellipsis = '...') {
         return str.substr(0, maxLength - ellipsis.length) + ellipsis;
     }
 
-    originalHasProtocol () {
-        return /^https?:\/\//.test(this.original);
-    }
-
     withProtocol (protocol = 'http://') {
         if (this.type == 'email') return this.original;
-        return this.originalHasProtocol() ? this.original : protocol + this.original;
+        return this.originalHasProtocol ? this.original : protocol + this.original;
     }
 
     cleanUp (removeQueryParams = false) {
