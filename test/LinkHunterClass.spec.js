@@ -33,12 +33,16 @@ describe('LinkHunterClass', () => {
             expect(JSON.stringify(linkHunter.getLinks(text))).toEqual(JSON.stringify([
                 { original: 'site.com/whatever', type: 'url' },
                 { original: 'http://www.domain.com/some/sub/path?with=params#hash', type: 'url' },
-                { original: 'hello@someone.com', type: 'url' }
+                { original: 'hello@someone.com', type: 'email' }
             ]));
         });
 
         it('should not extract partial urls', () => {
             expect(JSON.stringify(linkHunter.getLinks('Have a look at github.com/angular.js guys!'))).toEqual(JSON.stringify([]));
+        });
+
+        it('should extract urls that are followed by a punctuation mark', () => {
+            expect(JSON.stringify(linkHunter.getLinks('Have a look at github.com! site.com.'))).toEqual(JSON.stringify([{ original: 'github.com', type: 'url' }, { original: 'site.com', type: 'url' }]));
         });
 
         it('should replace links by an html anchor tag', () => {

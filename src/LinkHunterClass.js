@@ -4,7 +4,6 @@ import utils from './utils';
 const EMAIL_REGEXP      = '[^\\s]+@[^\\s.]+\\.[-a-z]{2,10}';
 const REGULARURL_REGEXP = 'https?:\/\/(?:[a-z0-9]{1,255}\\.)+[a-z]{2,10}[^\\s]*';
 const USERURL_REGEXP    = '(?:[a-z0-9]{1,255}\\.)+[a-z]{2,10}[^.\\s"\'!?:,;]*';
-const LINK_REGEXP       = `(?:${EMAIL_REGEXP})|(?:${REGULARURL_REGEXP})|(?:${USERURL_REGEXP})`;
 
 export default class LinkHunterClass {
     constructor () {
@@ -12,8 +11,8 @@ export default class LinkHunterClass {
             email:      new RegExp(`^${EMAIL_REGEXP}$`, 'i'),
             regularUrl: new RegExp(`^${REGULARURL_REGEXP}$`, 'i'),
             userUrl:    new RegExp(`^${USERURL_REGEXP}$`, 'i'),
-            link:       new RegExp(`^(${LINK_REGEXP})$`, 'i'),
-            links:      new RegExp(`(^|\\s)(${LINK_REGEXP}(?=\\s|$))`, 'gi')
+            link:       new RegExp(`^((?:${EMAIL_REGEXP})|(?:${REGULARURL_REGEXP})|(?:${USERURL_REGEXP}))$`, 'i'),
+            links:      new RegExp(`(^|\\s)((?:${EMAIL_REGEXP})|(?:${REGULARURL_REGEXP})|(?:${USERURL_REGEXP}(?=[."\'!?:,;]*(?:\\s|$))))`, 'gi')
         };
     }
 
@@ -35,7 +34,8 @@ export default class LinkHunterClass {
             links = links.filter(link => { return !self.looksLikeAnEmail(link); });
         }
 
-        return links.map(link => { return new LinkClass(link); });
+        let self = this;
+        return links.map(link => { return new LinkClass(link, self.looksLikeAnEmail(link)); });
     }
 
     replaceLinks (str, callback, context = this) {
