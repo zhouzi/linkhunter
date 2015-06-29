@@ -254,7 +254,8 @@ Link('http://site.com/path/to/article-title?utf8&tracker=data').beautify(false)
 ## Known "Limitations"
 
 * Domain such as Twitter's `t.co` are matched so `a.bc` and `q.we` too
-* User typed links (meaning urls without a protocol) can't contain a punctuation mark after the first slash. It means that `github.com` is properly matched in `Go to github.com!And let me know` and not `github.com!And`. It also means that `github.com/angular.js` is not considered as a valid "user typed" url because we can't be sure whether what's behind the punctuation mark (the dot in this case) is part of the url or not. Adding the protocol fix it so `http://github.com/angular.js` is perfectly valid.
+* Match user typed urls if followed or not by a punctuation mark and a space so `github.com` is matched in `github.com!` and `github.com! ` but not in `github.com!Whatever`.
+* User typed links (meaning urls without a protocol) can't contain a punctuation mark after the first slash. It means that `github.com` is properly matched in `Go to github.com! And let me know` and not `github.com!`. It also means that `github.com/angular.js` is not considered as a valid "user typed" url because we can't be sure whether what's behind the punctuation mark (the dot in this case) is part of the url or not. Adding the protocol fix it so `http://github.com/angular.js` is perfectly valid.
 
 
 

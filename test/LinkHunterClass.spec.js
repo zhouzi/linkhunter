@@ -26,7 +26,12 @@ describe('LinkHunterClass', () => {
     describe('Manipulating strings', () => {
         let text;
         beforeEach(() => {
-            text = 'Have a look at site.com/whatever and http://www.domain.com/some/sub/path?with=params#hash guys! And say hello@someone.com!';
+            text =
+                [
+                    'Have a look at site.com/whatever and http://www.domain.com/some/sub/path?with=params#hash guys!',
+                    'And say hello@someone.com!',
+                    'Oh and what about github.com!Let me know what you think.'
+                ].join('\n');
         });
 
         it('should extract links from a text', () => {
@@ -46,16 +51,16 @@ describe('LinkHunterClass', () => {
         });
 
         it('should replace links by an html anchor tag', () => {
-            expect(linkHunter.linky(text)).toBe('Have a look at <a href="http://site.com/whatever">site.com/whatever</a> and <a href="http://www.domain.com/some/sub/path?with=params#hash">http://www.domain.com/some/sub/path?with=params#hash</a> guys! And say <a href="mailto:hello@someone.com">hello@someone.com</a>!');
+            expect(linkHunter.linky(text)).toBe('Have a look at <a href="http://site.com/whatever">site.com/whatever</a> and <a href="http://www.domain.com/some/sub/path?with=params#hash">http://www.domain.com/some/sub/path?with=params#hash</a> guys!\nAnd say <a href="mailto:hello@someone.com">hello@someone.com</a>!\nOh and what about github.com!Let me know what you think.');
         });
 
         it('should replace links by an html anchor tag and respect options', () => {
-            expect(linkHunter.linky(text, { ignoreEmail: true, targetBlank: true, protocol: 'https://' })).toBe('Have a look at <a href="https://site.com/whatever" target="_blank">site.com/whatever</a> and <a href="http://www.domain.com/some/sub/path?with=params#hash" target="_blank">http://www.domain.com/some/sub/path?with=params#hash</a> guys! And say hello@someone.com!');
+            expect(linkHunter.linky(text, { ignoreEmail: true, targetBlank: true, protocol: 'https://' })).toBe('Have a look at <a href="https://site.com/whatever" target="_blank">site.com/whatever</a> and <a href="http://www.domain.com/some/sub/path?with=params#hash" target="_blank">http://www.domain.com/some/sub/path?with=params#hash</a> guys!\nAnd say hello@someone.com!\nOh and what about github.com!Let me know what you think.');
         });
 
         it('should perform an operation on links\' display value', () => {
-            expect(linkHunter.linky(text, { operation: { name: 'cleanUp', args: [true] } })).toBe('Have a look at <a href="http://site.com/whatever">site.com/whatever</a> and <a href="http://www.domain.com/some/sub/path?with=params#hash">www.domain.com/some/sub/path</a> guys! And say <a href="mailto:hello@someone.com">hello@someone.com</a>!');
-            expect(linkHunter.linky(text, { operation: { name: 'beautify', args: [true] } })).toBe('Have a look at <a href="http://site.com/whatever">site.com/whatever</a> and <a href="http://www.domain.com/some/sub/path?with=params#hash">www.domain.com/.../path</a> guys! And say <a href="mailto:hello@someone.com">hello@someone.com</a>!');
+            expect(linkHunter.linky(text, { operation: { name: 'cleanUp', args: [true] } })).toBe('Have a look at <a href="http://site.com/whatever">site.com/whatever</a> and <a href="http://www.domain.com/some/sub/path?with=params#hash">www.domain.com/some/sub/path</a> guys!\nAnd say <a href="mailto:hello@someone.com">hello@someone.com</a>!\nOh and what about github.com!Let me know what you think.');
+            expect(linkHunter.linky(text, { operation: { name: 'beautify', args: [true] } })).toBe('Have a look at <a href="http://site.com/whatever">site.com/whatever</a> and <a href="http://www.domain.com/some/sub/path?with=params#hash">www.domain.com/.../path</a> guys!\nAnd say <a href="mailto:hello@someone.com">hello@someone.com</a>!\nOh and what about github.com!Let me know what you think.');
         });
     });
 
