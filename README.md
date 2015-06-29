@@ -284,6 +284,7 @@ Link('http://site.com/path/to/article-title?utf8&tracker=data').beautify(false)
 * [x] Add more options to `.linky()`: beautify, shorten, cleanUp.
 * [ ] Set `.originalHasProtocol()` as a property.
 * [x] Improve regexp to avoid matching partical urls like `github.com/angular` in `github.com/angular.js`.
+* [x] Fix issue with `.getLinks()` to properly set `.type` to `"email"` for emails.
 * [ ] Add support for non-browser environment.
 
 ### 1.0.0 - 2015-06-28
