@@ -318,15 +318,18 @@ Use `LinkHunter.linky()` to replace links by anchor tags in a string.
 * [ ] Replace `targetBlank` by `target` to allow any target value.
 * [ ] Add support for non-browser environment.
 
-### 1.1.0 - Unreleased
+### 1.1.0 - 2015-06-30
 
-* [x] Improve the regular url regexp to avoid matching `http://.` (add the domain pattern from user typed regexp).
-* [x] Add a `.replaceLinks(callback)` method.
-* [x] Add more options to `.linky()`: beautify, shorten, cleanUp.
-* [x] Set `.originalHasProtocol()` as a property.
-* [x] Improve regexp to avoid matching partical urls like `github.com/angular` in `github.com/angular.js`.
-* [x] Fix issue with `.getLinks()` to properly set `.type` to `"email"` for emails.
-* [x] Add an Angular module.
+* Lots of improvements in the regexp
+    * Regular urls (the ones with a protocol) now also benefit from the domain pattern. Which means that everything that's before the first slash must looks like a domain name so `http://.` is no more matched for example.
+    * Partial urls are no more matched by the "user typed" regexp. Meaning `github.com/angular` is no more matched from `github.com/angular.js`. In such case the url is completely dropped because:
+        1. Matching partial urls is pointless and would surely lead to mistakes.
+        2. We can't be sure whether what's behind the punctuation mark (the dot in this case) is part of the url or not.
+* Added a `.replaceLinks(callback)` method so your could benefit from LinkHunter's regexps to replace links the way you want to. This is method is now also used by `.linky()`.
+* `.linky()` now supports more options like beautify, shorten and clean up.
+* Every link object has now a `.originalHasProtocol` property which is true when the original url has a protocol.
+* LinkHunter is now also available as an Angular module.
+* Fixed an issue where `.getLinks()` wasn't setting emails' type to "email".
 
 ### 1.0.0 - 2015-06-28
 
