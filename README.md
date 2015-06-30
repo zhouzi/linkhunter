@@ -247,6 +247,43 @@ Link('http://site.com/path/to/article-title?utf8&tracker=data').beautify(false)
 // -> site.com/.../article-title?utf8&tracker=data
 ```
 
+### Angular Module
+
+LinkHunter is also available as an angular module.
+To use it in your application, include both the `dist/LinkHunter.min.js` and `dist/LinkHunter.angular.min.js` files.
+Also declare it as a dependency like:
+
+```javascript
+angular.module('yourApplication', ['LinkHunter']);
+```
+
+You are now able to inject the `LinkHunterService` which is basically an instance of LinkHunter.
+
+```javascript
+angular
+    .module('yourApplication', ['LinkHunter'])
+    .controller('demoController', [
+        'LinkHunterService',
+        function (LinkHunterService) {}
+    ])
+;
+
+```
+
+This module also contains...
+
+#### `huntLinky(options)` (filter)
+
+Use `LinkHunter.linky()` to replace links by anchor tags in a string.
+
+1. **options** (type: object): have a look at `.linky()`'s documentation.
+
+```javascript
+<div data-ng-bind-html="string|huntLinky: { targetBlank: true }"></div>
+// considering: string = "Have a look at twitter.com!";
+// it would result in: "Have a look at <a href="http://twitter.com" target="_blank">twitter.com</a>!"
+```
+
 
 
 ## Known "Limitations"
@@ -276,6 +313,11 @@ Link('http://site.com/path/to/article-title?utf8&tracker=data').beautify(false)
 
 ## Change log
 
+### 2.0.0 - Unreleased
+
+* [ ] Replace `targetBlank` by `target` to allow any target value.
+* [ ] Add support for non-browser environment.
+
 ### 1.1.0 - Unreleased
 
 * [x] Improve the regular url regexp to avoid matching `http://.` (add the domain pattern from user typed regexp).
@@ -284,7 +326,7 @@ Link('http://site.com/path/to/article-title?utf8&tracker=data').beautify(false)
 * [x] Set `.originalHasProtocol()` as a property.
 * [x] Improve regexp to avoid matching partical urls like `github.com/angular` in `github.com/angular.js`.
 * [x] Fix issue with `.getLinks()` to properly set `.type` to `"email"` for emails.
-* [ ] Add support for non-browser environment.
+* [x] Add an Angular module.
 
 ### 1.0.0 - 2015-06-28
 

@@ -27,8 +27,17 @@ gulp.task('scripts', function () {
         .pipe(gulp.dest('dist'));
 });
 
+gulp.task('scripts:angular', function () {
+    return gulp
+        .src('src/LinkHunter.angular.js')
+        .pipe($.uglify())
+        .pipe($.header(header, { pkg: pkg }))
+        .pipe($.rename({ suffix: '.min' }))
+        .pipe(gulp.dest('dist'));
+});
+
 gulp.task('watch', ['default'], function () {
-    gulp.watch('src/*.js', ['scripts']);
+    gulp.watch('src/*.js', ['scripts', 'scripts:angular']);
     gulp.watch('*.scss', ['styles']);
 });
 
@@ -53,4 +62,4 @@ gulp.task('serve', ['default'], function () {
     gulp.run('watch');
 });
 
-gulp.task('default', ['styles', 'scripts']);
+gulp.task('default', ['styles', 'scripts', 'scripts:angular']);
