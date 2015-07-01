@@ -55,7 +55,7 @@ describe('LinkHunterClass', () => {
         });
 
         it('should replace links by an html anchor tag and respect options', () => {
-            expect(linkHunter.linky(text, { ignoreEmail: true, targetBlank: true, protocol: 'https://' })).toBe('Have a look at <a href="https://site.com/whatever" target="_blank">site.com/whatever</a> and <a href="http://www.domain.com/some/sub/path?with=params#hash" target="_blank">http://www.domain.com/some/sub/path?with=params#hash</a> guys!\nAnd say hello@someone.com!\nOh and what about github.com!Let me know what you think.');
+            expect(linkHunter.linky(text, { ignoreEmail: true, target: '_blank', protocol: 'https://' })).toBe('Have a look at <a href="https://site.com/whatever" target="_blank">site.com/whatever</a> and <a href="http://www.domain.com/some/sub/path?with=params#hash" target="_blank">http://www.domain.com/some/sub/path?with=params#hash</a> guys!\nAnd say hello@someone.com!\nOh and what about github.com!Let me know what you think.');
         });
 
         it('should perform an operation on links\' display value', () => {

@@ -46,12 +46,12 @@ export default class LinkHunterClass {
     }
 
     linky (str, options = {}) {
-        let defaults = { ignoreEmail: false, targetBlank: false, protocol: 'http://', operation: {} };
+        let defaults = { ignoreEmail: false, target: null, protocol: 'http://', operation: {} };
         options = utils.merge(defaults, options);
 
         let linkTemplate =
-            options.targetBlank ?
-            '<a href="{{formatted}}" target="_blank">{{displayValue}}</a>' :
+            options.target ?
+            '<a href="{{formatted}}" target="' + options.target + '">{{displayValue}}</a>' :
             '<a href="{{formatted}}">{{displayValue}}</a>';
 
         let displayValue;
