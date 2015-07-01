@@ -65,7 +65,7 @@ export default class LinkHunterClass {
                 displayValue = link[options.operation.name].apply(link, options.operation.args);
             }
 
-            if (link.type == 'email') return `<a href="mailto:${link.original}">${displayValue}</a>`;
+            if (link.type == 'email') return `<a href="${link.withProtocol()}">${displayValue}</a>`;
             else return linkTemplate.replace('{{formatted}}', link.withProtocol(options.protocol)).replace('{{displayValue}}', displayValue);
         }, this);
     }

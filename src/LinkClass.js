@@ -2,8 +2,7 @@ export default class LinkClass {
     constructor (link, isEmail) {
         this.original            = link;
         this.type                = isEmail ? 'email' : 'url';
-
-        if (this.type != 'email') this.originalHasProtocol = /^https?:\/\//.test(this.original);
+        this.originalHasProtocol = this.type != 'email' && /^https?:\/\//.test(this.original);
     }
 
     static addEllipsis (str, maxLength = str.length, ellipsis = '...') {
@@ -11,7 +10,7 @@ export default class LinkClass {
     }
 
     withProtocol (protocol = 'http://') {
-        if (this.type == 'email') return this.original;
+        if (this.type == 'email') protocol = 'mailto:';
         return this.originalHasProtocol ? this.original : protocol + this.original;
     }
 

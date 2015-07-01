@@ -3,7 +3,7 @@ import LinkClass from '../src/LinkClass.js';
 describe('LinkClass', () => {
     it('should build a link object', () => {
         expect(JSON.stringify(new LinkClass('site.com'))).toBe(JSON.stringify({ original: 'site.com', type: 'url', originalHasProtocol: false }));
-        expect(JSON.stringify(new LinkClass('email@domain.com', true))).toBe(JSON.stringify({ original: 'email@domain.com', type: 'email' }));
+        expect(JSON.stringify(new LinkClass('email@domain.com', true))).toBe(JSON.stringify({ original: 'email@domain.com', type: 'email', originalHasProtocol: false }));
     });
 
     it('should detect if original link has a protocol or not', () => {
@@ -18,6 +18,10 @@ describe('LinkClass', () => {
 
         expect(new LinkClass('http://site.com').withProtocol()).toBe('http://site.com');
         expect(new LinkClass('https://site.com').withProtocol()).toBe('https://site.com');
+
+        expect(new LinkClass('hello@someone.com', true).withProtocol()).toBe('mailto:hello@someone.com');
+        expect(new LinkClass('hello@someone.com', true).withProtocol('http://')).toBe('mailto:hello@someone.com');
+        expect(new LinkClass('hello@someone.com', true).withProtocol('https://')).toBe('mailto:hello@someone.com');
     });
 
     it('should cleanup original link', () => {

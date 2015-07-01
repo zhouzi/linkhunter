@@ -63,7 +63,7 @@ These are just a few of LinkHunter's capabilities, have at look at the [document
 
 ### 2.0.0 - Unreleased
 
-* [ ] Update `.withProtocol()` to add `mailto:` to emails.
+* [x] Consider `mailto:` to be email's only possible protocol so `.withProtocol()` returns it.
 * [ ] Replace `targetBlank` by `target` to allow any target value.
 * [ ] Add support for non-browser environment.
 
