@@ -1,31 +1,48 @@
 {
-  "correct": [
-    "site.com",
-    "site.com/whatever/it/is-some-things",
-    "sub.site.site.domain.com",
-    "t.co",
-    "http://site.com",
-    "https://site.com",
-    "https://site.com/some-sub/path/with?params=foo#hash",
-    "user@email.com",
-    "http://t.co"
-  ],
+  "links": {
+    "correct": [
+      "site.com",
+      "site.com/whatever/it/is-some-things",
+      "sub.site.site.domain.com",
+      "t.co",
+      "http://site.com",
+      "https://site.com",
+      "https://site.com/some-sub/path/with?params=foo#hash",
+      "user@email.com",
+      "http://t.co"
+    ],
 
-  "incorrect": [
-    "site..com",
-    "s.c",
-    "some.site.com.",
-    "some.site.com!",
-    "\"some.ste.com\"",
-    "'site.com'",
-    "github.com...",
-    "github.com/angular.js",
-    "user@email",
-    "user@email..com",
-    "user@email.c",
-    "http://",
-    "http://.",
-    "http://t.c",
-    "http://t.c9"
-  ]
+    "incorrect": [
+      "site..com",
+      "s.c",
+      "some.site.com.",
+      "some.site.com!",
+      "\"some.ste.com\"",
+      "'site.com'",
+      "github.com...",
+      "github.com/angular.js",
+      "user@email",
+      "user@email..com",
+      "user@email.c",
+      "http://",
+      "http://.",
+      "http://t.c",
+      "http://t.c9"
+    ]
+  },
+
+  "emails": {
+    "correct": [
+      "email@domain.com",
+      "email@domain-sub.domain.com",
+      "some-email+whatever@domain-sub.domain.whatever"
+    ],
+
+    "incorrect": [
+      "email@domain",
+      "someone@domain!com",
+      "someone@domain%.com+something",
+      "email@domain.thisisawaytoologtopleveldomain"
+    ]
+  }
 }

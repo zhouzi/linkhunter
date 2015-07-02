@@ -10,15 +10,29 @@ describe('LinkHunterClass', () => {
     });
 
     describe('linkHunter.looksLikeALink', () => {
-        subjects.correct.forEach(str => {
+        subjects.links.correct.forEach(str => {
             it(`should return true for ${str}`, () => {
                 expect(linkHunter.looksLikeALink(str, true)).toBe(true);
             });
         });
 
-        subjects.incorrect.forEach(str => {
+        subjects.links.incorrect.forEach(str => {
             it(`should return false for ${str}`, () => {
                 expect(linkHunter.looksLikeALink(str)).toBe(false);
+            });
+        });
+    });
+
+    describe('linkHunter.looksLikeAnEmail', () => {
+        subjects.emails.correct.forEach(str => {
+            it(`should return true for ${str}`, () => {
+                expect(linkHunter.looksLikeAnEmail(str)).toBe(true);
+            });
+        });
+
+        subjects.emails.incorrect.forEach(str => {
+            it(`should return false for ${str}`, () => {
+                expect(linkHunter.looksLikeAnEmail(str)).toBe(false);
             });
         });
     });
