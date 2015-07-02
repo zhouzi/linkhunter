@@ -1,8 +1,42 @@
+/*------------------------------------------------*\
+  Functions
+\*------------------------------------------------*/
+
+@function pow ($x, $n) {
+  $ret: 1;
+
+  @if $n >= 0 {
+    @for $i from 0 to $n {
+      $ret: $ret * $x;
+    }
+  } @else {
+    @for $i from $n to 0 {
+      $ret: $ret / $x;
+    }
+  }
+
+  @return $ret;
+}
+
+@function ms ($n, $base: $ms-base, $ratio: $ms-ratio) {
+  @return pow($ratio, $n) * $base;
+}
+
+
+
+/*------------------------------------------------*\
+  Variables
+\*------------------------------------------------*/
+
 $heading-font-family: 'Fredoka One', sans-serif;
 $font-family: 'Sniglet', sans-serif;
 
 $font-size-root: 18px;
 $font-size-base: 1rem;
+
+$ms-ratio: 1.6;
+$ms-base: $font-size-base;
+
 $text-color: #3d3d3d;
 $gray-light: darken(#fff, 8%);
 $gray: darken(#fff, 30%);
@@ -14,6 +48,17 @@ $color-tertiary: #fee23d;
 
 $sm-width: 480px;
 $sm-up: "(min-width:#{$sm-width})";
+
+
+
+/*------------------------------------------------*\
+  Styles
+\*------------------------------------------------*/
+
+html,
+body {
+  height: 100%;
+}
 
 html {
   font-family: $font-family;
@@ -29,28 +74,31 @@ html {
 }
 
 body {
-  font-size: $font-size-base;
+  font-size: ms(0);
   color: $text-color;
 
   @media #{$sm-up} {
     background-color: $gray-light;
-    padding: $gutter $gutter ($gutter * 4) $gutter;
+    //padding: $gutter $gutter ($gutter * 4) $gutter;
   }
 }
 
 h1,
 h2 {
   line-height: 1.2;
-  margin: 0;
+  margin: 0 0 $gutter 0;
 }
 
 h1 {
   display: inline-block;
-  font-size: 3rem;
+  font-size: ms(2);
   color: $color-secondary;
   font-family: $heading-font-family;
-  margin-bottom: $gutter / 2;
   position: relative;
+
+  @media #{$sm-up} {
+    font-size: ms(3);
+  }
 
   &:before {
     content: "";
@@ -66,21 +114,24 @@ h1 {
 }
 
 h2 {
-  font-size: 1.2rem;
+  font-size: ms(0);
   color: #fff;
   font-weight: normal;
-  margin-bottom: $gutter;
+
+  @media #{$sm-up} {
+    font-size: ms(1);
+  }
 }
 
 h3 {
-  font-size: .8rem;
-  text-transform: uppercase;
+  font-size: ms(0);
+  //text-transform: uppercase;
   color: $gray;
   margin: 0 0 ($gutter / 2) 0;
   border-bottom: 2px solid $gray-light;
 }
 
-.drop-shadow {
+/*.drop-shadow {
   @media #{$sm-up} {
     position: relative;
 
@@ -96,11 +147,13 @@ h3 {
       box-shadow: 0 50px 6px rgba(#000, .2);
     }
   }
-}
+}*/
 
 .wrapper {
-  max-width: 500px;
+  max-width: 700px;
+  min-height: 100%;
   margin: auto;
+  background-color: #fff;
 }
 
 .hero {
@@ -111,7 +164,7 @@ h3 {
 
   @media #{$sm-up} {
     padding: ($gutter * 4) ($gutter * 2);
-    border-radius: 8px 8px 0 0;
+    //border-radius: 8px 8px 0 0;
   }
 }
 
@@ -119,8 +172,7 @@ h3 {
   padding: ($gutter * 2);
 
   @media #{$sm-up} {
-    background-color: #fff;
-    border-radius: 0 0 8px 8px;
+    //border-radius: 0 0 8px 8px;
   }
 }
 
@@ -151,6 +203,7 @@ textarea {
   padding: .4rem;
   margin-bottom: $gutter;
   transition: border-color 150ms ease-out;
+  resize: vertical;
 
   &:focus {
     border-color: $color-secondary;

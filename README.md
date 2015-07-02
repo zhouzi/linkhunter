@@ -43,6 +43,7 @@ With that, it's able to:
 These are just a few of LinkHunter's capabilities, have at look at the [documentation](https://github.com/Zhouzi/LinkHunter#documentation) for more details.
 
 
+
 ## Usage
 
 1. Download [LinkHunter.min.js](https://raw.githubusercontent.com/Zhouzi/LinkHunter/master/dist/LinkHunter.min.js)
@@ -81,6 +82,7 @@ These are just a few of LinkHunter's capabilities, have at look at the [document
     * [ ] Update documentation.
 * [x] Add more tests to looksLikeAnEmail.
     * [x] Update specs.
+* [ ] Publish as a bower component.
 * [ ] Add support for non-browser environment.
 
 ### 1.1.0 - 2015-06-30

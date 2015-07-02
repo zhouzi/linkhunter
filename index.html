@@ -24,7 +24,7 @@
             </section>
 
             <section class="demo">
-                <textarea id="demo-textarea" rows="6">LinkHunter's purpose is to match links that users type as well as the ones they copy/paste. The difference between the two is that users rarely type urls in the form of http://twitter.com/ but rather twitter.com.</textarea>
+                <textarea id="demo-textarea" rows="6">LinkHunter's purpose if to match three type of links: emails such as someone@domain.com, urls in the form of http://gabinaureche.com/LinkHunter and finally user-typed urls like twitter.com. It's also able, among other things, to shorten, beautify and replace those links.</textarea>
 
                 <h3 id="demo-title"></h3>
                 <ul class="demo-links"></ul>
@@ -50,7 +50,7 @@
             textarea.addEventListener('input', detect);
 
             function detect () {
-                var links = linkHunter.getLinks(textarea.value, false);
+                var links = linkHunter.getLinks(textarea.value, true);
                 var html  = '';
 
                 for (var i = 0, link; link = links[i]; i++) {
@@ -66,7 +66,7 @@
                         '</li>';
                 }
 
-                demoTitle.innerHTML = 'Found <strong>' + links.length + '</strong> link' + (links.length !== 1 ? 's' : '') + ' from the text above';
+                demoTitle.innerHTML = 'Hunted <strong>' + links.length + '</strong> link' + (links.length !== 1 ? 's' : '') + ' from the text above';
                 demoLinks.innerHTML = html;
             }
 
