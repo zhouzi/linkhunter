@@ -12,7 +12,7 @@ describe('LinkHunterClass', () => {
     describe('linkHunter.looksLikeALink', () => {
         subjects.correct.forEach(str => {
             it(`should return true for ${str}`, () => {
-                expect(linkHunter.looksLikeALink(str)).toBe(true);
+                expect(linkHunter.looksLikeALink(str, true)).toBe(true);
             });
         });
 

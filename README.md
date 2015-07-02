@@ -76,9 +76,10 @@ These are just a few of LinkHunter's capabilities, have at look at the [document
 * [ ] Update getLinks to ignore emails by default.
     * [x] Update specs.
     * [ ] Update documentation.
-* [ ] Update looksLikeALink to ingore emails by default.
-    * [ ] Update specs.
+* [ ] Update looksLikeALink to ignore emails by default.
+    * [x] Update specs.
     * [ ] Update documentation.
+* [ ] Add more tests to looksLikeAnEmail.
 * [ ] Add support for non-browser environment.
 
 ### 1.1.0 - 2015-06-30

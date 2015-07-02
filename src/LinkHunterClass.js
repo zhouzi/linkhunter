@@ -22,8 +22,8 @@ export default class LinkHunterClass {
         return this.regexps.email.test(str);
     }
 
-    looksLikeALink (str, ignoreEmail = false) {
-        if (ignoreEmail && this.looksLikeAnEmail(str)) return false;
+    looksLikeALink (str, includeEmail = false) {
+        if (!includeEmail && this.looksLikeAnEmail(str)) return false;
         return this.regexps.link.test(str);
     }
 
