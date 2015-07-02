@@ -73,6 +73,12 @@ These are just a few of LinkHunter's capabilities, have at look at the [document
     * [x] Use the domain regexp pattern.
     * [x] Prevent from matching partial emails.
     * [x] Update specs.
+* [ ] Update getLinks to ignore emails by default.
+    * [x] Update specs.
+    * [ ] Update documentation.
+* [ ] Update looksLikeALink to ingore emails by default.
+    * [ ] Update specs.
+    * [ ] Update documentation.
 * [ ] Add support for non-browser environment.
 
 ### 1.1.0 - 2015-06-30

@@ -35,7 +35,7 @@ describe('LinkHunterClass', () => {
         });
 
         it('should extract links from a text', () => {
-            expect(JSON.stringify(linkHunter.getLinks(text))).toEqual(JSON.stringify([
+            expect(JSON.stringify(linkHunter.getLinks(text, true))).toEqual(JSON.stringify([
                 { original: 'site.com/whatever', type: 'url', originalHasProtocol: false },
                 { original: 'http://www.domain.com/some/sub/path?with=params#hash', type: 'url', originalHasProtocol: true },
                 { original: 'hello@someone.com', type: 'email', originalHasProtocol: false },

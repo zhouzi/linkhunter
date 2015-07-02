@@ -27,11 +27,11 @@ export default class LinkHunterClass {
         return this.regexps.link.test(str);
     }
 
-    getLinks (str, ignoreEmail = false) {
+    getLinks (str, includeEmail = false) {
         let links =
             (str.match(this.regexps.links) || []).map(link => { return link.trim(); });
 
-        if (ignoreEmail) {
+        if (!includeEmail) {
             let self = this;
             links = links.filter(link => { return !self.looksLikeAnEmail(link); });
         }
