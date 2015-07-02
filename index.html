@@ -56,7 +56,7 @@
                 for (var i = 0, link; link = links[i]; i++) {
                     html +=
                         '<li>' +
-                            '<a href="'+ (link.type == 'email' ? 'mailto:' + link.original : link.withProtocol()) +'" target="_blank" class="demo-link">' +
+                            '<a href="'+ link.withProtocol() + '"' + (link.type != 'email' ? ' target="_blank"' : '') + ' class="demo-link">' +
                                 link.shorten(30) +
                             '</a>' +
                             '<ul class="demo-link__details">' +
