@@ -1,9 +1,11 @@
 import LinkClass from './LinkClass';
 import utils from './utils';
 
-const EMAIL_REGEXP      = '[^\\s]+@[^\\s.]+\\.[-a-z]{2,10}';
-const REGULARURL_REGEXP = 'https?:\/\/(?:[a-z0-9]{1,255}\\.)+[a-z]{2,10}[^\\s]*';
-const USERURL_REGEXP    = '(?:[a-z0-9]{1,255}\\.)+[a-z]{2,10}[^.\\s"\'!?:,;]*';
+const ENDOFSTRING_REGEXP = `(?=[."\'!?:,;]*(?:\\s|$))`;
+const DOMAIN_REGEXP      = `(?:[-a-z0-9]{1,255}\\.)+[a-z]{2,10}`;
+const EMAIL_REGEXP       = `[^\\s]+@${DOMAIN_REGEXP}`;
+const REGULARURL_REGEXP  = `https?:\/\/${DOMAIN_REGEXP}[^\\s]*`;
+const USERURL_REGEXP     = `${DOMAIN_REGEXP}[^.\\s"\'!?:,;]*`;
 
 export default class LinkHunterClass {
     constructor () {
@@ -12,7 +14,7 @@ export default class LinkHunterClass {
             regularUrl: new RegExp(`^${REGULARURL_REGEXP}$`, 'i'),
             userUrl:    new RegExp(`^${USERURL_REGEXP}$`, 'i'),
             link:       new RegExp(`^((?:${EMAIL_REGEXP})|(?:${REGULARURL_REGEXP})|(?:${USERURL_REGEXP}))$`, 'i'),
-            links:      new RegExp(`(^|\\s)((?:${EMAIL_REGEXP})|(?:${REGULARURL_REGEXP})|(?:${USERURL_REGEXP}(?=[."\'!?:,;]*(?:\\s|$))))`, 'gi')
+            links:      new RegExp(`(^|\\s)((?:${REGULARURL_REGEXP})|(?:(?:${EMAIL_REGEXP}|(?:${USERURL_REGEXP}))${ENDOFSTRING_REGEXP}))`, 'gi')
         };
     }
 

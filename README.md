@@ -69,6 +69,10 @@ These are just a few of LinkHunter's capabilities, have at look at the [document
 * [x] Replace `targetBlank` by `target` to allow any target value.
     * [x] Update specs.
     * [ ] Update documentation.
+* [x] Fix the email regexp to match `firstname.lastname@email.address-site.com`.
+    * [x] Use the domain regexp pattern.
+    * [x] Prevent from matching partial emails.
+    * [x] Update specs.
 * [ ] Add support for non-browser environment.
 
 ### 1.1.0 - 2015-06-30
