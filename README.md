@@ -68,14 +68,14 @@ These are just a few of LinkHunter's capabilities, have at look at the [document
 
 ### 2.0.0 - 2015-07-04
 
-* `mailto:` is now considered to be emails' protocol meaning `Link('email@domain.com').withProtocol()` now returns `mailto:email@domain.com`.
-* The `targetBlank` option is replaced by `target` to allow any target value.
+* `mailto:` is now considered to be emails' protocol, meaning `Link('email@domain.com').withProtocol()` now returns `mailto:email@domain.com`.
+* The `targetBlank` option of `.linky()` is replaced by `target` to allow any target value.
 * Improved the email matching.
  * It's now using the "domain pattern" regexp and match properly `firstname.lastname@email.address-site.com`.
  * Added more tests to the specs.
-* `.getLinks` now ignore emails by default.
-* `.looksLikeALink` now ignore emails by default.
-* Added the `forceCleanUp` option to shorten (true by default).
+* `.getLinks()` now ignore emails by default.
+* `.looksLikeALink()` now ignore emails by default.
+* Added the `forceCleanUp` option to `.shorten()` (true by default).
 * LinkHunter is now available as a bower component: `bower install linkhunter`.
 
 ### 1.1.0 - 2015-06-30
