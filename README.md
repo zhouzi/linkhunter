@@ -66,30 +66,17 @@ These are just a few of LinkHunter's capabilities, have at look at the [document
 
 * [ ] Add support for non-browser environment.
 
-### 2.0.0 - Unreleased
+### 2.0.0 - 2015-07-04
 
-* [x] Consider `mailto:` to be email's only possible protocol so `.withProtocol()` returns it.
-    * [x] Update specs.
-    * [x] Add documentation.
-* [x] Replace `targetBlank` by `target` to allow any target value.
-    * [x] Update specs.
-    * [x] Update documentation.
-* [x] Fix the email regexp to match `firstname.lastname@email.address-site.com`.
-    * [x] Use the domain regexp pattern.
-    * [x] Prevent from matching partial emails.
-    * [x] Update specs.
-* [x] Update getLinks to ignore emails by default.
-    * [x] Update specs.
-    * [x] Update documentation.
-* [x] Update looksLikeALink to ignore emails by default.
-    * [x] Update specs.
-    * [x] Update documentation.
-* [x] Add more tests to looksLikeAnEmail.
-    * [x] Update specs.
-* [x] Add "forceCleanUp" option to shorten
-    * [x] Update specs.
-    * [x] Update documentation.
-* [ ] Publish as a bower component.
+* `mailto:` is now considered to be emails' protocol meaning `Link('email@domain.com').withProtocol()` now returns `mailto:email@domain.com`.
+* The `targetBlank` option is replaced by `target` to allow any target value.
+* Improved the email matching.
+ * It's now using the "domain pattern" regexp and match properly `firstname.lastname@email.address-site.com`.
+ * Added more tests to the specs.
+* `.getLinks` now ignore emails by default.
+* `.looksLikeALink` now ignore emails by default.
+* Added the `forceCleanUp` option to shorten (true by default).
+* LinkHunter is now available as a bower component: `bower install linkhunter`.
 
 ### 1.1.0 - 2015-06-30
 
