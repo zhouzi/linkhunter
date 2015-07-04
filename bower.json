@@ -5,7 +5,7 @@
   "description": "Detect links that real users actually type.",
   "license": "MIT",
   "ignore": [
-    "*.**",
+    ".*",
     "src",
     "test",
     "CONTRIBUTING.md",
