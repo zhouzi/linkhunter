@@ -33,7 +33,8 @@ describe('LinkClass', () => {
 
     it('should shorten a link', () => {
         expect(new LinkClass('http://site.com/some/path').shorten(12)).toBe('site.com/...');
-        expect(new LinkClass('http://site.com/some/path').shorten(99)).toBe('http://site.com/some/path');
+        expect(new LinkClass('http://site.com/some/path').shorten(99)).toBe('site.com/some/path');
+        expect(new LinkClass('http://site.com/some/path').shorten(99, false)).toBe('http://site.com/some/path');
     });
 
     it('should beautify a link', () => {

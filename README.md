@@ -62,28 +62,34 @@ These are just a few of LinkHunter's capabilities, have at look at the [document
 
 ## Change log
 
+### 2.1.0 - Unreleased
+
+* [ ] Add support for non-browser environment.
+
 ### 2.0.0 - Unreleased
 
-* [ ] Consider `mailto:` to be email's only possible protocol so `.withProtocol()` returns it.
+* [x] Consider `mailto:` to be email's only possible protocol so `.withProtocol()` returns it.
     * [x] Update specs.
-    * [ ] Add documentation.
+    * [x] Add documentation.
 * [x] Replace `targetBlank` by `target` to allow any target value.
     * [x] Update specs.
-    * [ ] Update documentation.
+    * [x] Update documentation.
 * [x] Fix the email regexp to match `firstname.lastname@email.address-site.com`.
     * [x] Use the domain regexp pattern.
     * [x] Prevent from matching partial emails.
     * [x] Update specs.
-* [ ] Update getLinks to ignore emails by default.
+* [x] Update getLinks to ignore emails by default.
     * [x] Update specs.
-    * [ ] Update documentation.
-* [ ] Update looksLikeALink to ignore emails by default.
+    * [x] Update documentation.
+* [x] Update looksLikeALink to ignore emails by default.
     * [x] Update specs.
-    * [ ] Update documentation.
+    * [x] Update documentation.
 * [x] Add more tests to looksLikeAnEmail.
     * [x] Update specs.
+* [x] Add "forceCleanUp" option to shorten
+    * [x] Update specs.
+    * [x] Update documentation.
 * [ ] Publish as a bower component.
-* [ ] Add support for non-browser environment.
 
 ### 1.1.0 - 2015-06-30
 

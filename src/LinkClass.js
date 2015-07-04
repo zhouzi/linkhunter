@@ -6,6 +6,7 @@ export default class LinkClass {
     }
 
     static addEllipsis (str, maxLength = str.length, ellipsis = '...') {
+        if (str.length <= maxLength) return str;
         return str.substr(0, maxLength - ellipsis.length) + ellipsis;
     }
 
@@ -27,11 +28,15 @@ export default class LinkClass {
         return link;
     }
 
-    shorten (maxLength) {
+    shorten (maxLength, forceCleanUp = true) {
         if (this.type == 'email') return this.original.substr(0, maxLength);
 
-        let link = this.original;
-        if (link.length <= maxLength || (link = this.cleanUp()).length <= maxLength) return link;
+        let link = forceCleanUp ? this.cleanUp() : this.original;
+
+        if (link.length <= maxLength) return link;
+
+        // this is just to avoid calling cleanUp twice but it would have no effects anyway
+        if (!forceCleanUp) link = this.cleanUp();
 
         return LinkClass.addEllipsis(link, maxLength);
     }
