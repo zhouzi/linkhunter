@@ -68,6 +68,11 @@ These are just a few of LinkHunter's capabilities, have at look at the [document
 
 * [ ] Add support for non-browser environment.
 
+### 2.0.1 - 2015-07-04
+
+* Update README.md on usage.
+* Update bower's ignore.
+
 ### 2.0.0 - 2015-07-04
 
 * `mailto:` is now considered to be emails' protocol, meaning `Link('email@domain.com').withProtocol()` now returns `mailto:email@domain.com`.
