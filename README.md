@@ -40,7 +40,7 @@ With that, it's able to:
 * Beautify `http://site.com/some/sub/path/to/article-title?some=tracker` to `site.com/.../article-title`
 * Transform `Have a look at site.com and say hello@domain.com` to `Have a look at <a href="http://site.com" target="_blank">site.com</a> and say <a href="mailto:hello@domain.com">hello@domain.com</a>`
 
-These are just a few of LinkHunter's capabilities, have at look at the [documentation](https://github.com/Zhouzi/LinkHunter#documentation) for more details.
+These are just a few of LinkHunter's capabilities, have at look at the [documentation](https://github.com/Zhouzi/LinkHunter/wiki) for more details.
 
 
 
