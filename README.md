@@ -46,9 +46,9 @@ These are just a few of LinkHunter's capabilities, have at look at the [document
 
 ## Usage
 
-1. Include LinkHunter by:
-   * Downloading the distributed file: [LinkHunter.min.js](https://raw.githubusercontent.com/Zhouzi/LinkHunter/master/dist/LinkHunter.min.js)
-   * Installing via bower: `bower install linkhunter`
+1. To include LinkHunter you can:
+   * Download the distributed file: [LinkHunter.min.js](https://raw.githubusercontent.com/Zhouzi/LinkHunter/master/dist/LinkHunter.min.js)
+   * Install via bower: `bower install linkhunter`
 2. Link it in your markup: `<script src="path/to/LinkHunter.min.js"></script>`
 3. You are now able to build a LinkHunter's instance: `var linkHunter = new LinkHunter();`
 
