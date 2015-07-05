@@ -38,6 +38,7 @@ gulp.task('scripts:angular', function () {
 
 gulp.task('watch', ['default'], function () {
     gulp.watch('src/*.js', ['scripts', 'scripts:angular']);
+    gulp.watch('demo.js', ['demo']);
     gulp.watch('*.scss', ['styles']);
 });
 
@@ -46,6 +47,16 @@ gulp.task('test', function (done) {
         configFile: __dirname + '/karma.conf.js',
         singleRun: true
     }, done);
+});
+
+gulp.task('demo', function () {
+    return gulp
+        .src('demo.js')
+        .pipe($.react())
+        .pipe($.uglify())
+        .pipe($.rename({ suffix: '.min' }))
+        .pipe(gulp.dest(''))
+    ;
 });
 
 gulp.task('styles', function () {
@@ -58,8 +69,8 @@ gulp.task('styles', function () {
 
 gulp.task('serve', ['default'], function () {
     browserSync({ notify: false, port: 9000, server: { baseDir: ['.'] } });
-    gulp.watch(['*.css', 'dist/*.js', 'index.html']).on('change', reload);
+    gulp.watch(['demo.min.js', '*.css', 'dist/*.js', 'index.html']).on('change', reload);
     gulp.run('watch');
 });
 
-gulp.task('default', ['styles', 'scripts', 'scripts:angular']);
+gulp.task('default', ['styles', 'scripts', 'scripts:angular', 'demo']);

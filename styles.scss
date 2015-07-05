@@ -38,6 +38,7 @@ $ms-ratio: 1.6;
 $ms-base: $font-size-base;
 
 $text-color: #3d3d3d;
+$gray-lighter: darken(#fff, 4%);
 $gray-light: darken(#fff, 8%);
 $gray: darken(#fff, 30%);
 $gutter: 20px;
@@ -54,11 +55,6 @@ $sm-up: "(min-width:#{$sm-width})";
 /*------------------------------------------------*\
   Styles
 \*------------------------------------------------*/
-
-html,
-body {
-  height: 100%;
-}
 
 html {
   font-family: $font-family;
@@ -79,7 +75,6 @@ body {
 
   @media #{$sm-up} {
     background-color: $gray-light;
-    //padding: $gutter $gutter ($gutter * 4) $gutter;
   }
 }
 
@@ -123,35 +118,8 @@ h2 {
   }
 }
 
-h3 {
-  font-size: ms(0);
-  //text-transform: uppercase;
-  color: $gray;
-  margin: 0 0 ($gutter / 2) 0;
-  border-bottom: 2px solid $gray-light;
-}
-
-/*.drop-shadow {
-  @media #{$sm-up} {
-    position: relative;
-
-    &:after {
-      content: "";
-      position: absolute;
-      z-index: -1;
-      bottom: 0;
-      left: 2%;
-      height: 16px;
-      width: 96%;
-      border-radius: 100%;
-      box-shadow: 0 50px 6px rgba(#000, .2);
-    }
-  }
-}*/
-
 .wrapper {
   max-width: 700px;
-  min-height: 100%;
   margin: auto;
   background-color: #fff;
 }
@@ -164,16 +132,11 @@ h3 {
 
   @media #{$sm-up} {
     padding: ($gutter * 4) ($gutter * 2);
-    //border-radius: 8px 8px 0 0;
   }
 }
 
 .demo {
   padding: ($gutter * 2);
-
-  @media #{$sm-up} {
-    //border-radius: 0 0 8px 8px;
-  }
 }
 
 .button {
@@ -196,18 +159,30 @@ h3 {
   }
 }
 
-textarea {
-  display: block;
-  width: 100%;
+.textarea {
   border: 2px solid $gray-light;
-  padding: .4rem;
   margin-bottom: $gutter;
-  transition: border-color 150ms ease-out;
-  resize: vertical;
 
-  &:focus {
-    border-color: $color-secondary;
-    outline: none;
+  textarea,
+  .textarea__footer {
+    padding: $gutter / 2;
+  }
+
+  textarea {
+    display: block;
+    width: 100%;
+    border: none;
+    resize: vertical;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .textarea__footer {
+    font-size: ms(-1);
+    color: $gray;
+    background-color: $gray-lighter;
   }
 }
 
@@ -215,73 +190,39 @@ textarea {
   list-style: none;
   padding: 0;
   margin: 0;
-  font-size: 0;
-
-  > li {
-    font-size: $font-size-base;
-    display: inline-block;
-    position: relative;
-    margin: 0 ($gutter / 2) ($gutter / 2) 0;
-  }
 }
 
 .demo-link {
-  display: block;
-  padding: .4rem;
-  color: $text-color;
-  text-decoration: none;
-  background-color: $gray-light;
+  &:not(:last-child) {
+    padding-bottom: $gutter;
+    margin-bottom: $gutter;
+    border-bottom: 2px solid $gray-light;
+  }
 
-  &:focus,
-  &:hover {
-    background-color: $blue;
+  a {
+    //display: inline-block;
+    color: $color-secondary;
+    text-decoration: none;
+    border-bottom: 2px solid $color-tertiary;
 
-    + .demo-link__details {
-      display: block;
+    &:focus,
+    &:hover {
+      background-color: $color-tertiary;
     }
   }
 }
 
-.demo-link__details {
-  display: none;
-  list-style: none;
-  margin: 0 0 5px 0;
-  position: absolute;
-  line-height: 1;
-  bottom: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: $color-tertiary;
-  padding: $gutter / 2;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, .1);
+.demo-link-group {
+  margin-bottom: $gutter / 2;
 
-  &:before {
-    content: "";
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: 10px 10px 0 10px;
-    border-color: $color-tertiary transparent transparent transparent;
-  }
-
-  li {
-    white-space: nowrap;
+  &:last-child {
+    margin-bottom: 0;
   }
 }
 
-.demo-link__details__title {
-  font-size: .6rem;
-  text-transform: uppercase;
-  opacity: .8;
-  margin-bottom: .2rem;
-
-  &:not(:first-child) {
-    margin-top: $gutter;
-  }
+.demo-link-group__title {
+  color: $gray;
+  font-size: ms(-1);
 }
 
 .nav {

@@ -23,12 +23,7 @@
                 </nav>
             </section>
 
-            <section class="demo">
-                <textarea id="demo-textarea" rows="6">LinkHunter's purpose if to match three type of links: emails such as someone@domain.com, urls in the form of http://gabinaureche.com/LinkHunter and finally user-typed urls like twitter.com. It's also able, among other things, to shorten, beautify and replace those links. Try to copy and paste some urls and/or type some text in there to see it in action.</textarea>
-
-                <h3 id="demo-title"></h3>
-                <ul class="demo-links"></ul>
-            </section>
+            <section id="app" class="demo"></section>
         </main>
 
         <script>
@@ -40,37 +35,8 @@
             ga('create', 'UA-43673873-7', 'auto');
             ga('send', 'pageview');
         </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.min.js"></script>
         <script src="dist/LinkHunter.min.js"></script>
-        <script>
-            var linkHunter = new LinkHunter();
-            var textarea   = document.getElementById('demo-textarea');
-            var demoLinks  = document.getElementsByClassName('demo-links')[0];
-            var demoTitle  = document.getElementById('demo-title');
-
-            textarea.addEventListener('input', detect);
-
-            function detect () {
-                var links = linkHunter.getLinks(textarea.value, true);
-                var html  = '';
-
-                for (var i = 0, link; link = links[i]; i++) {
-                    html +=
-                        '<li>' +
-                            '<a href="'+ link.withProtocol() + '"' + (link.type != 'email' ? ' target="_blank"' : '') + ' class="demo-link">' +
-                                link.shorten(30) +
-                            '</a>' +
-                            '<ul class="demo-link__details">' +
-                                '<li class="demo-link__details__title">Beautified</li>' +
-                                '<li>' + link.beautify(true) + '</li>' +
-                            '</ul>' +
-                        '</li>';
-                }
-
-                demoTitle.innerHTML = 'Hunted <strong>' + links.length + '</strong> link' + (links.length !== 1 ? 's' : '') + ' from the text above';
-                demoLinks.innerHTML = html;
-            }
-
-            detect();
-        </script>
+        <script src="demo.min.js"></script>
     </body>
 </html>
