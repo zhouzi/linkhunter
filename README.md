@@ -42,25 +42,13 @@ linkhunter follows the UMD (Universal Module Definition) pattern which means it 
 
 ## Change log
 
-### 3.0.0 - Unreleased
+### 3.0.0 - 2015-07-06
 
-* [x] The usage of linkhunter as a constructor currently makes no sense and just add an useless step. The api should be directly available.
-    * [x] Change linkhunter to be an object instead of a Class.
-    * [x] Rename the files and update imports.
-    * [x] Update specs.
-    * [x] Change the lib's name to be `linkhunter` instead of `LinkHunter`.
-    * [x] Update documentation.
-* [x] Transforming links into Link objects makes it hard, if not impossible, to chain operations (e.g. beautify+shorten). Moving those methods to linkhunter would make it really easy and decrease the overall complexity.
-    * [x] Move LinkClass' methods to linkhunter.
-    * [x] Remove useless options (e.g. forceCleanUp).
-    * [x] Update specs.
-    * [x] Update documentation.
-* [x] Simplify the `operation` option of `linkhunter.linky()` by adding: `{ withProtocol: false, beautify: false, shorten: false, cleanUp: false }`.
-    * [x] Add tests.
-    * [x] Update documentation.
-* [x] Update the angular wrapper.
-* [x] Update demo page.
-* [x] Add support for non-browser environment.
+* The usage of linkhunter as a constructor made no sense so it's now just an object exposing the whole API.
+* The LinkClass has been removed and each of its method has been transferred to linkhunter. It means that chaining operation is now much more simple and there's less concepts to learn.
+* `linkhunter.linky()`'s `operation` option has been replaced by individual properties that alter the link's display value (see documentation for more details).
+* The angular wrapper has been updated (module, service and filter renamed).
+* Added support for non-browser environment by following the UMD pattern.
 
 ### 2.0.1 - 2015-07-04
 
