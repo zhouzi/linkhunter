@@ -59,6 +59,30 @@ describe('linkhunter', () => {
         });
     });
 
+    describe('Using linky\'s options', () => {
+        let text = 'Go to http://site.com/some/sub/path/to/article/#';
+
+        it('should replace links and clean up display value', () => {
+            expect(linkhunter.linky(text, { displayValue: { cleanUp: true } })).toBe('Go to <a href="http://site.com/some/sub/path/to/article/#">site.com/some/sub/path/to/article</a>');
+        });
+
+        it('should replace links and beautify display value', () => {
+            expect(linkhunter.linky(text, { displayValue: { beautify: true } })).toBe('Go to <a href="http://site.com/some/sub/path/to/article/#">site.com/.../article</a>');
+        });
+
+        it('should replace links and shorten display value', () => {
+            expect(linkhunter.linky(text, { displayValue: { shorten: 20 } })).toBe('Go to <a href="http://site.com/some/sub/path/to/article/#">http://site.com/s...</a>');
+        });
+
+        it('should replace links and clean up + shorten display value', () => {
+            expect(linkhunter.linky(text, { displayValue: { cleanUp: true, shorten: 20 } })).toBe('Go to <a href="http://site.com/some/sub/path/to/article/#">site.com/some/sub...</a>');
+        });
+    });
+
+    it('should replace links and add protocol to display value', () => {
+        expect(linkhunter.linky('Go to site.com', { displayValue: { withProtocol: true } })).toBe('Go to <a href="http://site.com">http://site.com</a>');
+    });
+
     it('should not extract partial urls', () => {
         expect(JSON.stringify(linkhunter.getLinks('Have a look at github.com/angular.js guys!'))).toEqual(JSON.stringify([]));
     });

@@ -43,7 +43,17 @@ let linkhunter = {
     },
 
     linky: (str, options = {}) => {
-        let defaults = { ignoreEmail: false, target: null, protocol: 'http://' };
+        let defaults = {
+            ignoreEmail: false,
+            target: null,
+            protocol: 'http://',
+            displayValue: utils.merge({
+                cleanUp: false,
+                beautify: false,
+                shorten: false
+            }, options.displayValue || {})
+        };
+
         options = utils.merge(defaults, options);
 
         let linkTemplate =
@@ -52,12 +62,20 @@ let linkhunter = {
             '<a href="{{formatted}}">{{displayValue}}</a>';
 
         let isEmail;
+        let displayValue;
         return linkhunter.replaceLinks(str, (link) => {
             isEmail = linkhunter.looksLikeAnEmail(link);
             if (options.ignoreEmail && isEmail) return link;
 
-            if (isEmail) return `<a href="${linkhunter.withProtocol(link)}">${link}</a>`;
-            else return linkTemplate.replace('{{formatted}}', linkhunter.withProtocol(link, options.protocol)).replace('{{displayValue}}', link);
+            displayValue = link;
+
+            if (options.displayValue.cleanUp)      displayValue = linkhunter.cleanUp(displayValue);
+            if (options.displayValue.beautify)     displayValue = linkhunter.beautify(displayValue);
+            if (options.displayValue.shorten)      displayValue = linkhunter.shorten(displayValue, options.displayValue.shorten);
+            if (options.displayValue.withProtocol) displayValue = linkhunter.withProtocol(displayValue, options.protocol);
+
+            if (isEmail) return `<a href="${linkhunter.withProtocol(link)}">${displayValue}</a>`;
+            else return linkTemplate.replace('{{formatted}}', linkhunter.withProtocol(link, options.protocol)).replace('{{displayValue}}', displayValue);
         }, linkhunter);
     },
 
