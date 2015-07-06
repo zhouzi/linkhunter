@@ -64,8 +64,20 @@ These are just a few of LinkHunter's capabilities, have at look at the [document
 
 ## Change log
 
-### 2.1.0 - Unreleased
+### 3.0.0 - Unreleased
 
+* [ ] The usage of LinkHunter as a constructor currently makes no sense and just add an useless step. The api should be directly available.
+    * [x] Change LinkHunter to be an object instead of a Class.
+    * [ ] Rename the files/lib's name accordingly.
+    * [x] Update specs.
+    * [ ] Update documentation.
+* [ ] Transforming links into Link objects makes it hard, if not impossible, to chain operations (e.g. beautify+shorten). Moving those methods to LinkHunter would make it really easy and decrease the overall complexity.
+    * [ ] Move LinkClass' methods to LinkHunter.
+    * [ ] Remove useless options (e.g. forceCleanUp).
+    * [ ] Update specs.
+    * [ ] Update documentation.
+* [ ] Update the angular wrapper.
+* [ ] Update demo page.
 * [ ] Add support for non-browser environment.
 
 ### 2.0.1 - 2015-07-04

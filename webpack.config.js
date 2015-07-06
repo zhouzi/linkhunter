@@ -5,7 +5,7 @@ module.exports = {
 
     output: {
         path: __dirname + '/dist',
-        filename: 'LinkHunter.min.js'
+        filename: 'linkhunter.min.js'
     },
 
     module: {

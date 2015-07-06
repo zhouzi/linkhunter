@@ -1,5 +1,5 @@
-import LinkHunterClass from './LinkHunterClass';
+import linkhunter from './linkhunter';
 
-(w => {
-    w.LinkHunter = LinkHunterClass;
+(root => {
+    root.linkhunter = linkhunter;
 })(window);
