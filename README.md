@@ -68,8 +68,9 @@ These are just a few of LinkHunter's capabilities, have at look at the [document
 
 * [ ] The usage of LinkHunter as a constructor currently makes no sense and just add an useless step. The api should be directly available.
     * [x] Change LinkHunter to be an object instead of a Class.
-    * [ ] Rename the files/lib's name accordingly.
+    * [x] Rename the files and update imports.
     * [x] Update specs.
+    * [ ] Change the lib's name to be `linkhunter` instead of `LinkHunter`.
     * [ ] Update documentation.
 * [ ] Transforming links into Link objects makes it hard, if not impossible, to chain operations (e.g. beautify+shorten). Moving those methods to LinkHunter would make it really easy and decrease the overall complexity.
     * [ ] Move LinkClass' methods to LinkHunter.
