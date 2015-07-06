@@ -58,7 +58,7 @@ For example, `user@domain` is considered to be a valid email per the specificati
     * [x] Update documentation.
 * [x] Update the angular wrapper.
 * [x] Update demo page.
-* [ ] Add support for non-browser environment.
+* [x] Add support for non-browser environment.
 
 ### 2.0.1 - 2015-07-04
 
