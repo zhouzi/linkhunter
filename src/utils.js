@@ -6,5 +6,10 @@ export default {
         }
 
         return dest;
+    },
+
+    addEllipsis: (str, maxLength = str.length, ellipsis = '...') => {
+        if (str.length <= maxLength) return str;
+        return str.substr(0, maxLength - ellipsis.length) + ellipsis;
     }
 }

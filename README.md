@@ -73,9 +73,12 @@ These are just a few of LinkHunter's capabilities, have at look at the [document
     * [ ] Change the lib's name to be `linkhunter` instead of `LinkHunter`.
     * [ ] Update documentation.
 * [ ] Transforming links into Link objects makes it hard, if not impossible, to chain operations (e.g. beautify+shorten). Moving those methods to LinkHunter would make it really easy and decrease the overall complexity.
-    * [ ] Move LinkClass' methods to LinkHunter.
-    * [ ] Remove useless options (e.g. forceCleanUp).
-    * [ ] Update specs.
+    * [x] Move LinkClass' methods to LinkHunter.
+    * [x] Remove useless options (e.g. forceCleanUp).
+    * [x] Update specs.
+    * [ ] Update documentation.
+* [ ] Simplify the `operation` option of `linkhunter.linky()` by adding: `{ withProtocol: false, beautify: false, shorten: false, cleanUp: false }`.
+    * [ ] Add tests.
     * [ ] Update documentation.
 * [ ] Update the angular wrapper.
 * [ ] Update demo page.

@@ -1,4 +1,3 @@
-import LinkClass from './LinkClass';
 import utils from './utils';
 
 const ENDOFSTRING_REGEXP = `(?=[."\'!?:,;]*(?:\\s|$))`;
@@ -34,19 +33,17 @@ let linkhunter = {
             links = links.filter(link => { return !self.looksLikeAnEmail(link); });
         }
 
-        let self = linkhunter;
-        return links.map(link => { return new LinkClass(link, self.looksLikeAnEmail(link)); });
+        return links;
     },
 
     replaceLinks: (str, callback, context = linkhunter) => {
-        let self = linkhunter;
         return str.replace(linkhunter.regexps.links, (fullMatch, whitespace, link) => {
-            return whitespace + callback.call(context, new LinkClass(link, self.looksLikeAnEmail(link)));
+            return whitespace + callback.call(context, link);
         });
     },
 
     linky: (str, options = {}) => {
-        let defaults = { ignoreEmail: false, target: null, protocol: 'http://', operation: {} };
+        let defaults = { ignoreEmail: false, target: null, protocol: 'http://' };
         options = utils.merge(defaults, options);
 
         let linkTemplate =
@@ -54,20 +51,53 @@ let linkhunter = {
             '<a href="{{formatted}}" target="' + options.target + '">{{displayValue}}</a>' :
             '<a href="{{formatted}}">{{displayValue}}</a>';
 
-        let displayValue;
-
+        let isEmail;
         return linkhunter.replaceLinks(str, (link) => {
-            displayValue = link.original;
+            isEmail = linkhunter.looksLikeAnEmail(link);
+            if (options.ignoreEmail && isEmail) return link;
 
-            if (options.ignoreEmail && link.type == 'email') return displayValue;
-
-            if (typeof link[options.operation.name] == 'function') {
-                displayValue = link[options.operation.name].apply(link, options.operation.args);
-            }
-
-            if (link.type == 'email') return `<a href="${link.withProtocol()}">${displayValue}</a>`;
-            else return linkTemplate.replace('{{formatted}}', link.withProtocol(options.protocol)).replace('{{displayValue}}', displayValue);
+            if (isEmail) return `<a href="${linkhunter.withProtocol(link)}">${link}</a>`;
+            else return linkTemplate.replace('{{formatted}}', linkhunter.withProtocol(link, options.protocol)).replace('{{displayValue}}', link);
         }, linkhunter);
+    },
+
+    hasProtocol: (link) => {
+        if (linkhunter.looksLikeAnEmail(link)) return /^mailto:/.test(link);
+        return /^https?:\/\//.test(link);
+    },
+
+    withProtocol: (link, protocol = 'http://') => {
+        if (linkhunter.looksLikeAnEmail(link)) protocol = 'mailto:';
+        return linkhunter.hasProtocol(link) ? link : protocol + link;
+    },
+
+    cleanUp: (link, removeQueryParams = false) => {
+        if (removeQueryParams) {
+            var indexOfQueryParams = link.lastIndexOf('?');
+            if (indexOfQueryParams >= 0) link = link.substr(0, indexOfQueryParams);
+        }
+
+        link = link.replace(/^https?:\/\//, '').replace(/\/#?$/, '');
+
+        return link;
+    },
+
+    shorten: (link, maxLength) => {
+        return utils.addEllipsis(link, maxLength);
+    },
+
+    beautify: (link, removeQueryParams = true) => {
+        if (linkhunter.looksLikeAnEmail(link)) return link;
+
+        link = linkhunter.cleanUp(link, removeQueryParams);
+
+        // if there is no sub path e.g. site.com
+        if (link.indexOf('/') < 0) return link;
+
+        let fragments = link.split('/');
+
+        if (fragments.length > 2) return fragments.shift() + '/.../' + fragments.pop();
+        else return fragments.shift() + '/' + fragments.pop();
     }
 };
 
