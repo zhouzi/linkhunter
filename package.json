@@ -26,12 +26,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Zhouzi/LinkHunter.git"
+    "url": "https://github.com/Zhouzi/linkhunter.git"
   },
   "author": "Gabin Aureche",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Zhouzi/LinkHunter/issues"
+    "url": "https://github.com/Zhouzi/linkhunter/issues"
   },
-  "homepage": "https://github.com/Zhouzi/LinkHunter"
+  "homepage": "https://github.com/Zhouzi/linkhunter"
 }

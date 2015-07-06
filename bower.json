@@ -1,6 +1,6 @@
 {
   "name": "linkhunter",
-  "homepage": "https://github.com/Zhouzi/LinkHunter",
+  "homepage": "https://github.com/Zhouzi/linkhunter",
   "authors": ["Gabin <hello@gabinaureche.com>"],
   "description": "Detect links that real users actually type.",
   "license": "MIT",
