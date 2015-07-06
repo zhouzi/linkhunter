@@ -42,20 +42,20 @@ For example, `user@domain` is considered to be a valid email per the specificati
 
 ### 3.0.0 - Unreleased
 
-* [ ] The usage of linkhunter as a constructor currently makes no sense and just add an useless step. The api should be directly available.
+* [x] The usage of linkhunter as a constructor currently makes no sense and just add an useless step. The api should be directly available.
     * [x] Change linkhunter to be an object instead of a Class.
     * [x] Rename the files and update imports.
     * [x] Update specs.
     * [x] Change the lib's name to be `linkhunter` instead of `LinkHunter`.
-    * [ ] Update documentation.
-* [ ] Transforming links into Link objects makes it hard, if not impossible, to chain operations (e.g. beautify+shorten). Moving those methods to linkhunter would make it really easy and decrease the overall complexity.
+    * [x] Update documentation.
+* [x] Transforming links into Link objects makes it hard, if not impossible, to chain operations (e.g. beautify+shorten). Moving those methods to linkhunter would make it really easy and decrease the overall complexity.
     * [x] Move LinkClass' methods to linkhunter.
     * [x] Remove useless options (e.g. forceCleanUp).
     * [x] Update specs.
-    * [ ] Update documentation.
-* [ ] Simplify the `operation` option of `linkhunter.linky()` by adding: `{ withProtocol: false, beautify: false, shorten: false, cleanUp: false }`.
+    * [x] Update documentation.
+* [x] Simplify the `operation` option of `linkhunter.linky()` by adding: `{ withProtocol: false, beautify: false, shorten: false, cleanUp: false }`.
     * [x] Add tests.
-    * [ ] Update documentation.
+    * [x] Update documentation.
 * [x] Update the angular wrapper.
 * [x] Update demo page.
 * [ ] Add support for non-browser environment.
