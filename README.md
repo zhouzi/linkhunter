@@ -78,7 +78,7 @@ These are just a few of LinkHunter's capabilities, have at look at the [document
     * [x] Update specs.
     * [ ] Update documentation.
 * [ ] Simplify the `operation` option of `linkhunter.linky()` by adding: `{ withProtocol: false, beautify: false, shorten: false, cleanUp: false }`.
-    * [ ] Add tests.
+    * [x] Add tests.
     * [ ] Update documentation.
 * [ ] Update the angular wrapper.
 * [ ] Update demo page.
