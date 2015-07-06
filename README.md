@@ -23,6 +23,8 @@ For example, `user@domain` is considered to be a valid email per the specificati
 
 ## Usage
 
+linkhunter follows the UMD (Universal Module Definition) pattern which means it works everywhere.
+
 1. Include the linkhunter.min.js file by whether:
   * Downloading the distributed file: [linkhunter.min.js](https://raw.githubusercontent.com/Zhouzi/linkhunter/master/dist/linkhunter.min.js)
   * Installing via bower: `bower install linkhunter`
