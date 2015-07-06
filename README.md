@@ -2,63 +2,39 @@
 
 Detect links that real users actually type.
 
-linkhunter's purpose is to match links that users type as well as the ones they copy/paste.
-The difference between the two is that users rarely type urls in the form of `http://twitter.com/` but rather `twitter.com`.
-It means that linkhunter is able to match:
+linkhunter is focussed on matching links from user inputs. To do so, it considers three type of links: emails (someone@domain.com), urls with a protocol (http://site.com/) and finally user-typed url (site.com). Matching the last is particularly hard since almost everything could actually be an url. To do it properly, linkhunter does two things: ensure it starts by a valid domain name and stop on punctuation mark. It means that linkhunter is able to match:
 
 * `http://twitter.com/` in `Have a look at http://twitter.com/`
-* `twitter.com` in `Have a look at twitter.com`
+* `github.com` in `Feel free to submit an issue on github.com!`
 * `me@domain.com` in `Contact me@domain.com`
 
-Note that linkhunter is meant to extract links from user's input but not to strictly validate urls or emails.
-For example, while `user@domain` is a correct email address, it won't match it but would work with `user@domain.com`.
+The library is also made to avoid matching partial urls. It means that `github.com/angular.js` won't be matched at all because there's no way to be sure that the dot before "js" is part of the url and not a punctuation mark.
 
-When searching for "user typed" links, it will make sure to break on punctuation mark so `twitter.com` is properly matched in `Have a look at twitter.com!` and not `twitter.com!`.
-It could be an issue if an user tries to type `twitter.com?some=params` but we assume that an user that is aware of the query parameter thing is also aware of the need of a protocol.
-Adding a protocol solve the issue and match the url properly (`http://twitter.com?some=params`).
+*Note that linkhunter is meant to extract links from user's input but not to strictly validate urls or emails.
+For example, `user@domain` is considered to be a valid email per the specifications but not by linkhunter.*
 
-* [Features](https://github.com/Zhouzi/LinkHunter#features)
-* [Usage](https://github.com/Zhouzi/LinkHunter#usage)
-* [Documentation](https://github.com/Zhouzi/LinkHunter/wiki)
-* [Known "Limitations"](https://github.com/Zhouzi/LinkHunter#known-limitations)
-* [Contributing](https://github.com/Zhouzi/LinkHunter/blob/gh-pages/CONTRIBUTING.md)
-* [Change Log](https://github.com/Zhouzi/LinkHunter#change-log)
-
-
-
-## Features
-
-linkhunter considers three types of links:
-
-* copy/paste: `http://site.com/some/sub/path/to/article-title?some=tracker`
-* user typed: `site.com/articles`
-* email: `email@domain.com`
-
-With that, it's able to:
-
-* Shorten `http://site.com/some/sub/path/to/article-title?some=tracker` to `site.com/some...`
-* Beautify `http://site.com/some/sub/path/to/article-title?some=tracker` to `site.com/.../article-title`
-* Transform `Have a look at site.com and say hello@domain.com` to `Have a look at <a href="http://site.com" target="_blank">site.com</a> and say <a href="mailto:hello@domain.com">hello@domain.com</a>`
-
-These are just a few of linkhunter's capabilities, have at look at the [documentation](https://github.com/Zhouzi/LinkHunter/wiki) for more details.
+* [Usage](https://github.com/Zhouzi/linkhunter#usage)
+* [Documentation](https://github.com/Zhouzi/linkhunter/wiki)
+* [Known "Limitations"](https://github.com/Zhouzi/linkhunter#known-limitations)
+* [Contributing](https://github.com/Zhouzi/linkhunter/blob/gh-pages/CONTRIBUTING.md)
+* [Change Log](https://github.com/Zhouzi/linkhunter#change-log)
 
 
 
 ## Usage
 
-1. To include linkhunter you can:
-   * Download the distributed file: [linkhunter.min.js](https://raw.githubusercontent.com/Zhouzi/LinkHunter/master/dist/linkhunter.min.js)
-   * Install via bower: `bower install linkhunter`
+1. Include the linkhunter.min.js file by whether:
+  * Downloading the distributed file: [linkhunter.min.js](https://raw.githubusercontent.com/Zhouzi/linkhunter/master/dist/linkhunter.min.js)
+  * Installing via bower: `bower install linkhunter`
 2. Link it in your markup: `<script src="path/to/linkhunter.min.js"></script>`
-3. You are now able to build a linkhunter's instance: `var linkhunter = new linkhunter();`
 
 
 
 ## Known "Limitations"
 
-* Domain such as Twitter's `t.co` are matched so `a.bc` and `q.we` too
-* Match user typed urls if followed or not by a punctuation mark and a space so `github.com` is matched in `github.com!` and `github.com! ` but not in `github.com!Whatever`.
-* User typed links (meaning urls without a protocol) can't contain a punctuation mark after the first slash. It means that `github.com` is properly matched in `Go to github.com! And let me know` and not `github.com!`. It also means that `github.com/angular.js` is not considered as a valid "user typed" url because we can't be sure whether what's behind the punctuation mark (the dot in this case) is part of the url or not. Adding the protocol fix it so `http://github.com/angular.js` is perfectly valid.
+* Domains such as Twitter's `t.co` are matched, meaning `a.bc` and `q.we`.
+* Match user typed urls if followed or not by a punctuation mark and a space so `github.com` is matched in `github.com!` and `github.com! Some text...` but not in `github.com!Some text...`.
+* User typed urls can't contain a punctuation mark after the first slash. It means that `github.com` is properly matched in `Go to github.com! And let me know` (and not `github.com!`). It also means that `github.com/angular.js` is not considered as a valid "user typed" url because we can't be sure whether what's behind the punctuation mark (the dot in this case) is part of the url or not. Adding the protocol fix it so `http://github.com/angular.js` is perfectly valid.
 
 
 
