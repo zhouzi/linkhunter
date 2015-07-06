@@ -32,7 +32,7 @@ For example, `user@domain` is considered to be a valid email per the specificati
 
 ## Known "Limitations"
 
-* Domains such as Twitter's `t.co` are matched, meaning `a.bc` and `q.we`.
+* Domains such as Twitter's `t.co` are matched, meaning `a.bc` and `q.we` too.
 * Match user typed urls if followed or not by a punctuation mark and a space so `github.com` is matched in `github.com!` and `github.com! Some text...` but not in `github.com!Some text...`.
 * User typed urls can't contain a punctuation mark after the first slash. It means that `github.com` is properly matched in `Go to github.com! And let me know` (and not `github.com!`). It also means that `github.com/angular.js` is not considered as a valid "user typed" url because we can't be sure whether what's behind the punctuation mark (the dot in this case) is part of the url or not. Adding the protocol fix it so `http://github.com/angular.js` is perfectly valid.
 
