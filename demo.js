@@ -1,30 +1,27 @@
 (function () {
     'use strict';
 
-    var linkHunter = new LinkHunter();
-
     var Link = React.createClass({
         render: function () {
             return (
                 <li className="demo-link">
                     <div className="demo-link-group">
-                        <div className="demo-link-group__title">Link.original</div>
-                        <a href={this.props.obj.withProtocol()}>{this.props.obj.original}</a>
+                        <a href={linkhunter.withProtocol(this.props.obj)}>{this.props.obj}</a>
                     </div>
 
                     <div className="demo-link-group">
-                        <div className="demo-link-group__title">Link.withProtocol()</div>
-                        {this.props.obj.withProtocol()}
+                        <div className="demo-link-group__title">linkhunter.withProtocol(link)</div>
+                        {linkhunter.withProtocol(this.props.obj)}
                     </div>
 
                     <div className="demo-link-group">
-                        <div className="demo-link-group__title">Link.shorten(24, true)</div>
-                        {this.props.obj.shorten(24, true)}
+                        <div className="demo-link-group__title">linkhunter.shorten(link, 24)</div>
+                        {linkhunter.shorten(this.props.obj, 24, true)}
                     </div>
 
                     <div className="demo-link-group">
-                        <div className="demo-link-group__title">Link.beautify()</div>
-                        {this.props.obj.beautify(true)}
+                        <div className="demo-link-group__title">linkhunter.beautify(link)</div>
+                        {linkhunter.beautify(this.props.obj)}
                     </div>
                 </li>
             );
@@ -40,12 +37,12 @@
                 'Try to copy and paste urls and/or type some text in there to see it in action.'
             ].join(' ');
 
-            return { text: text, links: linkHunter.getLinks(text, true) };
+            return { text: text, links: linkhunter.getLinks(text, true) };
         },
 
         onChange: function () {
             var text = React.findDOMNode(this.refs.textarea).value;
-            this.setState({ text: text, links: linkHunter.getLinks(text, true) });
+            this.setState({ text: text, links: linkhunter.getLinks(text, true) });
         },
 
         render: function () {

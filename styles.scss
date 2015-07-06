@@ -33,6 +33,7 @@ $font-family: 'Sniglet', sans-serif;
 
 $font-size-root: 18px;
 $font-size-base: 1rem;
+$font-size-small: .8rem;
 
 $ms-ratio: 1.6;
 $ms-base: $font-size-base;
@@ -180,7 +181,7 @@ h2 {
   }
 
   .textarea__footer {
-    font-size: ms(-1);
+    font-size: $font-size-small;
     color: $gray;
     background-color: $gray-lighter;
   }
@@ -222,7 +223,7 @@ h2 {
 
 .demo-link-group__title {
   color: $gray;
-  font-size: ms(-1);
+  font-size: $font-size-small;
 }
 
 .nav {
