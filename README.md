@@ -1,16 +1,16 @@
-# LinkHunter
+# linkhunter
 
 Detect links that real users actually type.
 
-LinkHunter's purpose is to match links that users type as well as the ones they copy/paste.
+linkhunter's purpose is to match links that users type as well as the ones they copy/paste.
 The difference between the two is that users rarely type urls in the form of `http://twitter.com/` but rather `twitter.com`.
-It means that LinkHunter is able to match:
+It means that linkhunter is able to match:
 
 * `http://twitter.com/` in `Have a look at http://twitter.com/`
 * `twitter.com` in `Have a look at twitter.com`
 * `me@domain.com` in `Contact me@domain.com`
 
-Note that LinkHunter is meant to extract links from user's input but not to strictly validate urls or emails.
+Note that linkhunter is meant to extract links from user's input but not to strictly validate urls or emails.
 For example, while `user@domain` is a correct email address, it won't match it but would work with `user@domain.com`.
 
 When searching for "user typed" links, it will make sure to break on punctuation mark so `twitter.com` is properly matched in `Have a look at twitter.com!` and not `twitter.com!`.
@@ -28,7 +28,7 @@ Adding a protocol solve the issue and match the url properly (`http://twitter.co
 
 ## Features
 
-LinkHunter considers three types of links:
+linkhunter considers three types of links:
 
 * copy/paste: `http://site.com/some/sub/path/to/article-title?some=tracker`
 * user typed: `site.com/articles`
@@ -40,17 +40,17 @@ With that, it's able to:
 * Beautify `http://site.com/some/sub/path/to/article-title?some=tracker` to `site.com/.../article-title`
 * Transform `Have a look at site.com and say hello@domain.com` to `Have a look at <a href="http://site.com" target="_blank">site.com</a> and say <a href="mailto:hello@domain.com">hello@domain.com</a>`
 
-These are just a few of LinkHunter's capabilities, have at look at the [documentation](https://github.com/Zhouzi/LinkHunter/wiki) for more details.
+These are just a few of linkhunter's capabilities, have at look at the [documentation](https://github.com/Zhouzi/LinkHunter/wiki) for more details.
 
 
 
 ## Usage
 
-1. To include LinkHunter you can:
-   * Download the distributed file: [LinkHunter.min.js](https://raw.githubusercontent.com/Zhouzi/LinkHunter/master/dist/LinkHunter.min.js)
+1. To include linkhunter you can:
+   * Download the distributed file: [linkhunter.min.js](https://raw.githubusercontent.com/Zhouzi/LinkHunter/master/dist/linkhunter.min.js)
    * Install via bower: `bower install linkhunter`
-2. Link it in your markup: `<script src="path/to/LinkHunter.min.js"></script>`
-3. You are now able to build a LinkHunter's instance: `var linkHunter = new LinkHunter();`
+2. Link it in your markup: `<script src="path/to/linkhunter.min.js"></script>`
+3. You are now able to build a linkhunter's instance: `var linkhunter = new linkhunter();`
 
 
 
@@ -66,14 +66,14 @@ These are just a few of LinkHunter's capabilities, have at look at the [document
 
 ### 3.0.0 - Unreleased
 
-* [ ] The usage of LinkHunter as a constructor currently makes no sense and just add an useless step. The api should be directly available.
-    * [x] Change LinkHunter to be an object instead of a Class.
+* [ ] The usage of linkhunter as a constructor currently makes no sense and just add an useless step. The api should be directly available.
+    * [x] Change linkhunter to be an object instead of a Class.
     * [x] Rename the files and update imports.
     * [x] Update specs.
-    * [ ] Change the lib's name to be `linkhunter` instead of `LinkHunter`.
+    * [x] Change the lib's name to be `linkhunter` instead of `LinkHunter`.
     * [ ] Update documentation.
-* [ ] Transforming links into Link objects makes it hard, if not impossible, to chain operations (e.g. beautify+shorten). Moving those methods to LinkHunter would make it really easy and decrease the overall complexity.
-    * [x] Move LinkClass' methods to LinkHunter.
+* [ ] Transforming links into Link objects makes it hard, if not impossible, to chain operations (e.g. beautify+shorten). Moving those methods to linkhunter would make it really easy and decrease the overall complexity.
+    * [x] Move LinkClass' methods to linkhunter.
     * [x] Remove useless options (e.g. forceCleanUp).
     * [x] Update specs.
     * [ ] Update documentation.
@@ -99,7 +99,7 @@ These are just a few of LinkHunter's capabilities, have at look at the [document
 * `.getLinks()` now ignore emails by default.
 * `.looksLikeALink()` now ignore emails by default.
 * Added the `forceCleanUp` option to `.shorten()` (true by default).
-* LinkHunter is now available as a bower component: `bower install linkhunter`.
+* linkhunter is now available as a bower component: `bower install linkhunter`.
 
 ### 1.1.0 - 2015-06-30
 
@@ -108,10 +108,10 @@ These are just a few of LinkHunter's capabilities, have at look at the [document
     * Partial urls are no more matched by the "user typed" regexp. Meaning `github.com/angular` is no more matched from `github.com/angular.js`. In such case the url is completely dropped because:
         1. Matching partial urls is pointless and would surely lead to mistakes.
         2. We can't be sure whether what's behind the punctuation mark (the dot in this case) is part of the url or not.
-* Added a `.replaceLinks(callback)` method so your could benefit from LinkHunter's regexps to replace links the way you want to. This is method is now also used by `.linky()`.
+* Added a `.replaceLinks(callback)` method so your could benefit from linkhunter's regexps to replace links the way you want to. This is method is now also used by `.linky()`.
 * `.linky()` now supports more options like beautify, shorten and clean up.
 * Every link object has now a `.originalHasProtocol` property which is true when the original url has a protocol.
-* LinkHunter is now also available as an Angular module.
+* linkhunter is now also available as an Angular module.
 * Fixed an issue where `.getLinks()` wasn't setting emails' type to "email".
 
 ### 1.0.0 - 2015-06-28
