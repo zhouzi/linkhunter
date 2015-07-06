@@ -80,8 +80,8 @@ These are just a few of LinkHunter's capabilities, have at look at the [document
 * [ ] Simplify the `operation` option of `linkhunter.linky()` by adding: `{ withProtocol: false, beautify: false, shorten: false, cleanUp: false }`.
     * [x] Add tests.
     * [ ] Update documentation.
-* [ ] Update the angular wrapper.
-* [ ] Update demo page.
+* [x] Update the angular wrapper.
+* [x] Update demo page.
 * [ ] Add support for non-browser environment.
 
 ### 2.0.1 - 2015-07-04

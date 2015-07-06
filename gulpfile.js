@@ -29,7 +29,7 @@ gulp.task('scripts', function () {
 
 gulp.task('scripts:angular', function () {
     return gulp
-        .src('src/LinkHunter.angular.js')
+        .src('src/linkhunter-angular.js')
         .pipe($.uglify())
         .pipe($.header(header, { pkg: pkg }))
         .pipe($.rename({ suffix: '.min' }))
