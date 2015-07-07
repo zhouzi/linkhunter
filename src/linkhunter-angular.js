@@ -5,7 +5,7 @@ angular
             return linkhunter;
         }
     ])
-    .filter('linkhunter.linky', [
+    .filter('linkhunterLinky', [
         'linkhunter',
         function (linkhunter) {
             return function (str, options) {
