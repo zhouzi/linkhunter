@@ -42,6 +42,10 @@ linkhunter follows the UMD (Universal Module Definition) pattern which means it 
 
 ## Change log
 
+### 3.0.1 - 2015-07-07
+
+* Renamed the angular filter to `linkhunterLinky`.
+
 ### 3.0.0 - 2015-07-06
 
 * The usage of linkhunter as a constructor made no sense so it's now just an object exposing the whole API.
@@ -70,10 +74,10 @@ linkhunter follows the UMD (Universal Module Definition) pattern which means it 
 ### 1.1.0 - 2015-06-30
 
 * Lots of improvements in the regexp
-    * Regular urls (the ones with a protocol) now also benefit from the domain pattern. Which means that everything that's before the first slash must looks like a domain name so `http://.` is no more matched for example.
-    * Partial urls are no more matched by the "user typed" regexp. Meaning `github.com/angular` is no more matched from `github.com/angular.js`. In such case the url is completely dropped because:
-        1. Matching partial urls is pointless and would surely lead to mistakes.
-        2. We can't be sure whether what's behind the punctuation mark (the dot in this case) is part of the url or not.
+  * Regular urls (the ones with a protocol) now also benefit from the domain pattern. Which means that everything that's before the first slash must looks like a domain name so `http://.` is no more matched for example.
+  * Partial urls are no more matched by the "user typed" regexp. Meaning `github.com/angular` is no more matched from `github.com/angular.js`. In such case the url is completely dropped because:
+    1. Matching partial urls is pointless and would surely lead to mistakes.
+    2. We can't be sure whether what's behind the punctuation mark (the dot in this case) is part of the url or not.
 * Added a `.replaceLinks(callback)` method so your could benefit from linkhunter's regexps to replace links the way you want to. This is method is now also used by `.linky()`.
 * `.linky()` now supports more options like beautify, shorten and clean up.
 * Every link object has now a `.originalHasProtocol` property which is true when the original url has a protocol.
