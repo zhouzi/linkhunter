@@ -44,6 +44,10 @@ linkhunter follows the UMD (Universal Module Definition) pattern which means it 
 
 ### 3.0.1 - 2015-07-07
 
+* Fixed angular linky filter name.
+
+### 3.0.1 - 2015-07-07
+
 * Renamed the angular filter to `linkhunterLinky`.
 
 ### 3.0.0 - 2015-07-06
