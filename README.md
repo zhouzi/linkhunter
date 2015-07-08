@@ -48,7 +48,7 @@ linkhunter follows the UMD (Universal Module Definition) pattern which means it 
   * [ ] Update specs.
 * [ ] Add more filters to the angular module.
 
-### 3.0.1 - 2015-07-07
+### 3.0.2 - 2015-07-07
 
 * Fixed angular linky filter name.
 
