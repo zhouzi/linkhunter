@@ -30,6 +30,14 @@ describe('linkhunter', () => {
         });
     });
 
+    describe('linkhunter.getLinks', () => {
+        subjects.extract.forEach(obj => {
+            it (`should get links from "${obj.value}"`, () => {
+                expect(linkhunter.getLinks(obj.value, obj.includeEmail)).toEqual(obj.expectation);
+            });
+        });
+    });
+
     describe('Manipulating strings', () => {
         let text;
         beforeEach(() => {
@@ -39,15 +47,6 @@ describe('linkhunter', () => {
                     'And say hello@someone.com! And john.doe@domain.more-domain.tld.',
                     'Oh and what about github.com!Let me know what you think.'
                 ].join('\n');
-        });
-
-        it('should extract links from a text', () => {
-            expect(linkhunter.getLinks(text, true)).toEqual([
-                'site.com/whatever',
-                'http://www.domain.com/some/sub/path?with=params#hash',
-                'hello@someone.com',
-                'john.doe@domain.more-domain.tld'
-            ]);
         });
 
         it('should replace links by an html anchor tag', () => {
@@ -81,18 +80,6 @@ describe('linkhunter', () => {
 
     it('should replace links and add protocol to display value', () => {
         expect(linkhunter.linky('Go to site.com', { displayValue: { withProtocol: true } })).toBe('Go to <a href="http://site.com">http://site.com</a>');
-    });
-
-    it('should not extract partial urls', () => {
-        expect(JSON.stringify(linkhunter.getLinks('Have a look at github.com/angular.js guys!'))).toEqual(JSON.stringify([]));
-    });
-
-    it('should not extract partial emails', () => {
-        expect(JSON.stringify(linkhunter.getLinks('Say hello@someone.com% '))).toEqual(JSON.stringify([]));
-    });
-
-    it('should extract urls that are followed by a punctuation mark', () => {
-        expect(linkhunter.getLinks('Have a look at github.com! site.com.')).toEqual(['github.com', 'site.com']);
     });
 
     it('should call a callback for each links found in a string', () => {

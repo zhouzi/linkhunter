@@ -1,10 +1,15 @@
 import utils from './utils';
 
-const ENDOFSTRING_REGEXP = `(?=[."\'!?:,;]*(?:\\s|$))`;
-const DOMAIN_REGEXP      = `(?:[-a-z0-9]{1,255}\\.)+[a-z]{2,10}`;
-const EMAIL_REGEXP       = `[^\\s]+@${DOMAIN_REGEXP}`;
-const REGULARURL_REGEXP  = `https?:\/\/${DOMAIN_REGEXP}[^\\s]*`;
-const USERURL_REGEXP     = `${DOMAIN_REGEXP}[^.\\s"\'!?:,;]*`;
+// /(^|\s)((?:https?:\/\/(?:[-a-z0-9]{1,255}\.)+[a-z]{2,10}[^\s]*)|(?:(?:[^\s]+@(?:[-a-z0-9]{1,255}\.)+[a-z]{2,10}|(?:(?:[-a-z0-9]{1,255}\.)+[a-z]{2,10}[^.\s"'!?:,;]*))(?=[."'!?:,;]*(?:\s|$))))/gi
+
+const WRAPPERS             = `(){}"\'`;
+const PUNCTUATION_MARK     = `.!?:,;`;
+const ENDOFSTRING_REGEXP   = `(?=[${WRAPPERS}${PUNCTUATION_MARK}]*(?:\\s|$))`;
+const STARTOFSTRING_REGEXP = `(^|\\s|[${WRAPPERS}])`;
+const DOMAIN_REGEXP        = `(?:[-a-z0-9]{1,255}\\.)+[a-z]{2,10}`;
+const EMAIL_REGEXP         = `[^${WRAPPERS}${PUNCTUATION_MARK}][^\\s]+@${DOMAIN_REGEXP}`;
+const REGULARURL_REGEXP    = `https?:\/\/${DOMAIN_REGEXP}(?:[^\\s]*[^\\s${WRAPPERS}${PUNCTUATION_MARK}])?`;
+const USERURL_REGEXP       = `${DOMAIN_REGEXP}[^\\s${WRAPPERS}${PUNCTUATION_MARK}]*`;
 
 let linkhunter = {
     regexps:  {
@@ -12,7 +17,7 @@ let linkhunter = {
         regularUrl: new RegExp(`^${REGULARURL_REGEXP}$`, 'i'),
         userUrl:    new RegExp(`^${USERURL_REGEXP}$`, 'i'),
         link:       new RegExp(`^((?:${EMAIL_REGEXP})|(?:${REGULARURL_REGEXP})|(?:${USERURL_REGEXP}))$`, 'i'),
-        links:      new RegExp(`(^|\\s)((?:${REGULARURL_REGEXP})|(?:(?:${EMAIL_REGEXP}|(?:${USERURL_REGEXP}))${ENDOFSTRING_REGEXP}))`, 'gi')
+        links:      new RegExp(`${STARTOFSTRING_REGEXP}((?:${REGULARURL_REGEXP})|(?:(?:${EMAIL_REGEXP})|(?:${USERURL_REGEXP}))${ENDOFSTRING_REGEXP})`, 'gi')
     },
 
     looksLikeAnEmail: (str) => {
@@ -25,8 +30,8 @@ let linkhunter = {
     },
 
     getLinks: (str, includeEmail = false) => {
-        let links =
-            (str.match(linkhunter.regexps.links) || []).map(link => { return link.trim(); });
+        let links = [];
+        str.replace(linkhunter.regexps.links, function (match, precedingCharacter, link) { links.push(link); });
 
         if (!includeEmail) {
             let self = linkhunter;
@@ -37,8 +42,8 @@ let linkhunter = {
     },
 
     replaceLinks: (str, callback, context = linkhunter) => {
-        return str.replace(linkhunter.regexps.links, (fullMatch, whitespace, link) => {
-            return whitespace + callback.call(context, link);
+        return str.replace(linkhunter.regexps.links, (match, precedingCharacter, link) => {
+            return precedingCharacter + callback.call(context, link);
         });
     },
 

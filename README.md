@@ -44,8 +44,8 @@ linkhunter follows the UMD (Universal Module Definition) pattern which means it 
 
 ### 3.1.0 - Unreleased
 
-* [ ] Improve the "protocoled urls" to avoid matching trailing punctuation mark.
-  * [ ] Update specs.
+* [x] Improved regular expressions to avoid matching trailing punctuation marks and wrappers. Meaning it's now able to match:
+    * `site.com` in `(site.com)`, `site.com.`, `site.com...`, `site.com!`, and so on. Works for urls with a protocol or not and emails.
 * [ ] Add more filters to the angular module.
 
 ### 3.0.2 - 2015-07-07

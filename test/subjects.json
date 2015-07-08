@@ -44,5 +44,87 @@
       "someone@domain%.com+something",
       "email@domain.thisisawaytoologtopleveldomain"
     ]
-  }
+  },
+
+  "extract": [
+    {
+      "value": "Have a look at site.com/whatever and http://www.domain.com/some/sub/path?with=params#hash guys!\nAnd say hello@someone.com! And john.doe@domain.more-domain.tld.\nOh and what about github.com!Let me know what you think.",
+      "includeEmail": true,
+      "expectation": [
+        "site.com/whatever",
+        "http://www.domain.com/some/sub/path?with=params#hash",
+        "hello@someone.com",
+        "john.doe@domain.more-domain.tld"
+      ]
+    },
+
+    {
+      "value": "Have a look at github.com/angular.js guys!",
+      "includeEmail": false,
+      "expectation": []
+    },
+
+    {
+      "value": "Have a look at github.com! site.com.",
+      "includeEmail": false,
+      "expectation": [
+        "github.com",
+        "site.com"
+      ]
+    },
+
+    {
+      "value": "Did you see this? (site.com)",
+      "includeEmail": false,
+      "expectation": ["site.com"]
+    },
+
+    {
+      "value": "Did you see this? (http://site.com)",
+      "includeEmail": false,
+      "expectation": ["http://site.com"]
+    },
+
+    {
+      "value": "Did you see this? (site.com/some/sub/path/whatever)",
+      "includeEmail": false,
+      "expectation": ["site.com/some/sub/path/whatever"]
+    },
+
+    {
+      "value": "Did you see this? (http://site.com/some/sub/path/whatever)",
+      "includeEmail": false,
+      "expectation": ["http://site.com/some/sub/path/whatever"]
+    },
+
+    {
+      "value": "Did you see this site.com/some/path?",
+      "includeEmail": false,
+      "expectation": ["site.com/some/path"]
+    },
+
+    {
+      "value": "Did you see this http://site.com/some/sub/path/whatever?",
+      "includeEmail": false,
+      "expectation": ["http://site.com/some/sub/path/whatever"]
+    },
+
+    {
+      "value": "Did you see this someone@domain.tld?",
+      "includeEmail": true,
+      "expectation": ["someone@domain.tld"]
+    },
+
+    {
+      "value": "(someone@domain.tld) is the right email address",
+      "includeEmail": true,
+      "expectation": ["someone@domain.tld"]
+    },
+
+    {
+      "value": "Go to site.com... And let me know someone@domain.com!!",
+      "includeEmail": true,
+      "expectation": ["site.com", "someone@domain.com"]
+    }
+  ]
 }
