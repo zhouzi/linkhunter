@@ -1,7 +1,5 @@
 import utils from './utils';
 
-// /(^|\s)((?:https?:\/\/(?:[-a-z0-9]{1,255}\.)+[a-z]{2,10}[^\s]*)|(?:(?:[^\s]+@(?:[-a-z0-9]{1,255}\.)+[a-z]{2,10}|(?:(?:[-a-z0-9]{1,255}\.)+[a-z]{2,10}[^.\s"'!?:,;]*))(?=[."'!?:,;]*(?:\s|$))))/gi
-
 const WRAPPERS             = `(){}"\'`;
 const PUNCTUATION_MARK     = `.!?:,;`;
 const ENDOFSTRING_REGEXP   = `(?=[${WRAPPERS}${PUNCTUATION_MARK}]*(?:\\s|$))`;
