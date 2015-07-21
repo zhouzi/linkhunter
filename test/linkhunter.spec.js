@@ -45,16 +45,16 @@ describe('linkhunter', () => {
                 [
                     'Have a look at site.com/whatever and http://www.domain.com/some/sub/path?with=params#hash guys!',
                     'And say hello@someone.com! And john.doe@domain.more-domain.tld.',
-                    'Oh and what about github.com!Let me know what you think.'
+                    'Oh and what about github.com/angular.js! Let me know what you think.'
                 ].join('\n');
         });
 
         it('should replace links by an html anchor tag', () => {
-            expect(linkhunter.linky(text)).toBe('Have a look at <a href="http://site.com/whatever">site.com/whatever</a> and <a href="http://www.domain.com/some/sub/path?with=params#hash">http://www.domain.com/some/sub/path?with=params#hash</a> guys!\nAnd say <a href="mailto:hello@someone.com">hello@someone.com</a>! And <a href="mailto:john.doe@domain.more-domain.tld">john.doe@domain.more-domain.tld</a>.\nOh and what about github.com!Let me know what you think.');
+            expect(linkhunter.linky(text)).toBe('Have a look at <a href="http://site.com/whatever">site.com/whatever</a> and <a href="http://www.domain.com/some/sub/path?with=params#hash">http://www.domain.com/some/sub/path?with=params#hash</a> guys!\nAnd say <a href="mailto:hello@someone.com">hello@someone.com</a>! And <a href="mailto:john.doe@domain.more-domain.tld">john.doe@domain.more-domain.tld</a>.\nOh and what about <a href="http://github.com/angular.js">github.com/angular.js</a>! Let me know what you think.');
         });
 
         it('should replace links by an html anchor tag and respect options', () => {
-            expect(linkhunter.linky(text, { ignoreEmail: true, target: '_blank', protocol: 'https://' })).toBe('Have a look at <a href="https://site.com/whatever" target="_blank">site.com/whatever</a> and <a href="http://www.domain.com/some/sub/path?with=params#hash" target="_blank">http://www.domain.com/some/sub/path?with=params#hash</a> guys!\nAnd say hello@someone.com! And john.doe@domain.more-domain.tld.\nOh and what about github.com!Let me know what you think.');
+            expect(linkhunter.linky(text, { ignoreEmail: true, target: '_blank', protocol: 'https://' })).toBe('Have a look at <a href="https://site.com/whatever" target="_blank">site.com/whatever</a> and <a href="http://www.domain.com/some/sub/path?with=params#hash" target="_blank">http://www.domain.com/some/sub/path?with=params#hash</a> guys!\nAnd say hello@someone.com! And john.doe@domain.more-domain.tld.\nOh and what about <a href="https://github.com/angular.js" target="_blank">github.com/angular.js</a>! Let me know what you think.');
         });
     });
 

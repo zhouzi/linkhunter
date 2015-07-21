@@ -2,13 +2,14 @@
 
 Detect links that real users actually type.
 
-linkhunter is focussed on matching links from user inputs. To do so, it considers three type of links: emails (someone@domain.com), urls with a protocol (http://site.com/) and finally user-typed url (site.com). Matching the last is particularly hard since almost everything could actually be an url. To do it properly, linkhunter does two things: ensure it starts by a valid domain name and stop on punctuation mark. It means that linkhunter is able to match:
+linkhunter is focussed on matching links from user inputs.
+To do so, it considers three type of links: emails (someone@domain.com), urls with a protocol (http://site.com/) and finally user-typed url (site.com).
+It means that linkhunter is able to match:
 
 * `http://twitter.com/` in `Have a look at http://twitter.com/`
 * `github.com` in `Feel free to submit an issue on github.com!`
-* `me@domain.com` in `Contact me@domain.com`
-
-The library is also made to avoid matching partial urls. It means that `github.com/angular.js` won't be matched at all because there's no way to be sure that the dot before "js" is part of the url and not a punctuation mark.
+* `someone@domain.com` in `Should I contact someone@domain.com?`
+* `twitter.com` in `Did you visit twitter? (twitter.com)`
 
 *Note that linkhunter is meant to extract links from user's input but not to strictly validate urls or emails.
 For example, `user@domain` is considered to be a valid email per the specifications but not by linkhunter.*
@@ -25,18 +26,16 @@ For example, `user@domain` is considered to be a valid email per the specificati
 
 linkhunter follows the UMD (Universal Module Definition) pattern which means it works everywhere.
 
-1. Include the linkhunter.min.js file by whether:
-  * Downloading the distributed file: [linkhunter.min.js](https://raw.githubusercontent.com/Zhouzi/linkhunter/gh-pages/dist/linkhunter.min.js)
+1. Get the linkhunter.min.js file by whether:
+  * Downloading the distributed version: [linkhunter.min.js](https://raw.githubusercontent.com/Zhouzi/linkhunter/gh-pages/dist/linkhunter.min.js)
   * Installing via bower: `bower install linkhunter`
-2. Link it in your markup: `<script src="path/to/linkhunter.min.js"></script>`
+2. Include it in your markup: `<script src="path/to/linkhunter.min.js"></script>` (or `require('linkhunter.min.js')` in NodeJS apps)
 
 
 
 ## Known "Limitations"
 
 * Domains such as Twitter's `t.co` are matched, meaning `a.bc` and `q.we` too.
-* Match user typed urls if followed or not by a punctuation mark and a space so `github.com` is matched in `github.com!` and `github.com! Some text...` but not in `github.com!Some text...`.
-* User typed urls can't contain a punctuation mark after the first slash. It means that `github.com` is properly matched in `Go to github.com! And let me know` (and not `github.com!`). It also means that `github.com/angular.js` is not considered as a valid "user typed" url because we can't be sure whether what's behind the punctuation mark (the dot in this case) is part of the url or not. Adding the protocol fix it so `http://github.com/angular.js` is perfectly valid.
 
 
 
@@ -46,6 +45,9 @@ linkhunter follows the UMD (Universal Module Definition) pattern which means it 
 
 * [x] Improved regular expressions to avoid matching trailing punctuation marks and wrappers. Meaning it's now able to match:
     * `site.com` in `(site.com)`, `site.com.`, `site.com...`, `site.com!`, and so on. Works for urls with a protocol or not and emails.
+* [x] Improve user-typed url regexp to match `github.com/angular.js` but not `github.com/angular. js`
+  * [x] Update specs.
+  * [x] Update documentation.
 * [ ] Add more filters to the angular module.
 * [ ] Update regexp to match `http://` urls, no matter what's preceding it. By doing so, it should be able to match `"http://site.com"` in `"What?http://site.com"`.
 

@@ -9,7 +9,8 @@
       "https://site.com",
       "https://site.com/some-sub/path/with?params=foo#hash",
       "user@email.com",
-      "http://t.co"
+      "http://t.co",
+      "github.com/angular.js"
     ],
 
     "incorrect": [
@@ -20,14 +21,14 @@
       "\"some.ste.com\"",
       "'site.com'",
       "github.com...",
-      "github.com/angular.js",
       "user@email",
       "user@email..com",
       "user@email.c",
       "http://",
       "http://.",
       "http://t.c",
-      "http://t.c9"
+      "http://t.c9",
+      "github.com/angular. js"
     ]
   },
 
@@ -48,20 +49,21 @@
 
   "extract": [
     {
-      "value": "Have a look at site.com/whatever and http://www.domain.com/some/sub/path?with=params#hash guys!\nAnd say hello@someone.com! And john.doe@domain.more-domain.tld.\nOh and what about github.com!Let me know what you think.",
+      "value": "Have a look at site.com/whatever and http://www.domain.com/some/sub/path?with=params#hash guys!\nAnd say hello@someone.com! And john.doe@domain.more-domain.tld.\nOh and what about github.com/angular.js! Let me know what you think.",
       "includeEmail": true,
       "expectation": [
         "site.com/whatever",
         "http://www.domain.com/some/sub/path?with=params#hash",
         "hello@someone.com",
-        "john.doe@domain.more-domain.tld"
+        "john.doe@domain.more-domain.tld",
+        "github.com/angular.js"
       ]
     },
 
     {
       "value": "Have a look at github.com/angular.js guys!",
       "includeEmail": false,
-      "expectation": []
+      "expectation": ["github.com/angular.js"]
     },
 
     {
@@ -125,6 +127,18 @@
       "value": "Go to site.com... And let me know someone@domain.com!!",
       "includeEmail": true,
       "expectation": ["site.com", "someone@domain.com"]
+    },
+
+    {
+      "value": "Go to github.com/angular. js!",
+      "includeEmail": false,
+      "expectation": ["github.com/angular"]
+    },
+
+    {
+      "value": "Go to (github.com/angular.js)!",
+      "includeEmail": false,
+      "expectation": ["github.com/angular.js"]
     }
   ]
 }

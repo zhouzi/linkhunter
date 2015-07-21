@@ -4,10 +4,11 @@ const WRAPPERS             = `(){}"\'`;
 const PUNCTUATION_MARK     = `.!?:,;`;
 const ENDOFSTRING_REGEXP   = `(?=[${WRAPPERS}${PUNCTUATION_MARK}]*(?:\\s|$))`;
 const STARTOFSTRING_REGEXP = `(^|\\s|[${WRAPPERS}])`;
+const NOTRAILING_PUNC_WRAP = `(?:[^\\s]*[^\\s${WRAPPERS}${PUNCTUATION_MARK}])?`;
 const DOMAIN_REGEXP        = `(?:[-a-z0-9]{1,255}\\.)+[a-z]{2,10}`;
 const EMAIL_REGEXP         = `[^${WRAPPERS}${PUNCTUATION_MARK}][^\\s]+@${DOMAIN_REGEXP}`;
-const REGULARURL_REGEXP    = `https?:\/\/${DOMAIN_REGEXP}(?:[^\\s]*[^\\s${WRAPPERS}${PUNCTUATION_MARK}])?`;
-const USERURL_REGEXP       = `${DOMAIN_REGEXP}[^\\s${WRAPPERS}${PUNCTUATION_MARK}]*`;
+const REGULARURL_REGEXP    = `https?:\/\/${DOMAIN_REGEXP}${NOTRAILING_PUNC_WRAP}`;
+const USERURL_REGEXP       = `${DOMAIN_REGEXP}${NOTRAILING_PUNC_WRAP}`;
 
 let linkhunter = {
     regexps:  {
