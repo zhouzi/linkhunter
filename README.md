@@ -47,6 +47,7 @@ linkhunter follows the UMD (Universal Module Definition) pattern which means it 
 * [x] Improved regular expressions to avoid matching trailing punctuation marks and wrappers. Meaning it's now able to match:
     * `site.com` in `(site.com)`, `site.com.`, `site.com...`, `site.com!`, and so on. Works for urls with a protocol or not and emails.
 * [ ] Add more filters to the angular module.
+* [ ] Update regexp to match `http://` urls, no matter what's preceding it. By doing so, it should be able to match `"http://site.com"` in `"What?http://site.com"`.
 
 ### 3.0.2 - 2015-07-07
 
