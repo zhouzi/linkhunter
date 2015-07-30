@@ -139,6 +139,72 @@
       "value": "Go to (github.com/angular.js)!",
       "includeEmail": false,
       "expectation": ["github.com/angular.js"]
+    },
+
+    {
+      "value": "Have a look at:http://site.com/",
+      "includeEmail": false,
+      "expectation": ["http://site.com/"]
+    },
+
+    {
+      "value": "What about that?http://site.com/",
+      "includeEmail": false,
+      "expectation": ["http://site.com/"]
+    },
+
+    {
+      "value": "Have a look at:site.com",
+      "includeEmail": false,
+      "expectation": ["site.com"]
+    },
+
+    {
+      "value": "Have a look at?site.com",
+      "includeEmail": false,
+      "expectation": ["site.com"]
+    },
+
+    {
+      "value": "Have a look at:someone@email.com",
+      "includeEmail": true,
+      "expectation": ["someone@email.com"]
+    },
+
+    {
+      "value": "Have a look at?someone@email.com",
+      "includeEmail": true,
+      "expectation": ["someone@email.com"]
+    },
+
+    {
+      "value": "What's that (email(some(stuff@domain.com))with something else",
+      "includeEmail": true,
+      "expectation": ["stuff@domain.com"]
+    },
+
+    {
+      "value": "What's that (email(some(stuff.domain.com))with something else",
+      "includeEmail": false,
+      "expectation": ["stuff.domain.com"]
+    },
+
+    {
+      "value": "What's that (email(some(http://stuff.domain.com))with something else",
+      "includeEmail": false,
+      "expectation": ["http://stuff.domain.com"]
+    },
+
+    {
+      "value": "Some string ((whatever(site.com)some stuff) there",
+      "includeEmail": false,
+      "expectation": ["site.com"]
+    },
+
+    {
+      "value": "Whatever (stuff((there(or(someone@domain.com)So weird) string...",
+      "includeEmail": true,
+      "expectation": ["someone@domain.com"]
     }
   ]
 }

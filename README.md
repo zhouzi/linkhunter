@@ -41,15 +41,22 @@ linkhunter follows the UMD (Universal Module Definition) pattern which means it 
 
 ## Change log
 
-### 3.1.0 - Unreleased
+### 3.2.0 - Unreleased
 
-* [x] Improved regular expressions to avoid matching trailing punctuation marks and wrappers. Meaning it's now able to match:
-    * `site.com` in `(site.com)`, `site.com.`, `site.com...`, `site.com!`, and so on. Works for urls with a protocol or not and emails.
-* [x] Improve user-typed url regexp to match `github.com/angular.js` but not `github.com/angular. js`
-  * [x] Update specs.
-  * [x] Update documentation.
-* [ ] Add more filters to the angular module.
-* [ ] Update regexp to match `http://` urls, no matter what's preceding it. By doing so, it should be able to match `"http://site.com"` in `"What?http://site.com"`.
+* [ ] Add more filter to the Angular module
+    * [ ] `shorten`
+    * [ ] `beautify`
+    * [ ] `withProtocol`
+
+### 3.1.0 - 2015-07-30
+
+* Improved regular expressions to avoid matching trailing punctuation marks and wrappers. Meaning it's now able to match:
+    * `site.com` in `(site.com)`, `site.com.`, `site.com...`, `site.com!`, and so on.
+    * `site.com` in `Some string ((whatever(site.com)some stuff) there`
+    * `someone@domain.com` in `Whatever (stuff((there(or(someone@domain.com)So weird) string...`
+* Improved user-typed url regexp to match `github.com/angular.js` (urls with punctuation marks)
+* Improved regexp to match protocoled urls, no matter what's preceding it. It's now able to match `http://site.com` in `What?http://site.com`
+* Fixed urls regexps to avoid matching sub paths that do not start by a slash. It's no more matching `site.com)whatever` but `site.com/whatever`
 
 ### 3.0.2 - 2015-07-07
 
