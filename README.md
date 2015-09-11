@@ -48,7 +48,7 @@ linkhunter follows the UMD (Universal Module Definition) pattern which means it 
     * [ ] `beautify`
     * [ ] `withProtocol`
 
-### 3.1.1 - Unreleased
+### 3.1.1 - 2015-09-11
 
 * [x] Fix hasProtocol to be case insensitive
 
