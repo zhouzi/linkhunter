@@ -48,6 +48,10 @@ linkhunter follows the UMD (Universal Module Definition) pattern which means it 
     * [ ] `beautify`
     * [ ] `withProtocol`
 
+### 3.1.1 - Unreleased
+
+* [x] Fix hasProtocol to be case insensitive
+
 ### 3.1.0 - 2015-07-30
 
 * Improved regular expressions to avoid matching trailing punctuation marks and wrappers. Meaning it's now able to match:

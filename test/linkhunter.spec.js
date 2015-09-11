@@ -96,6 +96,9 @@ describe('linkhunter', () => {
         expect(linkhunter.hasProtocol('https://site.com')).toBe(true);
         expect(linkhunter.hasProtocol('email@domain.com')).toBe(false);
         expect(linkhunter.hasProtocol('mailto:email@domain.com')).toBe(true);
+
+        expect(linkhunter.hasProtocol('HtTp://site.com')).toBe(true);
+        expect(linkhunter.hasProtocol('mAiLtO:email@domain.com')).toBe(true);
     });
 
     it('should add a protocol if needed', () => {

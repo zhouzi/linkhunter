@@ -84,8 +84,8 @@ let linkhunter = {
     },
 
     hasProtocol: (link) => {
-        if (linkhunter.looksLikeAnEmail(link)) return /^mailto:/.test(link);
-        return /^https?:\/\//.test(link);
+        if (linkhunter.looksLikeAnEmail(link)) return /^mailto:/i.test(link);
+        return /^https?:\/\//i.test(link);
     },
 
     withProtocol: (link, protocol = 'http://') => {
