@@ -3,6 +3,10 @@
   "homepage": "https://github.com/Zhouzi/linkhunter",
   "authors": ["Gabin <hello@gabinaureche.com>"],
   "description": "Detect links that real users actually type.",
+  "main": [
+    "./dist/linkhunter.min.js",
+    "./dist/linkhunter-angular.min.js"
+  ],
   "license": "MIT",
   "ignore": [
     ".*",
