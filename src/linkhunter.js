@@ -99,7 +99,7 @@ let linkhunter = {
             if (indexOfQueryParams >= 0) link = link.substr(0, indexOfQueryParams);
         }
 
-        link = link.replace(/^https?:\/\//, '').replace(/\/#?$/, '');
+        link = link.replace(/^https?:\/\//i, '').replace(/\/#?$/, '');
 
         return link;
     },

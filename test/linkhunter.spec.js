@@ -118,6 +118,7 @@ describe('linkhunter', () => {
         expect(linkhunter.cleanUp('http://site.com?some=params', true)).toBe('site.com');
         expect(linkhunter.cleanUp('http://site.com/', true)).toBe('site.com');
         expect(linkhunter.cleanUp('http://site.com/#', true)).toBe('site.com');
+        expect(linkhunter.cleanUp('HtTps://SITE.com/#', true)).toBe('SITE.com');
     });
 
     it('should shorten a link', () => {
