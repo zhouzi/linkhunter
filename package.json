@@ -3,21 +3,26 @@
   "version": "3.1.2",
   "description": "Detect links that real users actually type.",
   "devDependencies": {
-    "gulp": "3.9.0",
-    "gulp-header": "1.2.2",
-    "gulp-load-plugins": "0.10.0",
-    "gulp-rename": "1.2.2",
-    "gulp-uglify": "1.2.0",
-    "gulp-webpack": "1.5.0",
     "jasmine-core": "2.3.4",
-    "json-loader": "0.5.2",
     "karma": "0.12.36",
     "karma-jasmine": "0.3.5",
     "karma-phantomjs-launcher": "0.2.0",
-    "karma-webpack": "1.5.1",
     "phantomjs": "1.9.17",
-    "webpack": "1.9.11"
+    "uglify-js": "2.6.2"
   },
+  "scripts": {
+    "test": "karma start --single-run",
+    "build": "uglifyjs index.js -o index.min.js -c -m --comments"
+  },
+  "main": "index.js",
+  "files": [
+    "index.angular.js",
+    "index.js",
+    "index.min.js",
+    "LICENSE",
+    "package.json",
+    "README.md"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/Zhouzi/linkhunter.git"

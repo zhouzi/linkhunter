@@ -1,12 +1,21 @@
+/*!
+ * linkhunter - v3.1.2
+ * Detect links that real users actually type.
+ * https://github.com/Zhouzi/linkhunter
+ *
+ * @author Gabin Aureche
+ * @license MIT
+ */
+
 (function (root, factory) {
     if (typeof exports === 'object' && typeof module === 'object') {
         module.exports = factory();
     } else if (typeof define === 'function' && define.amd) {
         define([], factory);
     } else if (typeof exports === 'object') {
-        exports.rogneur = factory();
+        exports.linkhunter = factory();
     } else {
-        root.rogneur = factory();
+        root.linkhunter = factory();
     }
 })(this, function () {
     var WRAPPERS = '(){}"\'';

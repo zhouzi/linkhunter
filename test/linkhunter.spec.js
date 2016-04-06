@@ -1,6 +1,3 @@
-var linkhunter = require('../src/linkhunter');
-var subjects = require('./subjects.json');
-
 describe('linkhunter', function () {
     describe('linkhunter.looksLikeALink', function () {
         subjects.links.correct.forEach(function (str) {

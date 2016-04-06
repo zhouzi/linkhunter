@@ -3,21 +3,12 @@
   "homepage": "https://github.com/Zhouzi/linkhunter",
   "authors": ["Gabin <hello@gabinaureche.com>"],
   "description": "Detect links that real users actually type.",
-  "main": ["./dist/linkhunter.min.js"],
+  "main": ["./index.min.js"],
   "license": "MIT",
   "ignore": [
     ".*",
-    "src",
     "test",
-    "CONTRIBUTING.md",
-    "gulpfile.js",
-    "index.html",
     "karma.conf.js",
-    "package.json",
-    "styles.css",
-    "styles.scss",
-    "webpack.config.js",
-    "demo.js",
-    "demo.min.js"
+    "package.json"
   ]
 }
