@@ -17,7 +17,6 @@ For example, `user@domain` is considered to be a valid email per the specificati
 * [Usage](https://github.com/Zhouzi/linkhunter#usage)
 * [Documentation](https://github.com/Zhouzi/linkhunter/wiki)
 * [Known "Limitations"](https://github.com/Zhouzi/linkhunter#known-limitations)
-* [Contributing](https://github.com/Zhouzi/linkhunter/blob/gh-pages/CONTRIBUTING.md)
 * [Change Log](https://github.com/Zhouzi/linkhunter#change-log)
 
 
