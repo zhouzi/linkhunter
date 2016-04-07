@@ -48,22 +48,6 @@
     return dest;
   }
 
-  function addEllipsis(str, maxLength, ellipsis) {
-    if (maxLength == null) {
-      maxLength = str.length;
-    }
-
-    if (ellipsis == null) {
-      ellipsis = '...';
-    }
-
-    if (str.length <= maxLength) {
-      return str;
-    }
-
-    return str.substr(0, maxLength - ellipsis.length) + ellipsis;
-  }
-
   function looksLikeAnEmail(str) {
     return regexps.email.test(str);
   }
@@ -211,7 +195,16 @@
   }
 
   function shorten(link, maxLength) {
-    return addEllipsis(link, maxLength);
+    if (maxLength == null) {
+      return link;
+    }
+
+    if (link.length <= maxLength) {
+      return link;
+    }
+
+    var ellipsis = '...';
+    return link.substr(0, maxLength - ellipsis.length) + ellipsis;
   }
 
   function beautify(link, removeQueryParams) {
