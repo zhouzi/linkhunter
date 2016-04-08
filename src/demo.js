@@ -31,9 +31,7 @@
     var DemoApp = React.createClass({
         getInitialState: function () {
             var text = [
-                //'linkhunter\'s purpose if to match three type of links: emails such as someone@domain.com, urls in the form of http://gabinaureche.com/linkhunter and finally user-typed urls like twitter.com.',
                 'linkhunter\'s purpose is to match links such as gabinaureche.com/linkhunter, hello@gabinaureche.com and http://www.nytimes.com/interactive/2015/07/03/upshot/a-quick-puzzle-to-test-your-problem-solving.html?_r=1 from user input.',
-                //'It\'s also able, among other things, to shorten, beautify and replace those links.',
                 'Try to copy and paste urls and/or type some text in there to see it in action.'
             ].join(' ');
 

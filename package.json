@@ -1,37 +1,21 @@
 {
-  "name": "linkhunter",
-  "version": "3.1.2",
-  "description": "Detect links that real users actually type.",
+  "name": "demo",
+  "version": "0.0.0",
+  "description": "linkhunter's demo page",
+  "private": true,
+  "scripts": {
+    "postinstall": "cp node_modules/linkhunter/index.min.js dist/linkhunter.min.js"
+  },
   "devDependencies": {
     "babel-core": "5.5.8",
     "babel-loader": "5.1.4",
-    "browser-sync": "2.7.12",
     "gulp": "3.9.0",
     "gulp-autoprefixer": "2.3.1",
-    "gulp-header": "1.2.2",
     "gulp-load-plugins": "0.10.0",
     "gulp-react": "3.0.1",
     "gulp-rename": "1.2.2",
     "gulp-sass": "2.0.2",
     "gulp-uglify": "1.2.0",
-    "gulp-webpack": "1.5.0",
-    "jasmine-core": "2.3.4",
-    "json-loader": "0.5.2",
-    "karma": "0.12.36",
-    "karma-jasmine": "0.3.5",
-    "karma-phantomjs-launcher": "0.2.0",
-    "karma-webpack": "1.5.1",
-    "phantomjs": "1.9.17",
-    "webpack": "1.9.11"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Zhouzi/linkhunter.git"
-  },
-  "author": "Gabin Aureche",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/Zhouzi/linkhunter/issues"
-  },
-  "homepage": "https://github.com/Zhouzi/linkhunter"
+    "linkhunter": "4.0.0"
+  }
 }
