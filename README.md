@@ -127,12 +127,12 @@ e.g `https://site.com/blog/2016-04-05/the-article-title` is beautified to `site.
 
 ## Change log
 
-### 4.0.0 - Unreleased
+### 4.0.0 - 2016-04-08
 
-* [x] Drop the "context" argument of `.replaceLinks`
-* [x] Simplify the workflow and remove any bloat
-* [x] Update and move documentation to the README.md
-* [ ] Publish to npm
+* `linkhunter.replaceLinks` doesn't support the context argument anymore
+* The workflow has been simplified, leading to less bloat in both the minified and non-minified versions
+* The documentation has been updated and moved to the README.md
+* linkhunter is now available as a npm package: `npm install linkhunter --save`
 
 ### 3.1.2 - 2016-04-05
 
