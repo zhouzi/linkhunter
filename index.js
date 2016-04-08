@@ -1,3 +1,5 @@
+/* global module, define, exports */
+
 /*!
  * linkhunter - v3.1.2
  * Detect links that real users actually type.
@@ -33,10 +35,22 @@
     regularUrl: new RegExp('^' + REGULARURL_REGEXP, 'i'),
     userUrl: new RegExp('^' + USERURL_REGEXP, 'i'),
     link: new RegExp('^((?:' + EMAIL_REGEXP + ')|(?:' + REGULARURL_REGEXP + ')|(?:' + USERURL_REGEXP + '))$', 'i'),
-    links: new RegExp(STARTOFSTRING_REGEXP + '((?:' + REGULARURL_REGEXP + ')|(?:(?:' + EMAIL_REGEXP + ')|(?:' + USERURL_REGEXP + '))' + ENDOFSTRING_REGEXP + ')', 'gi')
+    links: new RegExp(
+        STARTOFSTRING_REGEXP +
+        '((?:' +
+        REGULARURL_REGEXP +
+        ')|(?:(?:' +
+        EMAIL_REGEXP +
+        ')|(?:' +
+        USERURL_REGEXP +
+        '))' +
+        ENDOFSTRING_REGEXP +
+        ')',
+        'gi'
+      )
   };
 
-  function merge(dest, src) {
+  function merge (dest, src) {
     for (var key in src) {
       if (!src.hasOwnProperty(key)) {
         continue;
@@ -48,11 +62,11 @@
     return dest;
   }
 
-  function looksLikeAnEmail(str) {
+  function looksLikeAnEmail (str) {
     return regexps.email.test(str);
   }
 
-  function looksLikeALink(str, includeEmail) {
+  function looksLikeALink (str, includeEmail) {
     if (includeEmail == null) {
       includeEmail = false;
     }
@@ -64,7 +78,7 @@
     return regexps.link.test(str);
   }
 
-  function getLinks(str, includeEmail) {
+  function getLinks (str, includeEmail) {
     if (includeEmail == null) {
       includeEmail = false;
     }
@@ -86,13 +100,13 @@
   }
 
   // TODO: replaceLinks no more support the context argument, that's a breaking change!
-  function replaceLinks(str, callback) {
+  function replaceLinks (str, callback) {
     return str.replace(regexps.links, function (match, precedingCharacter, link) {
       return precedingCharacter + callback(link);
     });
   }
 
-  function linky(str, options) {
+  function linky (str, options) {
     if (options == null) {
       options = {};
     }
@@ -157,7 +171,7 @@
     });
   }
 
-  function hasProtocol(link) {
+  function hasProtocol (link) {
     if (looksLikeAnEmail(link)) {
       return /^mailto:/i.test(link);
     }
@@ -165,7 +179,7 @@
     return /^https?:\/\//i.test(link);
   }
 
-  function withProtocol(link, protocol) {
+  function withProtocol (link, protocol) {
     if (protocol == null) {
       protocol = 'http://';
     }
@@ -177,7 +191,7 @@
     return hasProtocol(link) ? link : protocol + link;
   }
 
-  function cleanUp(link, removeQueryParams) {
+  function cleanUp (link, removeQueryParams) {
     if (removeQueryParams == null) {
       removeQueryParams = false;
     }
@@ -194,7 +208,7 @@
     return link;
   }
 
-  function shorten(link, maxLength) {
+  function shorten (link, maxLength) {
     if (maxLength == null) {
       return link;
     }
@@ -207,7 +221,7 @@
     return link.substr(0, maxLength - ellipsis.length) + ellipsis;
   }
 
-  function beautify(link, removeQueryParams) {
+  function beautify (link, removeQueryParams) {
     if (removeQueryParams == null) {
       removeQueryParams = true;
     }
