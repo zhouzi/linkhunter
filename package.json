@@ -1,6 +1,6 @@
 {
   "name": "linkhunter",
-  "version": "3.1.2",
+  "version": "4.0.0",
   "description": "Detect links that real users actually type.",
   "devDependencies": {
     "dotfiles": "zhouzi/dotfiles#e3223046cf19854434e051f1b33982dfe56a70f7",

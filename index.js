@@ -1,7 +1,7 @@
 /* global module, define, exports */
 
 /*!
- * linkhunter - v3.1.2
+ * linkhunter - v4.0.0
  * Detect links that real users actually type.
  * https://github.com/Zhouzi/linkhunter
  *
