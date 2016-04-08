@@ -22,12 +22,9 @@ For example, `user@domain` is considered to be a valid email per the specificati
 
 ## Usage
 
-linkhunter follows the UMD (Universal Module Definition) pattern which means it works everywhere.
-
-1. Get the linkhunter.min.js file by whether:
-  * Downloading the distributed version: [linkhunter.min.js](https://raw.githubusercontent.com/Zhouzi/linkhunter/gh-pages/dist/linkhunter.min.js)
-  * Installing via bower: `bower install linkhunter`
-2. Include it in your markup: `<script src="path/to/linkhunter.min.js"></script>` (or `require('linkhunter.min.js')` in NodeJS apps)
+* `npm install linkhunter --save`
+* `bower install linkhunter`
+* [Grab the code](https://github.com/Zhouzi/linkhunter/releases)
 
 ## Known "Limitations"
 
