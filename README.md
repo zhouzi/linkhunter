@@ -17,9 +17,8 @@ For example, `user@domain` is considered to be a valid email per the specificati
 * [Usage](https://github.com/Zhouzi/linkhunter#usage)
 * [Documentation](https://github.com/Zhouzi/linkhunter/wiki)
 * [Known "Limitations"](https://github.com/Zhouzi/linkhunter#known-limitations)
+* [Documentation](https://github.com/Zhouzi/linkhunter#documentation)
 * [Change Log](https://github.com/Zhouzi/linkhunter#change-log)
-
-
 
 ## Usage
 
@@ -30,22 +29,110 @@ linkhunter follows the UMD (Universal Module Definition) pattern which means it 
   * Installing via bower: `bower install linkhunter`
 2. Include it in your markup: `<script src="path/to/linkhunter.min.js"></script>` (or `require('linkhunter.min.js')` in NodeJS apps)
 
-
-
 ## Known "Limitations"
 
 * Domains such as Twitter's `t.co` are matched, meaning `a.bc` and `q.we` too.
 
+## Documentation
 
+#### `linkhunter.looksLikeAnEmail(str)`
+
+Returns whether or not the string looks like an email.
+
+1. **str** - the string to check.
+
+#### `linkhunter.looksLikeALink(str, [includeEmail=false])`
+
+Returns whether or not the string looks like a link.
+
+1. **str** - the string to check.
+2. **includeEmail (default: false)** - if set to true, consider an email to look like a link.
+
+#### `linkhunter.getLinks(str, [includeEmail=false])`
+
+Returns an array of links found from str.
+
+1. **str** - the string in which to look for links.
+2. **includeEamil (default: false)** - if set to true, consider an email to look like a link.
+
+#### `linkhunter.replaceLinks(str, callback)`
+
+Replace every links found from str by the return value of callback which receives the link as only argument.
+
+1. **str** - the string where to replace links.
+2. **callback** - a function called for each link, receives the link as first and only argument.
+
+#### `linkhunter.linky(str, [options])`
+
+Wrap links with a `<a></a>`.
+
+1. **str** - the string where to replace links.
+2. **options (see defaults below)** - configure the links' display/attribute.
+
+```json
+{
+  "ignoreEmail": false,
+  "target": null,
+  "protocol": "http://",
+  "displayValue": {
+    "cleanUp": false,
+    "beautify": false,
+    "shorten": false
+  }
+}
+```
+
+* ignoreEmail: if set to true, consider an email to look like a link.
+* target: sets the `<a>`'s target attribute.
+* protocol: the protocol to use when a link misses one.
+* displayValue.cleanUp: if set to true, calls cleanUp for each link.
+* displayValue.beautify: if set to true, calls beautify for each link.
+* displayValue.shorten: if set to something else than false, used to call shorten for each link by passing the option as argument.
+
+#### `linkhunter.hasProtocol(link)`
+
+Returns whether or not a link has a protocol. Note: emails' protocol is considered to be `mailto:`.
+
+1. **link** - the link to check.
+
+#### `linkhunter.withProtocol(link, [protocol='http://'])`
+
+Adds the protocol if it's missing. Note: emails' protocol can't be configured and is set to `mailto:`.
+
+1. **link** - the link to add a protocol to.
+2. **protocol (default: 'http://')** - The protocol to add when it's missing.
+
+#### `linkhunter.cleanUp(link, [removeQueryParams=false])`
+
+Removes the protocol and trailing # from a link.
+e.g `https://site.com/whatever?foo=bar#` is cleaned up to `site.com/whatever`.
+
+1. **link** - the link to clean up.
+2. **removeQueryParams (default: false)** - if set to true, removes query parameters as well.
+
+#### `linkhunter.shorten(link, maxLength)`
+
+Substr the link to maxLength and adds `...` to the end (if necessary).
+
+1. **link** - the link to shorten.
+2. **maxLength** - the max length of the string.
+
+#### `linkhunter.beautify(link, [removeQueryParams=true])`
+
+Uses a combination of transformations to make a link nicer.
+e.g `https://site.com/blog/2016-04-05/the-article-title` is beautified to `site.com/.../the-article-title`
+
+1. **link** - the link to beautify.
+2. **removeQueryParams (default: true)** - if set to true, removes query parameters.
 
 ## Change log
 
-### 3.2.0 - Unreleased
+### 4.0.0 - Unreleased
 
-* [ ] Add more filter to the Angular module
-    * [ ] `shorten`
-    * [ ] `beautify`
-    * [ ] `withProtocol`
+* [x] Drop the "context" argument of `.replaceLinks`
+* [x] Simplify the workflow and remove any bloat
+* [x] Update and move documentation to the README.md
+* [ ] Publish to npm
 
 ### 3.1.2 - 2016-04-05
 
