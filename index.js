@@ -99,7 +99,6 @@
     return links;
   }
 
-  // TODO: replaceLinks no more support the context argument, that's a breaking change!
   function replaceLinks (str, callback) {
     return str.replace(regexps.links, function (match, precedingCharacter, link) {
       return precedingCharacter + callback(link);
