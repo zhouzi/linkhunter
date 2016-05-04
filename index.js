@@ -85,10 +85,10 @@
 
     var links = [];
 
-    // TODO: that's ugly
-    str.replace(regexps.links, function (match, precedingCharacter, link) {
-      links.push(link);
-    });
+    var result;
+    while (result = regexps.links.exec(str)) { // eslint-disable-line no-cond-assign
+      links.push(result[2]);
+    }
 
     if (!includeEmail) {
       return links.filter(function (link) {
