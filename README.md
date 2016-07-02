@@ -23,7 +23,6 @@ For example, `user@domain` is considered to be a valid email per the specificati
 ## Usage
 
 * `npm install linkhunter --save`
-* `bower install linkhunter`
 * [Grab the code](https://github.com/Zhouzi/linkhunter/releases)
 
 ## Known "Limitations"
