@@ -1,7 +1,7 @@
 import assert from 'assert';
-import linkish from '../linkish';
+import isLinkish from '../isLinkish';
 
-describe('linkish', () => {
+describe('isLinkish', () => {
   const validLinks = [
     'site.com',
     'site.com/whatever/it/is-some-things',
@@ -16,7 +16,7 @@ describe('linkish', () => {
   ];
   validLinks.forEach(subject => {
     it(`should consider ${subject} to be valid link`, () => {
-      assert.equal(linkish(subject), true);
+      assert.equal(isLinkish(subject), true);
     });
   });
 
@@ -39,7 +39,7 @@ describe('linkish', () => {
   ];
   invalidLinks.forEach(subject => {
     it(`should consider ${subject} to be an invalid link`, () => {
-      assert.equal(linkish(subject), false);
+      assert.equal(isLinkish(subject), false);
     });
   });
 });

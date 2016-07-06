@@ -4,7 +4,7 @@ import emailish from './emailish';
 import getLinks from './getLinks';
 import hasProtocol from './hasProtocol';
 import linkify from './linkify';
-import linkish from './linkish';
+import isLinkish from './isLinkish';
 import truncate from './truncate';
 import withProtocol from './withProtocol';
 
@@ -15,7 +15,7 @@ export default {
   getLinks,
   hasProtocol,
   linkify,
-  linkish,
+  isLinkish,
   truncate,
   withProtocol
 };
