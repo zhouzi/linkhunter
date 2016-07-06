@@ -1,8 +1,8 @@
-import emailish from './emailish';
+import isEmailish from './isEmailish';
 import cleanUp from './cleanUp';
 
 export default (link, removeQueryParams = true) => {
-  if (emailish(link)) {
+  if (isEmailish(link)) {
     return link;
   }
 

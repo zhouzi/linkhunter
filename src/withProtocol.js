@@ -1,4 +1,4 @@
-import emailish from './emailish';
+import isEmailish from './isEmailish';
 import hasProtocol from './hasProtocol';
 
 export default (link, protocol = 'http://') => {
@@ -6,7 +6,7 @@ export default (link, protocol = 'http://') => {
     return link;
   }
 
-  if (emailish(link)) {
+  if (isEmailish(link)) {
     return `mailto:${link}`;
   }
 

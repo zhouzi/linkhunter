@@ -1,7 +1,7 @@
 import assert from 'assert';
-import emailish from '../emailish';
+import isEmailish from '../isEmailish';
 
-describe('emailish', () => {
+describe('isEmailish', () => {
   const validEmails = [
     'email@domain.com',
     'email@domain-sub.domain.com',
@@ -9,7 +9,7 @@ describe('emailish', () => {
   ];
   validEmails.forEach(str => {
     it(`should consider ${str} to be a valid email address`, () => {
-      assert.equal(emailish(str), true);
+      assert.equal(isEmailish(str), true);
     });
   });
 
@@ -21,7 +21,7 @@ describe('emailish', () => {
   ];
   invalidEmails.forEach(str => {
     it(`should consider ${str} to be an invalid email address`, () => {
-      assert.equal(emailish(str), false);
+      assert.equal(isEmailish(str), false);
     });
   });
 });

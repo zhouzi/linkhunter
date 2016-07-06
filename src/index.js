@@ -1,6 +1,6 @@
 import beautify from './beautify';
 import cleanUp from './cleanUp';
-import emailish from './emailish';
+import isEmailish from './isEmailish';
 import getLinks from './getLinks';
 import hasProtocol from './hasProtocol';
 import linkify from './linkify';
@@ -11,7 +11,7 @@ import withProtocol from './withProtocol';
 export default {
   beautify,
   cleanUp,
-  emailish,
+  isEmailish,
   getLinks,
   hasProtocol,
   linkify,
