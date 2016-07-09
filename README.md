@@ -1,34 +1,34 @@
 # linkhunter
 
-Detect links that real users actually type.
+A library to deal with links that real users actually type.
 
-linkhunter is focussed on matching links from user inputs.
-To do so, it considers three type of links: emails (someone@domain.com), urls with a protocol (http://site.com/) and finally user-typed url (site.com).
-It means that linkhunter is able to match:
-
-* `http://twitter.com/` in `Have a look at http://twitter.com/`
-* `github.com` in `Feel free to submit an issue on github.com!`
-* `someone@domain.com` in `Should I contact someone@domain.com?`
-* `twitter.com` in `Did you visit twitter? (twitter.com)`
-
-*Note that linkhunter is meant to extract links from user's input but not to strictly validate urls or emails.
-For example, `user@domain` is considered to be a valid email per the specifications but not by linkhunter.*
-
-* [Usage](https://github.com/Zhouzi/linkhunter#usage)
-* [Documentation](https://github.com/Zhouzi/linkhunter#documentation)
+* [Introduction](https://github.com/Zhouzi/linkhunter#introduction)
+* [Installation](https://github.com/Zhouzi/linkhunter#installation)
+* [Documentation](https://www.notion.so/linkhunter-d6f6f0eb7e434ee1ab2e464e837efa32) *WIP*
 * [Change Log](https://github.com/Zhouzi/linkhunter#change-log)
 
-## Usage
+## Introduction
+
+In theory, matching an url is quite easy as it is supposed to start by whether `http://` or `https://`.
+But in a real world scenario, users are more likely to omit the protocol and simply type `site.com`.
+That's where linkhunter comes into play, it is focused on dealing with links from users inputs.
+
+The library is able to match:
+
+* `http://twitter.com/` from `Have a look at http://twitter.com/`
+* `github.com` from `Feel free to submit an issue on github.com!`
+* `someone@domain.com` from `Should I contact someone@domain.com?`
+* `twitter.com` from `Did you visit twitter? (twitter.com)`
+
+## Installation
 
 * `npm install linkhunter --save`
-
-## Documentation
-
-*WIP...*
 
 ## Change log
 
 ### 5.0.0 - Unreleased
+
+The whole api has been redesigned to make things even simpler and flexible.
 
 * *WIP...*
 
