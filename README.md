@@ -4,7 +4,7 @@ A library to deal with links that real users actually type.
 
 * [Introduction](https://github.com/Zhouzi/linkhunter#introduction)
 * [Installation](https://github.com/Zhouzi/linkhunter#installation)
-* [Documentation](https://www.notion.so/linkhunter-d6f6f0eb7e434ee1ab2e464e837efa32) *WIP*
+* [Documentation](https://www.notion.so/linkhunter-d6f6f0eb7e434ee1ab2e464e837efa32)
 * [Change Log](https://github.com/Zhouzi/linkhunter#change-log)
 
 ## Introduction

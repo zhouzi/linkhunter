@@ -1,7 +1,7 @@
 {
   "name": "linkhunter",
   "version": "4.0.0",
-  "description": "Detect links that real users actually type.",
+  "description": "A library to deal with links that real users actually type.",
   "devDependencies": {
     "babel-cli": "6.10.1",
     "babel-preset-es2015": "6.9.0",
