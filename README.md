@@ -26,11 +26,10 @@ The library is able to match:
 
 ## Change log
 
-### 5.0.0 - Unreleased
+### 5.0.0 - 2016-07-12
 
-The whole api has been redesigned to make things even simpler and flexible.
-
-* *WIP...*
+The whole api has been redesigned to make things simpler and more flexible.
+Please have a look at the [documentation](https://www.notion.so/linkhunter-d6f6f0eb7e434ee1ab2e464e837efa32) for the detailed changes.
 
 ### 4.0.0 - 2016-04-08
 
