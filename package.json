@@ -1,6 +1,6 @@
 {
   "name": "linkhunter",
-  "version": "4.0.0",
+  "version": "5.0.0",
   "description": "A library to deal with links that real users actually type.",
   "devDependencies": {
     "babel-cli": "6.10.1",
@@ -9,7 +9,9 @@
   },
   "scripts": {
     "test": "mocha 'src/__test__/*.js' --compilers js:babel-register",
-    "build": "babel src --out-dir lib --ignore __test__"
+    "prebuild": "npm run test",
+    "build": "babel src --out-dir lib --ignore __test__",
+    "prepublish": "npm run build"
   },
   "babel": {
     "presets": [
