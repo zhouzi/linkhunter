@@ -26,6 +26,10 @@ The library is able to match:
 
 ## Change log
 
+### 5.0.1 - 2016-08-03
+
+* Fix package.json's main entry point
+
 ### 5.0.0 - 2016-07-12
 
 The whole api has been redesigned to make things simpler and more flexible.
