@@ -13,45 +13,68 @@ class App extends Component {
     const links = linkhunter.getLinks(this.state.text);
 
     return (
-      <div>
-        <div className="textarea">
-          <textarea
-            rows="6"
-            onChange={(event) => this.setState({ text: event.target.value })}
-            value={this.state.text}
-          />
+      <main className="wrapper drop-shadow">
+        <section className="hero">
+          <h1>linkhunter</h1>
+          <h2>Detect links that real users actually type.</h2>
 
-          <div className="textarea__footer">
-            Found {links.length} link{links.length !== 1 ? 's' : ''}
+          <nav className="nav">
+            <ul>
+              <li>
+                <a href="https://github.com/Zhouzi/LinkHunter" className="button">
+                  View on Github
+                </a>
+              </li>
+
+              <li>
+                <a href="https://twitter.com/home?status=linkhunter%2C%20detect%20links%20that%20real%20users%20actually%20type%20-%20http%3A%2F%2Fgabinaureche.com%2Flinkhunter%20via%20%40zh0uzi" target="_blank" className="button">
+                  Tweet
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </section>
+
+        <section className="demo">
+          <div className="textarea">
+            <textarea
+              rows="6"
+              onChange={(event) => this.setState({ text: event.target.value })}
+              value={this.state.text}
+            />
+
+            <div className="textarea__footer">
+              Found {links.length} link{links.length !== 1 ? 's' : ''}
+            </div>
           </div>
-        </div>
 
-        <ul className="demo-links">
-          {links.map((link, index) => (
-            <li key={index} className="demo-link">
-              <div className="demo-link-group">
-                <a href={linkhunter.withProtocol(link)}>{link}</a>
-              </div>
-
-              <div className="demo-link-group">
-                <div className="demo-link-group__title">
-                  linkhunter.withProtocol(link)
+          <ul className="demo-links">
+            {links.map((link, index) => (
+              <li key={index} className="demo-link">
+                <div className="demo-link-group">
+                  <a href={linkhunter.withProtocol(link)}>{link}</a>
                 </div>
 
-                {linkhunter.withProtocol(link)}
-              </div>
+                <div className="demo-link-group">
+                  <div className="demo-link-group__title">
+                    linkhunter.withProtocol(link)
+                  </div>
 
-              <div className="demo-link-group">
-                <div className="demo-link-group__title">
-                  linkhunter.beautify(link)
+                  {linkhunter.withProtocol(link)}
                 </div>
 
-                {linkhunter.beautify(link)}
-              </div>
-            </li>
-          ))}
-        </ul>
-      </div>
+                <div className="demo-link-group">
+                  <div className="demo-link-group__title">
+                    linkhunter.beautify(link)
+                  </div>
+
+                  {linkhunter.beautify(link)}
+                </div>
+              </li>
+            ))}
+          </ul>
+        </section>
+      </main>
     );
   }
 }
