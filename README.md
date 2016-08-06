@@ -7,6 +7,8 @@ A library to deal with links that real users actually type.
 * [Documentation](https://www.notion.so/linkhunter-d6f6f0eb7e434ee1ab2e464e837efa32)
 * [Change Log](https://github.com/Zhouzi/linkhunter#change-log)
 
+**Note:** if you want a 100% bullet proof solution, have a look at [linkify-it](https://github.com/markdown-it/linkify-it) and [node-tlds](https://github.com/stephenmathieson/node-tlds).
+
 ## Introduction
 
 In theory, matching an url is quite easy as it is supposed to start by whether `http://` or `https://`.
