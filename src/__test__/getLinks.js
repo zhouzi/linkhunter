@@ -182,6 +182,13 @@ describe('getLinks', () => {
       expected: [
         'someone@domain.com'
       ]
+    },
+
+    {
+      subject: 'Have a look at randonnée.demain, it looks great.',
+      expected: [
+        'randonnée.demain'
+      ]
     }
   ];
   subjects.forEach(obj => {
