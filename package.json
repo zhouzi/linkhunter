@@ -1,6 +1,6 @@
 {
   "name": "linkhunter",
-  "version": "5.0.1",
+  "version": "5.0.2",
   "description": "A library to deal with links that real users actually type.",
   "devDependencies": {
     "babel-cli": "6.10.1",

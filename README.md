@@ -28,6 +28,10 @@ The library is able to match:
 
 ## Change log
 
+### 5.0.2 - 2016-10-27
+
+* Fix regexp to match accents as well
+
 ### 5.0.1 - 2016-08-03
 
 * Fix package.json's main entry point
